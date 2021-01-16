@@ -1,0 +1,3 @@
+INDEX VERSION 1.131+C:\Users\MainUser\UserDevelopProjects\StudyJavaByEclipse\KoreaITAcademy\.metadata\.plugins\org.eclipse.jdt.core
+3460880079.index
+836723414.index
