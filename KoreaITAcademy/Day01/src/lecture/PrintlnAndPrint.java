@@ -2,9 +2,9 @@ package lecture;
 
 public class PrintlnAndPrint {
 	public static void main(String[] args) {
-		System.out.print("°¡³ª´Ù");
-		System.out.print("¶ó¸¶¹Ù");
-		System.out.println("°¡³ª´Ù");
-		System.out.println("¶ó¸¶¹Ù");
+		System.out.print("ê°€ë‚˜ë‹¤");
+		System.out.print("ë¼ë§ˆë°”");
+		System.out.println("ê°€ë‚˜ë‹¤");
+		System.out.println("ë¼ë§ˆë°”");
 	}
 }
