@@ -1,4 +1,4 @@
-package lecture;
+package lecture.example;
 
 public class PrintlnAndPrint {
 	public static void main(String[] args) {
