@@ -16,7 +16,8 @@ public class JOptionPanePracticeNo6 {
 							selMonth[0]
 						 );
 					
-		System.out.println("당신의 생일은 " + month + "입니다.");
+//		System.out.println("당신의 생일은 " + month + "입니다.");
+		JOptionPane.showMessageDialog(null, "당신의 생일은 " + month + "입니다.");
 	}
 
 }
