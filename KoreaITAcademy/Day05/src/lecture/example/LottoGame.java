@@ -50,9 +50,12 @@ public class LottoGame {
 		int[] inputNum = new int[6];
 		Scanner inputSC = new Scanner(System.in);
 		
+		System.out.println("=========================로또게임===========================");
+		System.out.println();
+		
 		//입력번호 체크(사용자 위임)_S
 		System.out.print("1~45 중에 숫자를 입력하세요(" + inputNum[0] + "," + inputNum[1] + "," + inputNum[2] + "," + inputNum[3] + "," + inputNum[4] + " 제외) : ");
-		inputNum[1] = inputSC.nextInt();
+		inputNum[0] = inputSC.nextInt();
 		
 		System.out.print("1~45 중에 숫자를 입력하세요(" + inputNum[0] + "," + inputNum[1] + "," + inputNum[2] + "," + inputNum[3] + "," + inputNum[4] + " 제외) : ");
 		inputNum[1] = inputSC.nextInt();
@@ -105,13 +108,13 @@ public class LottoGame {
 		}
 		
 		System.out.println();
-		System.out.println("===========================================================");
+		System.out.println("==========================================================");
 		
 		System.out.println("로또 당첨 번호는 : " + lottoNum[0] + "," + lottoNum[1] + "," + lottoNum[2] + "," + lottoNum[3] + "," + lottoNum[4] + "," + lottoNum[5]);
 		System.out.println("당신의 입력 번호 : " + inputNum[0] + "," + inputNum[1] + "," + inputNum[2] + "," + inputNum[3] + "," + inputNum[4] + "," + inputNum[5]);
 		System.out.println("당신이 맞춘 수는 : " + correctCount + "개 입니다.");
 		
-		System.out.println("===========================================================");
+		System.out.println("==========================================================");
 		System.out.println();
 		
 		if (correctCount == 4) {
