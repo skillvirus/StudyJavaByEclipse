@@ -1,4 +1,4 @@
-package lecture.example.classex;
+package lecture.example.classEx.advanced;
 import java.text.DecimalFormat;
 
 public class LottoWinTest {
@@ -68,7 +68,6 @@ public class LottoWinTest {
 			}
 			
 			compareCount++;
-//			System.out.println(decimalFormat.format(compareCount) + "회 비교");
 			
 			if (randomCount == correctCount) {
 				break;

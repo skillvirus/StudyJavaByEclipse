@@ -1,4 +1,4 @@
-package lecture.example.classex;
+package lecture.example.classEx.advanced;
 
 public class RandomNumDuplicate {
 

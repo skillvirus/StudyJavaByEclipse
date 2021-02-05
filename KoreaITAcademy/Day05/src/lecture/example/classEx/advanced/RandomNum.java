@@ -1,4 +1,4 @@
-package lecture.example.classex;
+package lecture.example.classEx.advanced;
 import java.util.Random;
 
 public class RandomNum {
