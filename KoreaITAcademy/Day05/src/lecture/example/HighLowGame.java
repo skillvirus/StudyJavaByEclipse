@@ -23,6 +23,9 @@ public class HighLowGame {
 		Scanner inputSC;
 		int inputNum;
 		
+		System.out.println("=======================하이로우게임=======================");
+		System.out.println();
+		
 		while (true) {
 			
 			inputSC = new Scanner(System.in);
@@ -31,8 +34,9 @@ public class HighLowGame {
 			tryCount++;
 			
 			if (randomNum == inputNum) {
+				System.out.println();
 				System.out.println("숫자를 맞췄습니다.");
-				System.out.println("==========================================");
+				System.out.println();
 				break;
 			} else if (inputNum < randomNum) {
 				System.out.println("좀 더 큰 수를 입력하세요.");
@@ -44,6 +48,8 @@ public class HighLowGame {
 		
 		}
 		
+		System.out.println("==========================================================");
+		System.out.println();
 		System.out.println("임의의 숫자는 " + randomNum + "입니다.");
 		System.out.println("시도한 휫수는 " + tryCount + "회 입니다.");
 		

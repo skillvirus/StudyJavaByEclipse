@@ -29,7 +29,7 @@ public class LottoGame {
 //		int duplicateCount = 0;
 //		int duplicateNum = 0;
 		
-		for (int loopCount = 0; loopCount <= 5; loopCount++) {
+		for (int loopCount = 0; loopCount < 6; loopCount++) {
 			randomNum = random.nextInt(45) + 1;
 			
 			if (loopCount == 0) {
@@ -50,7 +50,7 @@ public class LottoGame {
 		int[] inputNum = new int[6];
 		Scanner inputSC = new Scanner(System.in);
 		
-		System.out.println("=========================로또게임===========================");
+		System.out.println("=========================로또게임=========================");
 		System.out.println();
 		
 		//입력번호 체크(사용자 위임)_S
@@ -73,10 +73,10 @@ public class LottoGame {
 		inputNum[5] = inputSC.nextInt();
 		//입력번호 체크(사용자 위임)_E
 
-		//입력번호 체크(반복문 이용)_S
+		//입력번호 중복 체크(반복문 이용)_S
 //		int inputSCNum = 0;
 //		
-//		for (int loopCount5 = 0; loopCount5 <= 5; loopCount5++) {
+//		for (int loopCount5 = 0; loopCount5 < 6; loopCount5++) {
 //			System.out.print("1~45 중의 숫자 하나를 입력하세요 [" + (loopCount5 + 1) + "] : ");
 //			inputSCNum = inputSC.nextInt();
 //			
@@ -95,7 +95,7 @@ public class LottoGame {
 //				inputNum[loopCount5] = inputSCNum;
 //			}
 //		}
-		//입력번호 체크(반복문 이용)_E
+		//입력번호 중복 체크(반복문 이용)_E
 		
 		int correctCount = 0;
 		
@@ -110,9 +110,9 @@ public class LottoGame {
 		System.out.println();
 		System.out.println("==========================================================");
 		
-		System.out.println("로또 당첨 번호는 : " + lottoNum[0] + "," + lottoNum[1] + "," + lottoNum[2] + "," + lottoNum[3] + "," + lottoNum[4] + "," + lottoNum[5]);
-		System.out.println("당신의 입력 번호 : " + inputNum[0] + "," + inputNum[1] + "," + inputNum[2] + "," + inputNum[3] + "," + inputNum[4] + "," + inputNum[5]);
-		System.out.println("당신이 맞춘 수는 : " + correctCount + "개 입니다.");
+		System.out.println("로또 번호 : [" + lottoNum[0] + "][" + lottoNum[1] + "][" + lottoNum[2] + "][" + lottoNum[3] + "][" + lottoNum[4] + "][" + lottoNum[5] + "]");
+		System.out.println("선택 번호 : [" + inputNum[0] + "][" + inputNum[1] + "][" + inputNum[2] + "][" + inputNum[3] + "][" + inputNum[4] + "][" + inputNum[5] + "]");
+		System.out.println("맞춘 수   : " + correctCount + "개 입니다.");
 		
 		System.out.println("==========================================================");
 		System.out.println();
