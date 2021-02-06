@@ -1,6 +1,6 @@
 package lecture.example.classEx;
 
-public class Home {
+public class SmartHome {
 	public static void main(String[] args) {
 
 		Television tvInLivingRoom = new Television("거실");
