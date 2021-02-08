@@ -7,7 +7,7 @@ public class LottoWinTest {
 
 		DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###"); //천단위 구분자 지정
 		
-		int testCount = 50;
+		int testCount = 100;
 		long[] result = new long[testCount];
 		
 		for (int loopCount = 0; loopCount < testCount; loopCount++) {
