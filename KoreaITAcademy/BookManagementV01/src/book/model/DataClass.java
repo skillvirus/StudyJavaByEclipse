@@ -10,7 +10,6 @@ public class DataClass {
 	public DataClass() {
 	}
 	
-
 	public void insertData(BookClass bookClass) {
 		bookList.add(bookClass);
 	}

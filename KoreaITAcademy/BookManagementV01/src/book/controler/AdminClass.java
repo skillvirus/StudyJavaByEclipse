@@ -9,15 +9,11 @@ public class AdminClass {
 	public AdminClass() {
 	}
 	
-	public AdminClass(DataClass dataClass) {
-		this.dataClass = dataClass;
-	}
-	
 	public void insertBookInfo(BookClass bookClass) {
-		this.dataClass.insertData(bookClass);
+		dataClass.insertData(bookClass);
 	}
 	
 	public void selectBookInfo() {
-		this.dataClass.selectData();
+		dataClass.selectData();
 	}
 }
