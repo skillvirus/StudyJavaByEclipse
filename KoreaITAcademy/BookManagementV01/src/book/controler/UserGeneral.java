@@ -1,5 +1,5 @@
 package book.controler;
 
-public class UserClass {
+public class UserGeneral {
 
 }

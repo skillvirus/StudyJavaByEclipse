@@ -1,6 +1,6 @@
 package book.controler;
 
-public class BookClass {
+public class Book {
 
 	private String bookNo; //책No
 	private String bookTitle; //제목
@@ -12,7 +12,7 @@ public class BookClass {
 	/*
 	 * Constructor
 	*/
-	public BookClass() {
+	public Book() {
 	}
 	
 	/*

@@ -3,22 +3,22 @@ package book.view;
 import java.util.Scanner;
 import book.controler.*;
 
-public class MainClass {
+public class Main {
 
 	public static void main(String[] args) {
 
 		Scanner inputSC = new Scanner(System.in);
 
-		BookClass bookClass = new BookClass();
-		AdminClass adminClass = new AdminClass();
+		Book book = new Book();
+		UserAdmin userAdmin = new UserAdmin();
 		
 		System.out.print("책 번호를 입력하세요 : ");
-		bookClass.setBookNo(inputSC.next());
+		book.setBookNo(inputSC.next());
 		
 		System.out.print("책 제목을 입력하세요 : ");
-		bookClass.setBookTitle(inputSC.next());
+		book.setBookTitle(inputSC.next());
 		
-		adminClass.insertBookInfo(bookClass);
+		userAdmin.insertBookInfo(book);
 		
 //		BookClass bookClass2 = new BookClass();
 //		System.out.print("책 번호를 입력하세요 : ");
@@ -39,7 +39,7 @@ public class MainClass {
 //		adminClass.insertBookInfo(bookClass3);
 //		
 //		
-		adminClass.selectBookInfo();
+		userAdmin.selectBookInfo();
 		
 		inputSC.close();
 	}

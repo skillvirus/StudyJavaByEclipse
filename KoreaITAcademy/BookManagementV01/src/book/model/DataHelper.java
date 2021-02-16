@@ -3,15 +3,15 @@ package book.model;
 import java.util.ArrayList;
 import book.controler.*;
 
-public class DataClass {
+public class DataHelper {
 
-	private ArrayList<BookClass> bookList = new ArrayList<BookClass>();
+	private ArrayList<Book> bookList = new ArrayList<Book>();
 
-	public DataClass() {
+	public DataHelper() {
 	}
 	
-	public void insertData(BookClass bookClass) {
-		bookList.add(bookClass);
+	public void insertData(Book book) {
+		bookList.add(book);
 	}
 	
 	public void selectData() {
