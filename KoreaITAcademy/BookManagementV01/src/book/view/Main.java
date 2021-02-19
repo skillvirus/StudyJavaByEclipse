@@ -1,24 +1,29 @@
 package book.view;
 
-import java.util.Scanner;
-import book.controler.*;
+//import java.util.Scanner;
+//import book.controler.*;
 
 public class Main {
 
 	public static void main(String[] args) {
 
-		Scanner inputSC = new Scanner(System.in);
-
-		Book book = new Book();
-		UserAdmin userAdmin = new UserAdmin();
+		Viewer viewer = new Viewer();
+		viewer.start();
 		
-		System.out.print("책 번호를 입력하세요 : ");
-		book.setBookNo(inputSC.next());
+//		Scanner inputSC = new Scanner(System.in);
+//
+//		Book book = new Book();
+////		UserAdmin userAdmin = new UserAdmin();
+//		
+//		System.out.print("책 번호를 입력하세요 : ");
+//		book.setBookNo(inputSC.next());
+//		
+//		System.out.print("책 제목을 입력하세요 : ");
+//		book.setBookTitle(inputSC.next());
+//		
+//		book.insertBookInfo(book);
 		
-		System.out.print("책 제목을 입력하세요 : ");
-		book.setBookTitle(inputSC.next());
-		
-		userAdmin.insertBookInfo(book);
+//		userAdmin.insertBookInfo(book);
 		
 //		BookClass bookClass2 = new BookClass();
 //		System.out.print("책 번호를 입력하세요 : ");
@@ -39,9 +44,9 @@ public class Main {
 //		adminClass.insertBookInfo(bookClass3);
 //		
 //		
-		userAdmin.selectBookInfo();
-		
-		inputSC.close();
+//		book.selectBookInfo();
+//		
+//		inputSC.close();
 	}
 
 }

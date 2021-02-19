@@ -2,9 +2,9 @@ package lecture.example.classEx;
 
 public class Television {
 	
-	int channel;
-	int volume;
-	String tvName;
+	private int channel;
+	private int volume;
+	private String tvName;
 	
 	Television () {
 	}
@@ -27,5 +27,29 @@ public class Television {
 	
 	public int upChannel() {
 		return this.channel++;
+	}
+	
+	public int getChannel() {
+		return this.channel;
+	}
+	
+	public void setChannel(int channel) {
+		this.channel = channel;
+	}
+	
+	public int downVolume() {
+		return this.volume--;
+	}
+	
+	public int upVolume() {
+		return this.volume++;
+	}
+	
+	public void setVolume(int volume) {
+		this.volume = volume;
+	}
+	
+	public String getTVName() {
+		return this.tvName;
 	}
 }

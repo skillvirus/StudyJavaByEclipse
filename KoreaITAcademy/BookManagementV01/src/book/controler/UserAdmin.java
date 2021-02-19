@@ -13,7 +13,7 @@ public class UserAdmin {
 		dataHelper.insertData(book);
 	}
 	
-	public void selectBookInfo() {
-		dataHelper.selectData();
-	}
+//	public void selectBookInfo() {
+//		dataHelper.selectData();
+//	}
 }

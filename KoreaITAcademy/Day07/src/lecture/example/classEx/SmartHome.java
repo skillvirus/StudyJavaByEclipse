@@ -13,7 +13,7 @@ public class SmartHome {
 		Television tvInSmallRoom = new Television("작은방");
 		tvInSmallRoom.turnOn();
 		
-		System.out.println(tvInLivingRoom.tvName);
+		System.out.println(tvInLivingRoom.getTVName());
 	}
 
 }

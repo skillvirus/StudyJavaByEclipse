@@ -1,5 +1,7 @@
 package book.controler;
 
+import book.model.DataHelper;
+
 public class Book {
 
 	private String bookNo; //책No
@@ -97,5 +99,15 @@ public class Book {
 	 */
 	public void setBookRegDate(String bookRegDate) {
 		this.bookRegDate = bookRegDate;
+	}
+
+	DataHelper dataHelper = new DataHelper();
+	
+	public void insertBookInfo(Book book) {
+		dataHelper.insertData(book);
+	}
+	
+	public void selectBookInfo() {
+		dataHelper.selectBookData();
 	}
 }
