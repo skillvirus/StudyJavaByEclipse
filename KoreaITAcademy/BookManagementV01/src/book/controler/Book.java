@@ -4,12 +4,13 @@ import book.model.DataHelper;
 
 public class Book {
 
-	private String bookNo; //책No
+	private String bookID; //책ID
 	private String bookTitle; //제목
 	private String bookAuthor; //저자
 	private String bookTranslator; //번역자
 	private String bookPublisher; //출판사
 	private String bookRegDate; //등록일
+	private String bookISBN; //ISBN
 	
 	/*
 	 * Constructor
@@ -21,14 +22,14 @@ public class Book {
 	 * Get bookNo
 	 */
 	public String getBookNo() {
-		return bookNo;
+		return bookID;
 	}
 	
 	/*
 	 * Set bookNo
 	 */
-	public void setBookNo(String bookNo) {
-		this.bookNo = bookNo;
+	public void setBookID(String bookID) {
+		this.bookID = bookID;
 	}
 
 	/*
@@ -101,13 +102,39 @@ public class Book {
 		this.bookRegDate = bookRegDate;
 	}
 
+	/*
+	 * Get bookISBN
+	 */
+	public String getBookISBN() {
+		return bookISBN;
+	}
+
+	/*
+	 * Set bookISBN
+	 */
+	public void setBookISBN(String bookISBN) {
+		this.bookISBN = bookISBN;
+	}
+	
 	DataHelper dataHelper = new DataHelper();
 	
 	public void insertBookInfo(Book book) {
 		dataHelper.insertData(book);
 	}
 	
-	public void selectBookInfo() {
-		dataHelper.selectBookData();
+	public void selectBookInfo(Book book) {
+		dataHelper.selectData(book);
+	}
+	
+	public void selectBookAllInfo(Book book) {
+		dataHelper.selectAllData(book);
+	}
+	
+	public void deleteBookInfo(Book book) {
+		dataHelper.deleteData(book);
+	}
+	
+	public void updateBookInfo(Book book, Book updatedbook) {
+		dataHelper.updateData(book, updatedbook);
 	}
 }
