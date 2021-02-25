@@ -1,16 +1,16 @@
 {
 	"folders": {},
 	"connections": {
-		"sqlite_jdbc-177d2c1592c-5762bba5961d7e6": {
+		"sqlite_jdbc-177d6b1bdc2-556ff3b9996cddf": {
 			"provider": "generic",
 			"driver": "sqlite_jdbc",
-			"name": "sqlite-jdbc-3.32.3.2.jar",
+			"name": "BookManagement.db",
 			"save-password": true,
 			"show-system-objects": true,
 			"read-only": false,
 			"configuration": {
-				"database": "C:\\Users\\MainUser\\UserDevelopProjects\\StudyJavaByEclipse\\KoreaITAcademy\\BookManagementV02\\Resources\\JDBCConnector\\sqlite-jdbc-3.32.3.2.jar",
-				"url": "jdbc:sqlite:C:\\Users\\MainUser\\UserDevelopProjects\\StudyJavaByEclipse\\KoreaITAcademy\\BookManagementV02\\Resources\\JDBCConnector\\sqlite-jdbc-3.32.3.2.jar",
+				"database": "C:\\Users\\MainUser\\UserDevelopProjects\\StudyJavaByEclipse\\KoreaITAcademy\\BookManagementV02ConsoleWithSQLite\\Resources\\Database\\BookManagement.db",
+				"url": "jdbc:sqlite:C:\\Users\\MainUser\\UserDevelopProjects\\StudyJavaByEclipse\\KoreaITAcademy\\BookManagementV02ConsoleWithSQLite\\Resources\\Database\\BookManagement.db",
 				"type": "dev",
 				"auth-model": "native",
 				"handlers": {}
