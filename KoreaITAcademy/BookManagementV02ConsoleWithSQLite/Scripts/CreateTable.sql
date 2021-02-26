@@ -1,18 +1,29 @@
---Book(도서) 테이블 생성
-CREATE TABLE BookInfo
-(
-	ID			INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	BookName	TEXT NOT NULL,
-	BookISBN	TEXT
+--BookInfo(도서) 테이블 생성
+CREATE TABLE "BookInfo" (
+	"BookID"	INTEGER NOT NULL,
+	"BookTitle"	TEXT NOT NULL,
+	"BookISBN"	TEXT,
+	PRIMARY KEY("BookID" AUTOINCREMENT)
 );
 
---User(사용자) 테이블 생성
-CREATE TABLE UserInfo
-(
-	ID			INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	Name		TEXT NOT NULL,
-	PhoneNum	TEXT
+--UserInfo(사용자) 테이블 생성
+CREATE TABLE "UserInfo" (
+	"UserID"	INTEGER NOT NULL,
+	"UserName"	TEXT NOT NULL,
+	"UserPhoneNum"	TEXT,
+	PRIMARY KEY("UserID" AUTOINCREMENT)
 );
 
-DROP TABLE Book;
-DROP TABLE User;
+--BookInOut(도서 대여) 테이블 생성
+CREATE TABLE "BookInOut" (
+	"UserID"	INTEGER NOT NULL,
+	"UserName"	TEXT NOT NULL,
+	"BookID"	INTEGER NOT NULL,
+	"BookName"	TEXT NOT NULL,
+	"InOutType"	TEXT,
+	"InOutDate"	TEXT
+);
+
+DROP TABLE BookInfo;
+DROP TABLE UserInfo;
+DROP TABLE BookInOut;
