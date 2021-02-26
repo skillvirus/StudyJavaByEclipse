@@ -277,14 +277,14 @@ public class Viewer {
 		book.setBookID(inputSC.next());
 		System.out.print("도서 제목을 입력하세요 : ");
 		updatedBook.setBookTitle(inputSC.next());
-		System.out.print("사용자 전화번호를 입력하세요 : ");
+		System.out.print("도서 ISBN을 입력하세요 : ");
 		updatedBook.setBookISBN(inputSC.next());
 		
 		book.updateBookInfo(book, updatedBook);
 		
 		System.out.println();
-		System.out.println("사용자가 정보가 수정되었습니다.");
-		this.showCommonInfo("user"); //처리 후 메뉴 호출
+		System.out.println("도서 정보가 수정되었습니다.");
+		this.showCommonInfo("book"); //처리 후 메뉴 호출
 	}
 	
 	/*
@@ -356,9 +356,9 @@ public class Viewer {
 		System.out.print("도서 아이디를 입력하세요 : ");
 		bookInOut.setBookID(inputSC.next());
 		System.out.print("도서 제목을 입력하세요 : ");
+		bookInOut.setBookName(inputSC.next());
 		System.out.print("일자를 입력하세요 : ");
 		bookInOut.setInOutDate(inputSC.next());
-		bookInOut.setBookName(inputSC.next());
 		bookInOut.setInOutType("I");
 		
 		//정보확인 후 맞다고 선택하면 등록 아니면 재등록 기능 필요

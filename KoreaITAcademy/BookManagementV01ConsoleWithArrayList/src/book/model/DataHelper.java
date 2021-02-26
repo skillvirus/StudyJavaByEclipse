@@ -27,9 +27,9 @@ public class DataHelper {
 	public void selectData(Book book) {
 		System.out.println();
 		for (int loopCount = 0; loopCount < bookList.size(); loopCount++) {
-			if (book.getBookNo().equals(bookList.get(loopCount).getBookNo()))
+			if (book.getBookID().equals(bookList.get(loopCount).getBookID()))
 			{
-				System.out.print(bookList.get(loopCount).getBookNo());
+				System.out.print(bookList.get(loopCount).getBookID());
 				System.out.print(" ");
 				System.out.print(bookList.get(loopCount).getBookTitle());
 				System.out.print(" ");
@@ -76,7 +76,7 @@ public class DataHelper {
 	public void selectAllData(Book book) {
 		System.out.println();
 		for (int loopCount = 0; loopCount < bookList.size(); loopCount++) {
-			System.out.print(bookList.get(loopCount).getBookNo());
+			System.out.print(bookList.get(loopCount).getBookID());
 			System.out.print(" ");
 			System.out.print(bookList.get(loopCount).getBookTitle());
 			System.out.print(" ");
@@ -117,7 +117,7 @@ public class DataHelper {
 	
 	public void deleteData(Book book) {
 		for (int loopCount = 0; loopCount < bookList.size(); loopCount++) {
-			if (book.getBookNo().equals(bookList.get(loopCount).getBookNo()))
+			if (book.getBookID().equals(bookList.get(loopCount).getBookID()))
 			{
 				bookList.remove(loopCount);
 			}
@@ -135,7 +135,7 @@ public class DataHelper {
 	
 	public void updateData(Book book, Book updatedBook) {
 		for (int loopCount = 0; loopCount < bookList.size(); loopCount++) {
-			if (book.getBookNo().equals(bookList.get(loopCount).getBookNo()))
+			if (book.getBookID().equals(bookList.get(loopCount).getBookID()))
 			{
 				bookList.get(loopCount).setBookTitle(updatedBook.getBookTitle());
 				bookList.get(loopCount).setBookISBN(updatedBook.getBookISBN());
