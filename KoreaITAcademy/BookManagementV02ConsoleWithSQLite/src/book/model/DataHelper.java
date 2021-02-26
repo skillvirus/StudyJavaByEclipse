@@ -89,9 +89,9 @@ public class DataHelper {
 						+ "		UserID,"
 						+ "		UserName,"
 						+ " 	BookID,"
-						+ " 	BookName,"
+						+ " 	BookTitle,"
 						+ " 	InOutType,"
-						+ " 	IntOutDate"
+						+ " 	InOutDate"
 						+ " )"
 						+ " VALUES"
 						+ " ("
@@ -214,8 +214,8 @@ public class DataHelper {
 			while(resultSet.next()) {
 				System.out.println(resultSet.getString("UserID") + " | " 
 						 		 + resultSet.getString("UserName") + " | " 
+								 + resultSet.getString("BookID") + " | "
 								 + resultSet.getString("BookTitle") + " | "
-								 + resultSet.getString("BookName") + " | "
 								 + resultSet.getString("InOutType") + " | "
 								 + resultSet.getString("InOutDate"));
 			}
@@ -292,7 +292,7 @@ public class DataHelper {
 			queryString = "	SELECT	UserID,"
 						+ "			UserName,"
 						+ "			BookID,"
-						+ "			BookTtile,"
+						+ "			BookTitle,"
 						+ "			InOutType,"
 						+ "			InOutDate"
 						+ "	FROM 	BookInOut";
@@ -305,8 +305,8 @@ public class DataHelper {
 			while(resultSet.next()) {
 				System.out.println(resultSet.getString("UserID") + " | " 
 						 		 + resultSet.getString("UserName") + " | " 
+								 + resultSet.getString("BookID") + " | "
 								 + resultSet.getString("BookTitle") + " | "
-								 + resultSet.getString("BookName") + " | "
 								 + resultSet.getString("InOutType") + " | "
 								 + resultSet.getString("InOutDate"));
 			}

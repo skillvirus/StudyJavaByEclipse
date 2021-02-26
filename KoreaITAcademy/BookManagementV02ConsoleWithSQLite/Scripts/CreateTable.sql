@@ -19,7 +19,7 @@ CREATE TABLE "BookInOut" (
 	"UserID"	INTEGER NOT NULL,
 	"UserName"	TEXT NOT NULL,
 	"BookID"	INTEGER NOT NULL,
-	"BookName"	TEXT NOT NULL,
+	"BookTitle"	TEXT NOT NULL,
 	"InOutType"	TEXT,
 	"InOutDate"	TEXT
 );
