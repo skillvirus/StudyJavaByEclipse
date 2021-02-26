@@ -273,17 +273,17 @@ public class Viewer {
 		
 		System.out.println();
 		System.out.println("==========사용자 정보 수정==========");
-		System.out.print("도서ID를 입력하세요 : ");
+		System.out.print("도서 아이디를 입력하세요 : ");
 		book.setBookID(inputSC.next());
-		System.out.print("도서제목을 입력하세요 : ");
+		System.out.print("도서 제목을 입력하세요 : ");
 		updatedBook.setBookTitle(inputSC.next());
-		System.out.print("도서ISBN을 입력하세요 : ");
+		System.out.print("도서 ISBN을 입력하세요 : ");
 		updatedBook.setBookISBN(inputSC.next());
 		
 		book.updateBookInfo(book, updatedBook);
 		
 		System.out.println();
-		System.out.println("도서정보가 정보가 수정되었습니다.");
+		System.out.println("도서 정보가 수정되었습니다.");
 		this.showCommonInfo("book"); //처리 후 메뉴 호출
 	}
 	
