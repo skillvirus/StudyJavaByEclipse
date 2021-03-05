@@ -1,0 +1,1 @@
+SELECT BookID, BookTitle, BookISBN FROM BookInfo

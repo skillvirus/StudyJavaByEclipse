@@ -1,0 +1,30 @@
+{
+	"folders": {},
+	"connections": {
+		"sqlite_jdbc-17800f86bbd-254a31eb67ad77c4": {
+			"provider": "generic",
+			"driver": "sqlite_jdbc",
+			"name": "BookManagement.db",
+			"save-password": true,
+			"show-system-objects": true,
+			"read-only": false,
+			"configuration": {
+				"database": "C:\\Users\\MainUser\\UserDevelopProjects\\StudyJavaByEclipse\\KoreaITAcademy\\JDBCTest\\BookManagement.db",
+				"url": "jdbc:sqlite:C:\\Users\\MainUser\\UserDevelopProjects\\StudyJavaByEclipse\\KoreaITAcademy\\JDBCTest\\BookManagement.db",
+				"type": "dev",
+				"auth-model": "native",
+				"handlers": {}
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false
+		}
+	}
+}
