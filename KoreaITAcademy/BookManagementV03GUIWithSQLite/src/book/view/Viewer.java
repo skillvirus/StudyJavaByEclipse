@@ -1,429 +1,550 @@
 package book.view;
-import java.util.Scanner;
 
-import book.controler.Book;
-import book.controler.BookInOut;
-import book.controler.UserGeneral;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
-public class Viewer {
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 
-	private Scanner inputSC = new Scanner(System.in);
-	private int inputNum;
-	
-	public void start() {
-		this.showMain();
-	}
-	
-	private void showMain() {
-		System.out.println();
-		System.out.println("=========도서대여 관리 프로그램=========");
-		System.out.println("[1] 사용자 정보 관리");
-		System.out.println("[2] 도서 정보 관리");
-		System.out.println("[3] 도서 대여 관리");
-		System.out.println("[0] 프로그램 종료");
-		System.out.println("========================================");
-		System.out.print("실행할 메뉴의 번호를 입력하세요 : ");
-		
-		inputNum = inputSC.nextInt();
-		
-		if (inputNum == 1) {
-			this.showUserInfoManagement();
-		} else if (inputNum == 2) {
-			this.showBookInfoManagement();
-		} else if (inputNum == 3) {
-			this.showBookInOutManagement();
-		} else if (inputNum == 0) {
-			this.end();
-		}		
-	}
-	
-	//Level1 Menu(도서대여점 관리 프로그램) Start
-	/*
-	 * 사용자 정보 관리
-	 */
-	private void showUserInfoManagement() {
-		System.out.println();
-		System.out.println("==========사용자 정보 관리==========");
-		System.out.println("[1] 사용자 정보 등록");
-		System.out.println("[2] 사용자 정보 삭제");
-		System.out.println("[3] 사용자 정보 수정");
-		System.out.println("[4] 사용자 정보 조회");
-		System.out.println("[9] 이전화면");
-		System.out.println("[0] 프로그램 종료");
-		System.out.println("========================================");
-		System.out.print("실행할 메뉴의 번호를 입력하세요 : ");
-		
-		inputNum = inputSC.nextInt();
-		
-		if (inputNum == 1) { //사용자 정보 등록
-			this.showUserInfoInsert();
-		} else if (inputNum == 2) { //사용자 정보 삭제
-			this.showUserInfoDelete();
-		} else if (inputNum == 3) { //사용자 정보 수정
-			this.showUserInfoUpdate();
-		} else if (inputNum == 4) { //사용자 정보 조회
-			this.showUserInfoSelect();
-		} else if (inputNum == 9) { //이전화면
-			this.showMain();
-		} else if (inputNum == 0) { //프로그램 종료
-			this.end();
-		}
-	}
-	
-	/*
-	 * 도서 정보 관리
-	 */
-	private void showBookInfoManagement() {
-		System.out.println();
-		System.out.println("==========도서 정보 관리==========");
-		System.out.println("[1] 도서 정보 등록");
-		System.out.println("[2] 도서 정보 삭제");
-		System.out.println("[3] 도서 정보 수정");
-		System.out.println("[4] 도서 정보 조회");
-		System.out.println("[9] 이전화면");
-		System.out.println("[0] 프로그램 종료");
-		System.out.println("========================================");
-		System.out.print("실행할 메뉴의 번호를 입력하세요 : ");
-		
-		inputNum = inputSC.nextInt();
-		
-		if (inputNum == 1) { //도서 정보 등록
-			this.showBookInfoInsert();
-		} else if (inputNum == 2) { //도서 정보 삭제
-			this.showBookInfoDelete();
- 		} else if (inputNum == 3) { //도서 정보 수정
-			this.showBookInfoUpdate();
-		} else if (inputNum == 4) { //도서 정보 조회
-			this.showBookInfoSelect();
-		} else if (inputNum == 9) {
-			this.showMain();
-		} else if (inputNum == 0) {
-			this.end();
-		}
-	}
-	
-	/*
-	 * 도서 대여 관리
-	 */
-	private void showBookInOutManagement() {
-		System.out.println();
-		System.out.println("==========도서 대여 관리==========");
-		System.out.println("[1] 도서 반출 등록");
-		System.out.println("[2] 도서 반입 등록");
-		System.out.println("[3] 도서 대여 이력 조회");
-		System.out.println("[9] 이전화면");
-		System.out.println("[0] 프로그램 종료");
-		System.out.println("========================================");
-		System.out.print("실행할 메뉴의 번호를 입력하세요 : ");
-		
-		inputNum = inputSC.nextInt();
-		
-		if (inputNum == 1) {
-			this.showInOutInfoOutgoing();
-		} else if (inputNum == 2) {
-			this.showInOutInfoIncoming();
-		} else if (inputNum == 3) {
-			this.showInOutInfoSelect();
-		} else if (inputNum == 9) {
-			this.showMain();
-		} else if (inputNum == 0) {
-			this.end();
-		}
-	}
-	//Level1 Menu(도서대여점 관리 프로그램) End
-	
-	//Level2-1 Menu(사용자 정보 관리) Start
-	/*
-	 * 사용자 정보 등록 
-	 */
-	private void showUserInfoInsert() {
-		UserGeneral userGeneral = new UserGeneral();
-		
-		System.out.println();
-		System.out.println("==========사용자 정보 등록==========");
-		System.out.print("사용자 아이디를 입력하세요 : ");
-		userGeneral.setUserID(inputSC.next());
-		System.out.print("사용자 이름을 입력하세요 : ");
-		userGeneral.setUserName(inputSC.next());
-		System.out.print("사용자 전화번호를 입력하세요 : ");
-		userGeneral.setUserPhoneNum(inputSC.next());
-		
-		//정보확인 후 맞다고 선택하면 등록 아니면 재등록 기능 필요
-		userGeneral.insertUserInfo(userGeneral);
-		
-		System.out.println();
-		System.out.println("사용자 정보가 등록되었습니다.");
-		this.showCommonInfo("user"); //처리 후 메뉴 호출
-	}
-	
-	/*
-	 * 사용자 정보 삭제
-	 */
-	private void showUserInfoDelete() {
-		UserGeneral userGeneral = new UserGeneral();
-		
-		System.out.println();
-		System.out.println("==========사용자 정보 삭제==========");
-		System.out.print("사용자 아이디를 입력하세요 : ");
-		userGeneral.setUserID(inputSC.next());
-		
-		userGeneral.deleteUserInfo(userGeneral);
+import book.model.DataPack;
+import book.model.DatabaseAccessHelper;
 
-		System.out.println();
-		System.out.println("사용자 정보가 삭제되었습니다.");
-		this.showCommonInfo("user"); //처리 후 메뉴 호출
-	}
-	
-	/*
-	 * 사용자 정보 수정
-	 */
-	private void showUserInfoUpdate() {
-		UserGeneral userGeneral = new UserGeneral();
-		UserGeneral updatedUser = new UserGeneral();
-		
-		System.out.println();
-		System.out.println("==========사용자 정보 수정==========");
-		System.out.print("사용자 아이디를 입력하세요 : ");
-		userGeneral.setUserID(inputSC.next());
-		System.out.print("사용자 이름을 입력하세요 : ");
-		updatedUser.setUserName(inputSC.next());
-		System.out.print("사용자 전화번호를 입력하세요 : ");
-		updatedUser.setUserPhoneNum(inputSC.next());
-		
-		userGeneral.updateUserInfo(userGeneral, updatedUser);
-		
-		System.out.println();
-		System.out.println("사용자가 정보가 수정되었습니다.");
-		this.showCommonInfo("user"); //처리 후 메뉴 호출
-	}
-	
-	/*
-	 * 사용자 정보 조회 
-	 */
-	private void showUserInfoSelect() {
-		UserGeneral userGeneral = new UserGeneral();
-		
-		System.out.println();
-		System.out.println("==========사용자 정보 조회==========");
-		System.out.print("사용자 아이디를 입력하세요[전체조회는 'A'를 입력하세요.] : ");
-		
-		String inputUserID = inputSC.next();
-		
-		if (inputUserID.equals("A")) {
-			userGeneral.selectUserAllInfo(userGeneral);
-		} else {
-			userGeneral.setUserID(inputUserID);
-			userGeneral.selectUserInfo(userGeneral);
-		}
-		
-		System.out.println();
-		System.out.println("사용자 정보를 조회했습니다.");
-		this.showCommonInfo("user");
-	}
-	//Level2-1 Menu(사용자 정보 관리) End
-	
-	//Level2-2 Menu(도서 정보 관리) Start
-	/*
-	 * 도서 정보 등록 
-	 */
-	private void showBookInfoInsert() {
-		Book book = new Book();
-		
-		System.out.println();
-		System.out.println("==========도서 정보 등록==========");
-		System.out.print("도서 아이디를 입력하세요 : ");
-		book.setBookID(inputSC.next());
-		System.out.print("도서 제목을 입력하세요 : ");
-		book.setBookTitle(inputSC.next());
-		System.out.print("도서 ISBN을 입력하세요 : ");
-		book.setBookISBN(inputSC.next());
-		
-		//정보확인 후 맞다고 선택하면 등록 아니면 재등록 기능 필요
-		book.insertBookInfo(book);
-		
-		System.out.println();
-		System.out.println("도서정보가 등록되었습니다.");
-		this.showCommonInfo("book"); //처리 후 메뉴 호출
-	}
-	
-	/*
-	 * 도서 정보 삭제
-	 */
-	private void showBookInfoDelete() {
-		Book book = new Book();
-		
-		System.out.println();
-		System.out.println("==========도서 정보 삭제==========");
-		System.out.print("도서 아이디를 입력하세요 : ");
-		book.setBookID(inputSC.next());
-		
-		book.deleteBookInfo(book);
+public class viewer {
 
-		System.out.println();
-		System.out.println("도서 정보가 삭제되었습니다.");
-		this.showCommonInfo("book"); //처리 후 메뉴 호출
-	}
-	
-	/*
-	 * 도서 정보 수정
-	 */
-	private void showBookInfoUpdate() {
-		Book book = new Book();
-		Book updatedBook = new Book();
-		
-		System.out.println();
-		System.out.println("==========사용자 정보 수정==========");
-		System.out.print("도서 아이디를 입력하세요 : ");
-		book.setBookID(inputSC.next());
-		System.out.print("도서 제목을 입력하세요 : ");
-		updatedBook.setBookTitle(inputSC.next());
-		System.out.print("사용자 전화번호를 입력하세요 : ");
-		updatedBook.setBookISBN(inputSC.next());
-		
-		book.updateBookInfo(book, updatedBook);
-		
-		System.out.println();
-		System.out.println("사용자가 정보가 수정되었습니다.");
-		this.showCommonInfo("user"); //처리 후 메뉴 호출
-	}
-	
-	/*
-	 * 도서 정보 조회 
-	 */
-	private void showBookInfoSelect() {
-		Book book = new Book();
-		
-		System.out.println();
-		System.out.println("==========도서 정보 조회==========");
-		System.out.print("도서 번호를 입력하세요[전체조회는 'A'를 입력하세요.] : ");
-		
-		String inputBookNo = inputSC.next();
-		
-		if (inputBookNo.equals("A")) {
-			book.selectBookAllInfo(book);
-		} else {
-			book.setBookID(inputBookNo);
-			book.selectBookInfo(book);
-		}
-		
-		System.out.println();
-		System.out.println("도서정보를 조회했습니다.");
-		this.showCommonInfo("book");
-	}
-	//Level2-2 Menu(도서 정보 관리) End
-	
-	//Level2-3 Menu(도서 대여 관리) Start
-	/*
-	 * 도서 반출 등록
-	 */
-	private void showInOutInfoOutgoing() {
-		BookInOut bookInOut = new BookInOut();
-		
-		System.out.println();
-		System.out.println("==========도서 반출 등록==========");
-		System.out.print("사용자 아이디를 입력하세요 : ");
-		bookInOut.setUserID(inputSC.next());
-		System.out.print("사용자 이름을 입력하세요 : ");
-		bookInOut.setUserName(inputSC.next());
-		System.out.print("도서 아이디를 입력하세요 : ");
-		bookInOut.setBookID(inputSC.next());
-		System.out.print("도서 제목을 입력하세요 : ");
-		bookInOut.setBookName(inputSC.next());
-		System.out.print("일자를 입력하세요 : ");
-		bookInOut.setInOutDate(inputSC.next());
-		bookInOut.setInOutType("O");
-		
-		//정보확인 후 맞다고 선택하면 등록 아니면 재등록 기능 필요
-		bookInOut.incomingInOutInfo(bookInOut);
-		
-		System.out.println();
-		System.out.println("도서 반출 정보가 등록되었습니다.");
-		this.showCommonInfo("inOut"); //처리 후 메뉴 호출
-	}
-	
-	/*
-	 * 도서 반입 등록
-	 */
-	private void showInOutInfoIncoming() {
-		BookInOut bookInOut = new BookInOut();
-		
-		System.out.println();
-		System.out.println("==========도서 반입 등록==========");
-		System.out.print("사용자 아이디를 입력하세요 : ");
-		bookInOut.setUserID(inputSC.next());
-		System.out.print("사용자 이름을 입력하세요 : ");
-		bookInOut.setUserName(inputSC.next());
-		System.out.print("도서 아이디를 입력하세요 : ");
-		bookInOut.setBookID(inputSC.next());
-		System.out.print("도서 제목을 입력하세요 : ");
-		System.out.print("일자를 입력하세요 : ");
-		bookInOut.setInOutDate(inputSC.next());
-		bookInOut.setBookName(inputSC.next());
-		bookInOut.setInOutType("I");
-		
-		//정보확인 후 맞다고 선택하면 등록 아니면 재등록 기능 필요
-		bookInOut.incomingInOutInfo(bookInOut);
-		
-		System.out.println();
-		System.out.println("도서 반입 정보가 등록되었습니다.");
-		this.showCommonInfo("inOut"); //처리 후 메뉴 호출
-	}
-	
-	/*
-	 * 도서 대여 이력 조회
-	 */
-	private void showInOutInfoSelect() {
-		BookInOut bookInOut = new BookInOut();
-		
-		System.out.println();
-		System.out.println("==========도서 대여 이력 조회==========");
-		System.out.print("사용자 아이디를 입력하세요[전체조회는 'A'를 입력하세요.] : ");
-		
-		String inputUserID = inputSC.next();
-		
-		if (inputUserID.equals("A")) {
-			bookInOut.selectInOutAllInfo(bookInOut);
-		} else {
-			bookInOut.setUserID(inputUserID);
-			bookInOut.selectInOutInfo(bookInOut);
-		}
-		
-		System.out.println();
-		System.out.println("도서 대여 이력을 조회했습니다.");
+	private JFrame frame;
+	private JTextField userInfoInsertID;
+	private JTextField userInfoInsertName;
+	private JTextField userInfoInsertPhoneNum;
+	private JTextField userInfoDeleteID;
+	private JTextField userInfoUpdateID;
+	private JTextField userInfoUpdatePhoneNum;
+	private JTextField userInfoUpdateName;
+	private JTable userInfoTable;
+	private JTextField textField_7;
 
-		this.showCommonInfo("inOut"); //처리 후 메뉴 호출
-	}
-	//Level2-3 Menu(도서 대여 관리) End
-	
-	private void showCommonInfo(String preShowType) {
-		System.out.println();
-		System.out.println("========================================");
-		System.out.println("[8] 최초화면");
-		System.out.println("[9] 이전화면");
-		System.out.println("[0] 프로그램 종료");
-		System.out.println("========================================");
-		System.out.print("실행할 메뉴의 번호를 입력하세요 : ");
-		
-		inputNum = inputSC.nextInt();
-		
-		if (inputNum == 8) {
-			this.showMain();
-		} else if (inputNum == 9) {
-			if (preShowType.equals("user")) {
-				this.showUserInfoManagement();
-			} else if (preShowType.equals("book")) {
-				this.showBookInfoManagement();
-			} else if (preShowType.equals("inOut")) {
-				this.showBookInOutManagement();
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					viewer window = new viewer();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
-		} else if (inputNum == 0) {
-			this.end();
-		}
+		});
 	}
-	
-	private void end() {
-		System.out.println();
-		System.out.println("프로그램을 종료합니다.");
-		System.exit(0);
+
+	/**
+	 * Create the application.
+	 */
+	public viewer() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setTitle("도서대여관리");
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		JPanel mainPanel = new JPanel();
+		mainPanel.setBounds(0, 0, 432, 238);
+		frame.getContentPane().add(mainPanel);
+		mainPanel.setLayout(null);
+		
+		JLabel lblNewLabel_6 = new JLabel("도서 대여 관리");
+		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_6.setFont(new Font("HY견고딕", Font.PLAIN, 24));
+		lblNewLabel_6.setBounds(78, 55, 255, 124);
+		mainPanel.add(lblNewLabel_6);
+		
+		JPanel userInfoUpdate = new JPanel();
+		userInfoUpdate.setBounds(0, 0, 434, 238);
+		frame.getContentPane().add(userInfoUpdate);
+		userInfoUpdate.setLayout(null);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("사용자 정보 수정");
+		lblNewLabel_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_1_1.setBounds(0, 0, 434, 15);
+		userInfoUpdate.add(lblNewLabel_1_1);
+		
+		userInfoUpdateID = new JTextField();
+		userInfoUpdateID.setColumns(10);
+		userInfoUpdateID.setBounds(68, 41, 116, 21);
+		userInfoUpdate.add(userInfoUpdateID);
+		
+		JLabel lblNewLabel_2_2 = new JLabel("ID");
+		lblNewLabel_2_2.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_2_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2_2.setBounds(12, 44, 57, 15);
+		userInfoUpdate.add(lblNewLabel_2_2);
+		
+		JLabel lblNewLabel_3_1 = new JLabel("이름");
+		lblNewLabel_3_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_3_1.setBounds(12, 73, 57, 15);
+		userInfoUpdate.add(lblNewLabel_3_1);
+		
+		JLabel lblNewLabel_4_1 = new JLabel("전화번호");
+		lblNewLabel_4_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_4_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_4_1.setBounds(12, 104, 57, 15);
+		userInfoUpdate.add(lblNewLabel_4_1);
+		
+		userInfoUpdatePhoneNum = new JTextField();
+		userInfoUpdatePhoneNum.setColumns(10);
+		userInfoUpdatePhoneNum.setBounds(68, 101, 116, 21);
+		userInfoUpdate.add(userInfoUpdatePhoneNum);
+		
+		userInfoUpdateName = new JTextField();
+		userInfoUpdateName.setColumns(10);
+		userInfoUpdateName.setBounds(68, 70, 116, 21);
+		userInfoUpdate.add(userInfoUpdateName);
+		
+		JButton btnNewButton_2_1 = new JButton("수정");
+		btnNewButton_2_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		btnNewButton_2_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DatabaseAccessHelper databaseAccessHelper = new DatabaseAccessHelper();
+				String queryString;
+				
+				try {
+					queryString = "	UPDATE	UserInfo "
+								+ " SET 	UserName = ?,"
+								+ "			UserPhoneNum = ?"
+								+ "	WHERE	UserID = ?;";
+				
+					ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
+					dataPack.add(new DataPack(1, userInfoUpdateName.getText()));
+					dataPack.add(new DataPack(2, userInfoUpdatePhoneNum.getText()));
+					dataPack.add(new DataPack(3, userInfoUpdateID.getText()));
+					
+					databaseAccessHelper.executeNonQuery(queryString, dataPack);
+				} catch(Exception ex) {
+					System.out.println(ex.getMessage());
+					//ex.printStackTrace();
+				} finally {
+					if (databaseAccessHelper != null) {
+						databaseAccessHelper.Close();
+					}
+				}
+			}
+		});
+		btnNewButton_2_1.setBounds(26, 141, 97, 23);
+		userInfoUpdate.add(btnNewButton_2_1);
+		
+		JPanel userInfoInsert = new JPanel();
+		userInfoInsert.setBounds(0, 0, 434, 238);
+		frame.getContentPane().add(userInfoInsert);
+		userInfoInsert.setLayout(null);
+		
+		JLabel lblNewLabel_1 = new JLabel("사용자 정보 등록");
+		lblNewLabel_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_1.setBounds(0, 0, 434, 15);
+		userInfoInsert.add(lblNewLabel_1);
+		
+		userInfoInsertID = new JTextField();
+		userInfoInsertID.setBounds(68, 40, 116, 21);
+		userInfoInsert.add(userInfoInsertID);
+		userInfoInsertID.setColumns(10);
+		
+		userInfoInsertName = new JTextField();
+		userInfoInsertName.setBounds(68, 69, 116, 21);
+		userInfoInsert.add(userInfoInsertName);
+		userInfoInsertName.setColumns(10);
+		
+		userInfoInsertPhoneNum = new JTextField();
+		userInfoInsertPhoneNum.setBounds(68, 100, 116, 21);
+		userInfoInsert.add(userInfoInsertPhoneNum);
+		userInfoInsertPhoneNum.setColumns(10);
+		
+		JLabel lblNewLabel_2 = new JLabel("ID");
+		lblNewLabel_2.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setBounds(12, 43, 57, 15);
+		userInfoInsert.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("이름");
+		lblNewLabel_3.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_3.setBounds(12, 72, 57, 15);
+		userInfoInsert.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel("전화번호");
+		lblNewLabel_4.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_4.setBounds(12, 103, 57, 15);
+		userInfoInsert.add(lblNewLabel_4);
+		
+		JButton btnNewButton_2 = new JButton("저장");
+		btnNewButton_2.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DatabaseAccessHelper databaseAccessHelper = new DatabaseAccessHelper();
+				String queryString;
+
+				try {
+					queryString = "	INSERT INTO UserInfo"
+								+ "	("
+								+ "		UserID,"
+								+ "		UserName,"
+								+ " 	UserPhoneNum"
+								+ " )"
+								+ " VALUES"
+								+ " ("
+								+ "		?,"
+								+ "		?,"
+								+ "		?"
+								+ " );";
+					
+					ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
+					dataPack.add(new DataPack(1, userInfoInsertID.getText()));
+					dataPack.add(new DataPack(2, userInfoInsertName.getText()));
+					dataPack.add(new DataPack(3, userInfoInsertPhoneNum.getText()));
+					
+					databaseAccessHelper.executeNonQuery(queryString, dataPack);
+				} catch(Exception ex) {
+					System.out.println(ex.getMessage());
+//					ex.printStackTrace();
+				} finally {
+					if (databaseAccessHelper != null) {
+						databaseAccessHelper.Close();
+					}
+				}
+			}
+		});
+		btnNewButton_2.setBounds(26, 141, 97, 23);
+		userInfoInsert.add(btnNewButton_2);
+		
+		JPanel userInfoDelete = new JPanel();
+		userInfoDelete.setBounds(0, 0, 434, 238);
+		frame.getContentPane().add(userInfoDelete);
+		userInfoDelete.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("사용자 정보 삭제");
+		lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel.setBounds(0, 0, 434, 15);
+		userInfoDelete.add(lblNewLabel);
+		
+		userInfoDeleteID = new JTextField();
+		userInfoDeleteID.setColumns(10);
+		userInfoDeleteID.setBounds(59, 25, 116, 21);
+		userInfoDelete.add(userInfoDeleteID);
+		
+		JLabel lblNewLabel_2_1 = new JLabel("ID");
+		lblNewLabel_2_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_2_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2_1.setBounds(3, 28, 57, 15);
+		userInfoDelete.add(lblNewLabel_2_1);
+		
+		JButton btnNewButton_3 = new JButton("삭제");
+		btnNewButton_3.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DatabaseAccessHelper databaseAccessHelper = new DatabaseAccessHelper();
+				String queryString;
+				
+				try {
+					queryString = "	DELETE "
+								+ " FROM 	UserInfo"
+								+ "	WHERE	UserID = ?;";
+					
+					ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
+					dataPack.add(new DataPack(1, userInfoDeleteID.getText()));
+					
+					databaseAccessHelper.executeNonQuery(queryString, dataPack);
+				} catch(Exception ex) {
+					System.out.println(ex.getMessage());
+//					ex.printStackTrace();
+				} finally {
+					if (databaseAccessHelper != null) {
+						databaseAccessHelper.Close();
+					}
+				}
+			}
+		});
+		btnNewButton_3.setBounds(12, 78, 97, 23);
+		userInfoDelete.add(btnNewButton_3);
+		
+		JPanel userInfoSelect = new JPanel();
+		userInfoSelect.setBounds(0, 0, 434, 238);
+		frame.getContentPane().add(userInfoSelect);
+		userInfoSelect.setLayout(null);
+		
+		String[] userInfoTableColName = {"사용자ID","사용자성명","사용자전화번호"};
+		DefaultTableModel userInfoTableModel = new DefaultTableModel(userInfoTableColName, 0);
+		
+		userInfoTable = new JTable(userInfoTableModel);
+		userInfoTable.setBounds(12, 55, 410, 150);
+		JScrollPane userInfoScrollPane = new JScrollPane(userInfoTable);
+		userInfoScrollPane.setBounds(12, 55, 410, 150);
+		userInfoSelect.add(userInfoScrollPane);
+		
+		JButton btnNewButton = new JButton("조회");
+		btnNewButton.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DatabaseAccessHelper databaseAccessHelper = new DatabaseAccessHelper();
+				ResultSet resultSet = null;
+				String queryString;
+				
+				try {
+					
+					queryString = "	SELECT	UserID,"
+								+ "			UserName,"
+								+ "			UserPhoneNum "
+								+ "	FROM 	UserInfo"
+								+ "	WHERE	UserID = ?";
+				
+					ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
+					dataPack.add(new DataPack(1, textField_7.getText()));
+					resultSet = databaseAccessHelper.executeQuery(queryString, dataPack);
+					userInfoTableModel.setNumRows(0);
+					while(resultSet.next() ) {
+						userInfoTableModel.addRow(new Object[]{
+													resultSet.getString("UserID"), 
+													resultSet.getString("UserName"),
+													resultSet.getString("UserPhoneNum")
+												 });
+					}
+				} catch(Exception ex) {
+					System.out.println(ex.getMessage());
+				} finally {
+					if (resultSet != null) {
+						try {
+							resultSet.close();
+						} catch (SQLException e1) {
+							e1.printStackTrace();
+						}
+					}
+					if (databaseAccessHelper != null) {
+						databaseAccessHelper.Close();
+					}
+				}
+			}
+		});
+		btnNewButton.setBounds(12, 210, 97, 23);
+		userInfoSelect.add(btnNewButton);
+		
+		JLabel lblNewLabel_1_2 = new JLabel("사용자 정보 조회");
+		lblNewLabel_1_2.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_1_2.setBounds(0, 0, 434, 15);
+		userInfoSelect.add(lblNewLabel_1_2);
+		
+		JLabel lblNewLabel_5 = new JLabel("ID");
+		lblNewLabel_5.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_5.setBounds(12, 25, 57, 15);
+		userInfoSelect.add(lblNewLabel_5);
+		
+		textField_7 = new JTextField();
+		textField_7.setBounds(34, 22, 92, 21);
+		userInfoSelect.add(textField_7);
+		textField_7.setColumns(10);
+		
+		JButton btnNewButton_1 = new JButton("전체조회");
+		btnNewButton_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DatabaseAccessHelper databaseAccessHelper = new DatabaseAccessHelper();
+				ResultSet resultSet = null;
+				String queryString;
+				
+				try {
+					
+					queryString = "	SELECT	UserID,"
+								+ "			UserName,"
+								+ "			UserPhoneNum "
+								+ "	FROM 	UserInfo";
+				
+					resultSet = databaseAccessHelper.executeQuery(queryString);
+					userInfoTableModel.setNumRows(0);
+					while(resultSet.next() ) {
+						userInfoTableModel.addRow(new Object[]{
+													resultSet.getString("UserID"), 
+													resultSet.getString("UserName"),
+													resultSet.getString("UserPhoneNum")
+												 });
+					}
+				} catch(Exception ex) {
+					System.out.println(ex.getMessage());
+				} finally {
+					if (databaseAccessHelper != null) {
+						databaseAccessHelper.Close();
+					}
+					if (resultSet != null) {
+						try {
+							resultSet.close();
+						} catch (SQLException e1) {
+							e1.printStackTrace();
+						}
+					}
+				}
+			}
+		});
+		btnNewButton_1.setBounds(121, 210, 97, 23);
+		userInfoSelect.add(btnNewButton_1);
+		
+		JMenuBar menuBar = new JMenuBar();
+		frame.setJMenuBar(menuBar);
+		
+		JMenu mnNewMenu = new JMenu("파일");
+		mnNewMenu.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("종료");
+		mntmNewMenuItem.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem);
+		
+		JMenu mnNewMenu_1 = new JMenu("사용자 정보 관리");
+		mnNewMenu_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		menuBar.add(mnNewMenu_1);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("사용자 정보 등록");
+		mntmNewMenuItem_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainPanel.setVisible(false);
+				userInfoInsert.setVisible(true);
+				userInfoUpdate.setVisible(false);
+				userInfoDelete.setVisible(false);
+				userInfoSelect.setVisible(false);
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_1);
+		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("사용자 정보 삭제");
+		mntmNewMenuItem_2.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainPanel.setVisible(false);
+				userInfoInsert.setVisible(false);
+				userInfoUpdate.setVisible(false);
+				userInfoDelete.setVisible(true);
+				userInfoSelect.setVisible(false);
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_2);
+		
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("사용자 정보 수정");
+		mntmNewMenuItem_3.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainPanel.setVisible(false);
+				userInfoInsert.setVisible(false);
+				userInfoUpdate.setVisible(true);
+				userInfoDelete.setVisible(false);
+				userInfoSelect.setVisible(false);
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_3);
+		
+		JMenuItem mntmNewMenuItem_4 = new JMenuItem("사용자 정보 조회");
+		mntmNewMenuItem_4.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		mntmNewMenuItem_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainPanel.setVisible(false);
+				userInfoInsert.setVisible(false);
+				userInfoUpdate.setVisible(false);
+				userInfoDelete.setVisible(false);
+				userInfoSelect.setVisible(true);
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_4);
+		
+		JMenu mnNewMenu_2 = new JMenu("도서 정보 관리");
+		mnNewMenu_2.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		menuBar.add(mnNewMenu_2);
+		
+		JMenuItem mntmNewMenuItem_6 = new JMenuItem("도서 정보 등록");
+		mntmNewMenuItem_6.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		mntmNewMenuItem_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		mnNewMenu_2.add(mntmNewMenuItem_6);
+		
+		JMenuItem mntmNewMenuItem_7 = new JMenuItem("도서 정보 삭제");
+		mntmNewMenuItem_7.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		mntmNewMenuItem_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		mnNewMenu_2.add(mntmNewMenuItem_7);
+		
+		JMenuItem mntmNewMenuItem_5 = new JMenuItem("도서 정보 수정");
+		mntmNewMenuItem_5.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		mntmNewMenuItem_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		mnNewMenu_2.add(mntmNewMenuItem_5);
+		
+		JMenuItem mntmNewMenuItem_8 = new JMenuItem("도서 정보 조회");
+		mntmNewMenuItem_8.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		mntmNewMenuItem_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		mnNewMenu_2.add(mntmNewMenuItem_8);
+		
+		JMenu mnNewMenu_3 = new JMenu("도서 대여 관리");
+		mnNewMenu_3.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		menuBar.add(mnNewMenu_3);
+		
+		JMenuItem mntmNewMenuItem_9 = new JMenuItem("도서 반출 등록");
+		mntmNewMenuItem_9.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		mntmNewMenuItem_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		mnNewMenu_3.add(mntmNewMenuItem_9);
+		
+		JMenuItem mntmNewMenuItem_10 = new JMenuItem("도서 반입 등록");
+		mntmNewMenuItem_10.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		mntmNewMenuItem_10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		mnNewMenu_3.add(mntmNewMenuItem_10);
+		
+		JMenuItem mntmNewMenuItem_11 = new JMenuItem("도서 대여 이력 조회");
+		mntmNewMenuItem_11.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		mntmNewMenuItem_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		mnNewMenu_3.add(mntmNewMenuItem_11);
+		
+		JMenu mnNewMenu_4 = new JMenu("도움말");
+		mnNewMenu_4.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		menuBar.add(mnNewMenu_4);
 	}
 }

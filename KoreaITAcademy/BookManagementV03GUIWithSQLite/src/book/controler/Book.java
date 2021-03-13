@@ -21,7 +21,7 @@ public class Book {
 	/*
 	 * Get bookNo
 	 */
-	public String getBookNo() {
+	public String getBookID() {
 		return bookID;
 	}
 	

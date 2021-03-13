@@ -1,155 +1,410 @@
 package book.model;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
-import book.controler.*;
+
+import book.controler.Book;
+import book.controler.BookInOut;
+import book.controler.UserGeneral;
 
 public class DataHelper {
-
-	private static ArrayList<Book> bookList = new ArrayList<Book>();
-	private static ArrayList<UserGeneral> userList = new ArrayList<UserGeneral>();
-	private static ArrayList<BookInOut> bookInOutList = new ArrayList<BookInOut>();
 
 	public DataHelper() {
 	}
 	
 	public void insertData(Book book) {
-		bookList.add(book);
+		DatabaseAccessHelper databaseAccessHelper = new DatabaseAccessHelper();
+		String queryString;
+		
+		try {
+			queryString = "	INSERT INTO BookInfo"
+						+ "	("
+						+ "		BookID,"
+						+ "		BookTitle,"
+						+ " 	BookISBN"
+						+ " )"
+						+ " VALUES"
+						+ " ("
+						+ "		?,"
+						+ "		?,"
+						+ "		?"
+						+ " );";
+			
+			ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
+			dataPack.add(new DataPack(1, book.getBookID()));
+			dataPack.add(new DataPack(2, book.getBookTitle()));
+			dataPack.add(new DataPack(3, book.getBookISBN()));
+			
+			databaseAccessHelper.executeNonQuery(queryString, dataPack);
+			
+			System.out.println();
+		
+
+			databaseAccessHelper.Close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void insertData(UserGeneral user) {
-		userList.add(user);
+		DatabaseAccessHelper databaseAccessHelper = new DatabaseAccessHelper();
+		String queryString;
+
+		try {
+			queryString = "	INSERT INTO UserInfo"
+						+ "	("
+						+ "		UserID,"
+						+ "		UserName,"
+						+ " 	UserPhoneNum"
+						+ " )"
+						+ " VALUES"
+						+ " ("
+						+ "		?,"
+						+ "		?,"
+						+ "		?"
+						+ " );";
+			
+			ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
+			dataPack.add(new DataPack(1, user.getUserID()));
+			dataPack.add(new DataPack(2, user.getUserName()));
+			dataPack.add(new DataPack(3, user.getUserPhoneNum()));
+			
+			databaseAccessHelper.executeNonQuery(queryString, dataPack);
+			
+			System.out.println();
+
+			databaseAccessHelper.Close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void insertData(BookInOut bookInOut) {
-		bookInOutList.add(bookInOut);
+		DatabaseAccessHelper databaseAccessHelper = new DatabaseAccessHelper();
+		String queryString;
+
+		try {
+			queryString = "	INSERT INTO BookInOut"
+						+ "	("
+						+ "		UserID,"
+						+ "		UserName,"
+						+ " 	BookID,"
+						+ " 	BookTitle,"
+						+ " 	InOutType,"
+						+ " 	InOutDate"
+						+ " )"
+						+ " VALUES"
+						+ " ("
+						+ "		?,"
+						+ "		?,"
+						+ "		?,"
+						+ "		?,"
+						+ "		?,"
+						+ "		?"
+						+ " );";
+			
+			ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
+			dataPack.add(new DataPack(1, bookInOut.getUserID()));
+			dataPack.add(new DataPack(2, bookInOut.getUserName()));
+			dataPack.add(new DataPack(3, bookInOut.getBookID()));
+			dataPack.add(new DataPack(4, bookInOut.getBookName()));
+			dataPack.add(new DataPack(5, bookInOut.getInOutType()));
+			dataPack.add(new DataPack(6, bookInOut.getInOutDate()));
+			
+			databaseAccessHelper.executeNonQuery(queryString, dataPack);
+			
+			System.out.println();
+
+			databaseAccessHelper.Close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void selectData(Book book) {
-		System.out.println();
-		for (int loopCount = 0; loopCount < bookList.size(); loopCount++) {
-			if (book.getBookNo().equals(bookList.get(loopCount).getBookNo()))
-			{
-				System.out.print(bookList.get(loopCount).getBookNo());
-				System.out.print(" ");
-				System.out.print(bookList.get(loopCount).getBookTitle());
-				System.out.print(" ");
-				System.out.print(bookList.get(loopCount).getBookISBN());
-				System.out.println();
+		DatabaseAccessHelper databaseAccessHelper = new DatabaseAccessHelper();
+		ResultSet resultSet = null;
+		String queryString;
+		
+		try {
+			queryString = "	SELECT	BookID,"
+						+ "			BookTitle,"
+						+ "			BookISBN "
+						+ "	FROM 	BookInfo"
+						+ "	WHERE	BookID = ?";
+			
+			ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
+			dataPack.add(new DataPack(1, book.getBookID()));
+			
+			resultSet = databaseAccessHelper.executeQuery(queryString, dataPack);
+			
+			System.out.println();
+		
+			System.out.println("도서ID" + " | " + "도서제목" + " | " + "도서ISBN"); //제목
+			while(resultSet.next()) {
+				System.out.println(resultSet.getString("BookID") + " | " 
+								 + resultSet.getString("BookTitle") + " | " 
+								 + resultSet.getString("BookISBN"));
 			}
+			
+			databaseAccessHelper.Close();
+			resultSet.close();
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
 	public void selectData(UserGeneral user) {
-		System.out.println();
-		for (int loopCount = 0; loopCount < userList.size(); loopCount++) {
-			if (user.getUserID().equals(userList.get(loopCount).getUserID()))
-			{
-				System.out.print(userList.get(loopCount).getUserID());
-				System.out.print(" ");
-				System.out.print(userList.get(loopCount).getUserName());
-				System.out.print(" ");
-				System.out.print(userList.get(loopCount).getUserPhoneNum());
-				System.out.println();
+		DatabaseAccessHelper databaseAccessHelper = new DatabaseAccessHelper();
+		ResultSet resultSet = null;
+		String queryString;
+		
+		try {
+			queryString = "	SELECT	UserID,"
+						+ "			UserName,"
+						+ "			UserPhoneNum "
+						+ "	FROM 	UserInfo"
+						+ "	WHERE	UserID = ?";
+			
+			ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
+			dataPack.add(new DataPack(1, user.getUserID()));
+			
+			resultSet = databaseAccessHelper.executeQuery(queryString, dataPack);
+			
+			System.out.println();
+			
+		
+			System.out.println("사용자ID" + " | " + "성명" + " | " + "전화번호"); //제목
+			while(resultSet.next()) {
+				System.out.println(resultSet.getString("UserID") + " | " 
+								 + resultSet.getString("UserName") + " | " 
+								 + resultSet.getString("UserPhoneNum"));
 			}
+			
+			databaseAccessHelper.Close();
+			resultSet.close();
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
 	public void selectData(BookInOut bookInOut) {
-		System.out.println();
-		for (int loopCount = 0; loopCount < bookInOutList.size(); loopCount++) {
-			if (bookInOut.getUserID().equals(bookInOutList.get(loopCount).getUserID()))
-			{
-				System.out.print(bookInOutList.get(loopCount).getUserID());
-				System.out.print(" ");
-				System.out.print(bookInOutList.get(loopCount).getUserName());
-				System.out.print(" ");
-				System.out.print(bookInOutList.get(loopCount).getBookID());
-				System.out.print(" ");
-				System.out.print(bookInOutList.get(loopCount).getBookName());
-				System.out.print(" ");
-				System.out.print(bookInOutList.get(loopCount).getInOutType());
-				System.out.println();
+		DatabaseAccessHelper databaseAccessHelper = new DatabaseAccessHelper();
+		ResultSet resultSet = null;
+		String queryString;
+		
+		try {
+			queryString = "	SELECT	UserID,"
+						+ "			UserName,"
+						+ "			BookID,"
+						+ "			BookTtile,"
+						+ "			InOutType,"
+						+ "			InOutDate"
+						+ "	FROM 	BookInOut"
+						+ "	WHERE	UserID = ?";
+			
+			ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
+			dataPack.add(new DataPack(1, bookInOut.getUserID()));
+			
+			resultSet = databaseAccessHelper.executeQuery(queryString, dataPack);
+			
+			System.out.println();
+			
+			System.out.println("사용자ID" + " | " + "성명" + " | " + "도서ID" + " | " + "도서제목" + " | " + "입출고구분" + " | " + "일자"); //제목
+			while(resultSet.next()) {
+				System.out.println(resultSet.getString("UserID") + " | " 
+						 		 + resultSet.getString("UserName") + " | " 
+								 + resultSet.getString("BookID") + " | "
+								 + resultSet.getString("BookTitle") + " | "
+								 + resultSet.getString("InOutType") + " | "
+								 + resultSet.getString("InOutDate"));
 			}
+			
+			databaseAccessHelper.Close();
+			resultSet.close();
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
 	public void selectAllData(Book book) {
-		System.out.println();
-		for (int loopCount = 0; loopCount < bookList.size(); loopCount++) {
-			System.out.print(bookList.get(loopCount).getBookNo());
-			System.out.print(" ");
-			System.out.print(bookList.get(loopCount).getBookTitle());
-			System.out.print(" ");
-			System.out.print(bookList.get(loopCount).getBookISBN());
+		DatabaseAccessHelper databaseAccessHelper = new DatabaseAccessHelper();
+		ResultSet resultSet = null;
+		String queryString;
+		
+		try {
+			queryString = "	SELECT	BookID,"
+						+ "			BookTitle,"
+						+ "			BookISBN "
+						+ "	FROM 	BookInfo";
+			
+			resultSet = databaseAccessHelper.executeQuery(queryString);
+	
 			System.out.println();
+
+			System.out.println("도서ID" + " | " + "도서제목" + " | " + "도서ISBN"); //제목
+			while(resultSet.next()) {
+				System.out.println(resultSet.getString("BookID") + " | " 
+								 + resultSet.getString("BookTitle") + " | " 
+								 + resultSet.getString("BookISBN"));
+			}
+			
+			databaseAccessHelper.Close();
+			resultSet.close();
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
 	public void selectAllData(UserGeneral user) {
-		System.out.println();
-		for (int loopCount = 0; loopCount < userList.size(); loopCount++) {
-			System.out.print(userList.get(loopCount).getUserID());
-			System.out.print(" ");
-			System.out.print(userList.get(loopCount).getUserName());
-			System.out.print(" ");
-			System.out.print(userList.get(loopCount).getUserPhoneNum());
+		DatabaseAccessHelper databaseAccessHelper = new DatabaseAccessHelper();
+		ResultSet resultSet = null;
+		String queryString;
+		
+		try {
+			queryString = "	SELECT	UserID,"
+						+ "			UserName,"
+						+ "			UserPhoneNum "
+						+ "	FROM 	UserInfo";
+			
+			resultSet = databaseAccessHelper.executeQuery(queryString);
+	
 			System.out.println();
+			
+			System.out.println("사용자ID" + " | " + "성명" + " | " + "전화번호"); //제목
+			while(resultSet.next()) {
+				System.out.println(resultSet.getString("UserID") + " | " + resultSet.getString("UserName") + " | " + resultSet.getString("UserPhoneNum"));
+			}
+			
+			databaseAccessHelper.Close();
+			resultSet.close();
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
 	public void selectAllData(BookInOut bookInOut) {
-		System.out.println();
-		for (int loopCount = 0; loopCount < bookInOutList.size(); loopCount++) {
-			System.out.print(bookInOutList.get(loopCount).getUserID());
-			System.out.print(" ");
-			System.out.print(bookInOutList.get(loopCount).getUserName());
-			System.out.print(" ");
-			System.out.print(bookInOutList.get(loopCount).getBookID());
-			System.out.print(" ");
-			System.out.print(bookInOutList.get(loopCount).getBookName());
-			System.out.print(" ");
-			System.out.print(bookInOutList.get(loopCount).getInOutType());
-			System.out.print(" ");
-			System.out.print(bookInOutList.get(loopCount).getInOutDate());
+		DatabaseAccessHelper databaseAccessHelper = new DatabaseAccessHelper();
+		ResultSet resultSet = null;
+		String queryString;
+		
+		try {
+			queryString = "	SELECT	UserID,"
+						+ "			UserName,"
+						+ "			BookID,"
+						+ "			BookTitle,"
+						+ "			InOutType,"
+						+ "			InOutDate"
+						+ "	FROM 	BookInOut";
+			
+			resultSet = databaseAccessHelper.executeQuery(queryString);
+	
 			System.out.println();
+
+			System.out.println("사용자ID" + " | " + "성명" + " | " + "도서ID" + " | " + "도서제목" + " | " + "입출고구분" + " | " + "일자"); //제목
+			while(resultSet.next()) {
+				System.out.println(resultSet.getString("UserID") + " | " 
+						 		 + resultSet.getString("UserName") + " | " 
+								 + resultSet.getString("BookID") + " | "
+								 + resultSet.getString("BookTitle") + " | "
+								 + resultSet.getString("InOutType") + " | "
+								 + resultSet.getString("InOutDate"));
+			}
+			
+			databaseAccessHelper.Close();
+			resultSet.close();
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
 	public void deleteData(Book book) {
-		for (int loopCount = 0; loopCount < bookList.size(); loopCount++) {
-			if (book.getBookNo().equals(bookList.get(loopCount).getBookNo()))
-			{
-				bookList.remove(loopCount);
-			}
+		DatabaseAccessHelper databaseAccessHelper = new DatabaseAccessHelper();
+		String queryString;
+		
+		try {
+			queryString = "	DELETE "
+						+ " FROM 	BookInfo"
+						+ "	WHERE	BookID = ?;";
+			
+			ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
+			dataPack.add(new DataPack(1, book.getBookID()));
+			
+			databaseAccessHelper.executeNonQuery(queryString, dataPack);
+			
+			System.out.println();
+			
+			databaseAccessHelper.Close();
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
 	public void deleteData(UserGeneral user) {
-		for (int loopCount = 0; loopCount < userList.size(); loopCount++) {
-			if (user.getUserID().equals(userList.get(loopCount).getUserID()))
-			{
-				userList.remove(loopCount);
-			}
+		DatabaseAccessHelper databaseAccessHelper = new DatabaseAccessHelper();
+		String queryString;
+		
+		try {
+			queryString = "	DELETE "
+						+ " FROM 	UserInfo"
+						+ "	WHERE	UserID = ?;";
+			
+			ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
+			dataPack.add(new DataPack(1, user.getUserID()));
+			
+			databaseAccessHelper.executeNonQuery(queryString, dataPack);
+			
+			System.out.println();
+			
+			databaseAccessHelper.Close();
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
 	public void updateData(Book book, Book updatedBook) {
-		for (int loopCount = 0; loopCount < bookList.size(); loopCount++) {
-			if (book.getBookNo().equals(bookList.get(loopCount).getBookNo()))
-			{
-				bookList.get(loopCount).setBookTitle(updatedBook.getBookTitle());
-				bookList.get(loopCount).setBookISBN(updatedBook.getBookISBN());
-			}
+		DatabaseAccessHelper databaseAccessHelper = new DatabaseAccessHelper();
+		String queryString;
+		
+		try {
+			queryString = "	UPDATE	BookInfo "
+						+ " SET 	BookTitle = ?,"
+						+ "			BookISBN = ?"
+						+ "	WHERE	BookID = ?;";
+			
+			ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
+			dataPack.add(new DataPack(1, updatedBook.getBookTitle()));
+			dataPack.add(new DataPack(2, updatedBook.getBookISBN()));
+			dataPack.add(new DataPack(3, book.getBookID()));
+			
+			databaseAccessHelper.executeNonQuery(queryString, dataPack);
+			
+			databaseAccessHelper.Close();
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
 	public void updateData(UserGeneral user, UserGeneral updatedUser) {
-		for (int loopCount = 0; loopCount < userList.size(); loopCount++) {
-			if (user.getUserID().equals(userList.get(loopCount).getUserID()))
-			{
-				userList.get(loopCount).setUserName(updatedUser.getUserName());
-				userList.get(loopCount).setUserPhoneNum(updatedUser.getUserPhoneNum());
-			}
+		DatabaseAccessHelper databaseAccessHelper = new DatabaseAccessHelper();
+		String queryString;
+		
+		try {
+			queryString = "	UPDATE	UserInfo "
+						+ " SET 	UserName = ?,"
+						+ "			UserPhoneNum = ?"
+						+ "	WHERE	UserID = ?;";
+			
+			ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
+			dataPack.add(new DataPack(1, updatedUser.getUserName()));
+			dataPack.add(new DataPack(2, updatedUser.getUserPhoneNum()));
+			dataPack.add(new DataPack(3, user.getUserID()));
+			
+			databaseAccessHelper.executeNonQuery(queryString, dataPack);
+			
+			databaseAccessHelper.Close();
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 }
