@@ -197,7 +197,7 @@ public class DataHelper {
 			queryString = "	SELECT	UserID,"
 						+ "			UserName,"
 						+ "			BookID,"
-						+ "			BookTtile,"
+						+ "			BookTitle,"
 						+ "			InOutType,"
 						+ "			InOutDate"
 						+ "	FROM 	BookInOut"
