@@ -13,6 +13,6 @@ public class Dog extends Animal implements Moveable {
 	
 	@Override
 	public void takeNutrition() {
-		System.out.println("Eat : 사료를 먹다.");
+		System.out.println("Eat : 사료를 먹는다.");
 	}
 }

@@ -7,6 +7,6 @@ public abstract class Plant extends Life {
 	}
 
 	public void takeNutrition() {
-		System.out.println("Eat : 광합성을 하다."); //다형성
+		System.out.println("Eat : 광합성을 한다."); //다형성
 	}	
 }

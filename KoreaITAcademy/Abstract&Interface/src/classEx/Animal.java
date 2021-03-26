@@ -7,6 +7,6 @@ public abstract class Animal extends Life {
 	}
 
 	public void takeNutrition() {
-		System.out.println("Eat : 음식을 먹다."); //다형성
+		System.out.println("Eat : 음식을 먹는다."); //다형성
 	}
 }
