@@ -1,4 +1,4 @@
-package AbstractEx;
+package abstractEx;
 
 public abstract class Electronics {
 	public abstract void turnOn();

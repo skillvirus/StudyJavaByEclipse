@@ -1,4 +1,7 @@
-package InterfaceEx;
+package abstractEx;
+
+import interfaceEx.Computer;
+import interfaceEx.Television;
 
 public class MainClass {
 
@@ -15,5 +18,7 @@ public class MainClass {
 		Television publicTV = new Television("거실 TV");
 		publicTV.turnOn();
 		publicTV.turnOff();
+		
 	}
+
 }

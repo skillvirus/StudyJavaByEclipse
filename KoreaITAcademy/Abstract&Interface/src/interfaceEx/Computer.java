@@ -1,10 +1,10 @@
-package AbstractEx;
+package interfaceEx;
 
-public class Television extends Electronics {
-
+public class Computer implements Electronics {
+	
 	String name;
 	
-	public Television(String name) {
+	public Computer (String name) {
 		this.name = name;
 	}
 
@@ -17,5 +17,4 @@ public class Television extends Electronics {
 	public void turnOff() {
 		System.out.println(name + "를(을) 끕니다.");
 	}
-	
 }

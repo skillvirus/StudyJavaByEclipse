@@ -1,4 +1,4 @@
-package InterfaceEx;
+package interfaceEx;
 
 public interface Electronics {
 	public void turnOn();
