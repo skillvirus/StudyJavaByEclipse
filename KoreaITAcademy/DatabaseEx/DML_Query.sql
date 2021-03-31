@@ -1,4 +1,4 @@
-----------DDL(Data Manupulation Language)----------
+----------DML(Data Manupulation Language)----------
 /*
 --조회
 SELECT		[컬럼명]
