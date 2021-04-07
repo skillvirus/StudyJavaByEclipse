@@ -11,7 +11,6 @@ public class DatabaseAccessHelper {
 	
 	private String connectionString = "jdbc:sqlite:./././Resources/Database/BookManagement.db";
 	private Connection connection = null;
-	//private Statement statement = null;
 	private PreparedStatement preparedStatement = null;
 	private ResultSet resultSet = null;
 	
