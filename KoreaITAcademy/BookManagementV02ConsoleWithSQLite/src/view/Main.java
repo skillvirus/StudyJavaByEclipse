@@ -1,4 +1,4 @@
-package book.view;
+package view;
 
 public class Main {
 

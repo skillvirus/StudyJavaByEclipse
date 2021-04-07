@@ -1,4 +1,4 @@
-package book.model;
+package model;
 
 public class DataPack {
 

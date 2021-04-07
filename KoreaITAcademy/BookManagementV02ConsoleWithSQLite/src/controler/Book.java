@@ -1,6 +1,6 @@
-package book.controler;
+package controler;
 
-import book.model.DataHelper;
+import model.DataHelper;
 
 public class Book {
 
