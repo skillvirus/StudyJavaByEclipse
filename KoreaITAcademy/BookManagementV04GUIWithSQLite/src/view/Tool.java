@@ -1,4 +1,4 @@
-package book.view;
+package view;
 
 import java.awt.Font;
 import java.util.Timer;

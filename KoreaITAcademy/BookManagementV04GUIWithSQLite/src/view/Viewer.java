@@ -1,4 +1,4 @@
-package book.view;
+package view;
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -23,10 +23,10 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
-import book.controler.Book;
-import book.controler.BookInOut;
-import book.controler.User;
-import book.model.DataPack;
+import controler.Book;
+import controler.BookInOut;
+import controler.User;
+import model.DataPack;
 
 public class Viewer {
 
