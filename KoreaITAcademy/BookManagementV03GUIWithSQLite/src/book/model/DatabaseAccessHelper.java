@@ -11,7 +11,6 @@ public class DatabaseAccessHelper {
 	
 	private String connectionString = "jdbc:sqlite:./././Resources/Database/BookManagement.db";
 	private Connection connection = null;
-	private Statement statement = null;
 	private PreparedStatement preparedStatement = null;
 	private ResultSet resultSet = null;
 	
@@ -97,8 +96,8 @@ public class DatabaseAccessHelper {
 	 */
 	public ResultSet executeQuery(String commandText) {
 		try {
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(commandText);
+			preparedStatement = connection.prepareStatement(commandText);
+			resultSet = preparedStatement.executeQuery();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
