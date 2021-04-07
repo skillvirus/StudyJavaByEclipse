@@ -1,4 +1,4 @@
-package book.view;
+package view;
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -21,8 +21,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
-import book.model.DataPack;
-import book.model.DatabaseAccessHelper;
+import model.DataPack;
+import model.DatabaseAccessHelper;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.FocusAdapter;

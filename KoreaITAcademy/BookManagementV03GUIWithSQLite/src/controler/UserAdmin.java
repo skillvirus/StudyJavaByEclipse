@@ -1,6 +1,6 @@
-package book.controler;
+package controler;
 
-import book.model.*;
+import model.*;
 
 public class UserAdmin {
 
