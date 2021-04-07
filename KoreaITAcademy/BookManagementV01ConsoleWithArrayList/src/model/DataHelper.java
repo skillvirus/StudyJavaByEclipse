@@ -1,7 +1,8 @@
-package book.model;
+package model;
 
 import java.util.ArrayList;
-import book.controler.*;
+
+import controler.*;
 
 public class DataHelper {
 

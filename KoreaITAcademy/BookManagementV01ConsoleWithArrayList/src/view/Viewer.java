@@ -1,9 +1,9 @@
-package book.view;
+package view;
 import java.util.Scanner;
 
-import book.controler.Book;
-import book.controler.BookInOut;
-import book.controler.UserGeneral;
+import controler.Book;
+import controler.BookInOut;
+import controler.UserGeneral;
 
 public class Viewer {
 
