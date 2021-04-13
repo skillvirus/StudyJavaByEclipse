@@ -177,10 +177,11 @@ public class Viewer {
 									+ "			UserName,"
 									+ "			UserPhoneNum "
 									+ "	FROM 	UserInfo"
-									+ "	WHERE	UserID = ?";
+									+ "	WHERE	UserID = CASE WHEN ? = '' THEN UserID ELSE ? END";
 			
 				ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
 				dataPack.add(new DataPack(1, userInfoSelectID.getText()));
+				dataPack.add(new DataPack(2, userInfoSelectID.getText()));
 				
 				User user = new User();
 				user.selectData(queryString, userInfoTableModel, dataPack);
