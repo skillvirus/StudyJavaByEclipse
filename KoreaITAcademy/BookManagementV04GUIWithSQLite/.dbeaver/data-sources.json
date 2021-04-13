@@ -1,11 +1,12 @@
 {
 	"folders": {},
 	"connections": {
-		"858DB640-C8DC-71C9-7E42-DF823B7E7F6C-178cb503662-2eb3d7f4687754e5": {
+		"sqlite_jdbc-178cd84c08b-5b7eabd146e4d2c8": {
 			"provider": "generic",
-			"driver": "858DB640-C8DC-71C9-7E42-DF823B7E7F6C",
+			"driver": "sqlite_jdbc",
 			"name": "BookManagement.db",
 			"save-password": true,
+			"show-system-objects": true,
 			"read-only": false,
 			"configuration": {
 				"database": "C:\\Users\\MainUser\\UserDevelopProjects\\StudyJavaByEclipse\\KoreaITAcademy\\BookManagementV04GUIWithSQLite\\Resources\\Database\\BookManagement.db",
@@ -23,54 +24,7 @@
 			"description": "Regular development database",
 			"auto-commit": true,
 			"confirm-execute": false,
-			"confirm-data-change": false,
-			"auto-close-transactions": false
-		}
-	},
-	"drivers": {
-		"generic": {
-			"858DB640-C8DC-71C9-7E42-DF823B7E7F6C": {
-				"provider": "generic",
-				"id": "858DB640-C8DC-71C9-7E42-DF823B7E7F6C",
-				"name": "SQLite",
-				"class": "org.sqlite.JDBC",
-				"url": "jdbc:sqlite:{file}",
-				"custom": true,
-				"embedded": true,
-				"anonymous": true,
-				"allowsEmptyPassword": true,
-				"instantiable": true,
-				"driver-parameters": {
-					"supports-indexes": "true",
-					"all-objects-pattern": "%",
-					"quote-reserved-words": "true",
-					"omit-schema": "false",
-					"schema-filters-enabled": "false",
-					"script-delimiter-redefiner": ";",
-					"supports-struct-cache": "true",
-					"supports-truncate": "true",
-					"omit-type-cache": "false",
-					"split-procedures-and-functions": "false",
-					"supports-stored-code": "true",
-					"supports-references": "true",
-					"omit-single-catalog": "false",
-					"ddl-drop-column-brackets": "false",
-					"omit-single-schema": "false",
-					"supports-scroll": "false",
-					"omit-catalog": "false",
-					"supports-views": "true",
-					"script-delimiter": ";",
-					"legacy-sql-dialect": "false",
-					"script-delimiter-after-query": "false",
-					"use-search-string-escape": "false",
-					"supports-multiple-results": "false",
-					"script-delimiter-after-block": "false",
-					"alter-table-add-column": "false",
-					"ddl-drop-column-short": "false",
-					"supports-limits": "true",
-					"supports-select-count": "true"
-				}
-			}
+			"confirm-data-change": false
 		}
 	}
 }
