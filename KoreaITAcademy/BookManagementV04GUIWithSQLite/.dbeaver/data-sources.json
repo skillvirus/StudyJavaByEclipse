@@ -1,38 +1,17 @@
 {
 	"folders": {},
 	"connections": {
-		"sqlite_jdbc-178cb262736-71cfe79a825c52f6": {
+		"858DB640-C8DC-71C9-7E42-DF823B7E7F6C-178cb503662-2eb3d7f4687754e5": {
 			"provider": "generic",
-			"driver": "sqlite_jdbc",
+			"driver": "858DB640-C8DC-71C9-7E42-DF823B7E7F6C",
 			"name": "BookManagement.db",
 			"save-password": true,
-			"show-system-objects": true,
 			"read-only": false,
 			"configuration": {
-				"database": "/home/mainuser/UserDevelopProjects/StudyJavaByEclipse/KoreaITAcademy/BookManagementV04GUIWithSQLite/Resources/Database/BookManagement.db",
-				"url": "jdbc:sqlite:/home/mainuser/UserDevelopProjects/StudyJavaByEclipse/KoreaITAcademy/BookManagementV04GUIWithSQLite/Resources/Database/BookManagement.db",
+				"database": "C:\\Users\\MainUser\\UserDevelopProjects\\StudyJavaByEclipse\\KoreaITAcademy\\BookManagementV04GUIWithSQLite\\Resources\\Database\\BookManagement.db",
+				"url": "jdbc:sqlite:C:\\Users\\MainUser\\UserDevelopProjects\\StudyJavaByEclipse\\KoreaITAcademy\\BookManagementV04GUIWithSQLite\\Resources\\Database\\BookManagement.db",
 				"type": "dev",
 				"auth-model": "native",
-				"handlers": {}
-			}
-		},
-		"microsoft-178cb30406e-16be863c7904d0ca": {
-			"provider": "sqlserver",
-			"driver": "microsoft",
-			"name": "master",
-			"save-password": true,
-			"show-system-objects": true,
-			"read-only": false,
-			"configuration": {
-				"host": "191.1.1.220",
-				"port": "1433",
-				"database": "master",
-				"url": "jdbc:sqlserver://;serverName=191.1.1.220;databaseName=master",
-				"type": "dev",
-				"provider-properties": {
-					"@dbeaver-authentication@": "SQL_SERVER_PASSWORD",
-					"@dbeaver-show-all-schemas@": "false"
-				},
 				"handlers": {}
 			}
 		}
@@ -44,7 +23,54 @@
 			"description": "Regular development database",
 			"auto-commit": true,
 			"confirm-execute": false,
-			"confirm-data-change": false
+			"confirm-data-change": false,
+			"auto-close-transactions": false
+		}
+	},
+	"drivers": {
+		"generic": {
+			"858DB640-C8DC-71C9-7E42-DF823B7E7F6C": {
+				"provider": "generic",
+				"id": "858DB640-C8DC-71C9-7E42-DF823B7E7F6C",
+				"name": "SQLite",
+				"class": "org.sqlite.JDBC",
+				"url": "jdbc:sqlite:{file}",
+				"custom": true,
+				"embedded": true,
+				"anonymous": true,
+				"allowsEmptyPassword": true,
+				"instantiable": true,
+				"driver-parameters": {
+					"supports-indexes": "true",
+					"all-objects-pattern": "%",
+					"quote-reserved-words": "true",
+					"omit-schema": "false",
+					"schema-filters-enabled": "false",
+					"script-delimiter-redefiner": ";",
+					"supports-struct-cache": "true",
+					"supports-truncate": "true",
+					"omit-type-cache": "false",
+					"split-procedures-and-functions": "false",
+					"supports-stored-code": "true",
+					"supports-references": "true",
+					"omit-single-catalog": "false",
+					"ddl-drop-column-brackets": "false",
+					"omit-single-schema": "false",
+					"supports-scroll": "false",
+					"omit-catalog": "false",
+					"supports-views": "true",
+					"script-delimiter": ";",
+					"legacy-sql-dialect": "false",
+					"script-delimiter-after-query": "false",
+					"use-search-string-escape": "false",
+					"supports-multiple-results": "false",
+					"script-delimiter-after-block": "false",
+					"alter-table-add-column": "false",
+					"ddl-drop-column-short": "false",
+					"supports-limits": "true",
+					"supports-select-count": "true"
+				}
+			}
 		}
 	}
 }
