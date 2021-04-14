@@ -10,7 +10,7 @@ import javax.swing.UIManager;
 
 public class Tool {
 	
-	public static int count;
+	public static int timerCount;
 	
 	public static enum messageType {
 		SUCCESS,
@@ -19,28 +19,28 @@ public class Tool {
 	}
 
 	public static void setText(JLabel resultLabel, String resultText, int keepSeconds, messageType type) {
-		count = 0;
+		timerCount = 0;
 		
 		Timer timer = new Timer();
 		TimerTask timerTaks = new TimerTask() {
 			
 			@Override
 			public void run() {
-				if (count < 1) {
+				if (timerCount < 1) {
 					resultLabel.setText("  " + resultText);
 					
 					if (type == messageType.SUCCESS) {
-						resultLabel.setBackground(new Color(144, 180, 213)); //Ice Blue
+						resultLabel.setBackground(new Color(127,182,123)); //Green
 					}
 					else if (type == messageType.WARNING) {
-						resultLabel.setBackground(new Color(254,240,158)); //Light Yellow
+						resultLabel.setBackground(new Color(159,177,203)); //Ice Blue(144,180,213)
 					}
-					else if (type == messageType.WARNING) {
+					else if (type == messageType.ERROR) {
 						resultLabel.setBackground(new Color(203,0,0)); //Red
 					}
 					resultLabel.setOpaque(true);
 					
-					count++;
+					timerCount++;
 				} 
 				else {
 					timer.cancel();
