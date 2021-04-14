@@ -8,7 +8,10 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,6 +25,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+
+import com.toedter.calendar.JDateChooser;
 
 import controler.Book;
 import controler.BookInOut;
@@ -50,18 +55,25 @@ public class Viewer {
 	private JTextField bookInfoUpdateBookISBN;
 	private JTextField bookInfoDeleteID;
 	private JTable bookInOutTable;
-	private JTextField bookInOutSelectID;
+	private JTextField bookInOutSelectName;
 	private JTextField bookInInsertUserID;
 	private JTextField bookInInsertUserName;
 	private JTextField bookInInsertBookID;
 	private JTextField bookInInsertBookTitle;
-	private JTextField bookInInsertDate;
 	private JTextField bookOutInsertUserID;
 	private JTextField bookOutInsertUserName;
-	private JTextField bookOutInsertDate;
 	private JTextField bookOutInsertBookTitle;
 	private JTextField bookOutInsertBookID;
-
+	private JTextField userInfoSelectName;
+	private JTextField userInfoSelectPhoneNum;
+	private JTextField bookInfoSelectTitle;
+	private JTextField bookInfoSelectISBN;
+	private JLabel lblResultOutput;
+	private DefaultTableModel bookInfoTableModel;
+	private DefaultTableModel bookInOutTableModel;
+	private DefaultTableModel userInfoTableModel;
+	private JTextField bookInOutSelectTitle;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -96,11 +108,314 @@ public class Viewer {
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
 		
-		JPanel userInfoSelect = new JPanel();
-		userInfoSelect.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		userInfoSelect.setBounds(0, 0, 634, 335);
-		frame.getContentPane().add(userInfoSelect);
-		userInfoSelect.setLayout(null);
+		JPanel bookOutInsert = new JPanel();
+		bookOutInsert.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bookOutInsert.setBounds(0, 0, 634, 335);
+		frame.getContentPane().add(bookOutInsert);
+		bookOutInsert.setLayout(null);
+		
+		JLabel lblNewLabel_12 = new JLabel("  [도서 반출 등록]");
+		lblNewLabel_12.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_12.setBounds(0, 0, 434, 15);
+		bookOutInsert.add(lblNewLabel_12);
+		
+		JLabel lblNewLabel_20_2 = new JLabel("사용자ID");
+		lblNewLabel_20_2.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_20_2.setBounds(35, 32, 67, 15);
+		bookOutInsert.add(lblNewLabel_20_2);
+		
+		bookOutInsertUserID = new JTextField();
+		bookOutInsertUserID.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bookOutInsertUserID.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				String queryString = "	SELECT	UserName"
+									+ "	FROM 	UserInfo"
+									+ "	WHERE	UserID = ?";
+		
+				ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
+				dataPack.add(new DataPack(1, bookOutInsertUserID.getText()));
+				
+				User user = new User();
+				user.selectData(queryString, bookOutInsertUserName, dataPack);
+				Tool.setText(lblResultOutput, "처리 완료", 3);
+			}
+		});
+		
+		bookOutInsertUserID.setColumns(10);
+		bookOutInsertUserID.setBounds(109, 29, 85, 21);
+		bookOutInsert.add(bookOutInsertUserID);
+		
+		bookOutInsertUserName = new JTextField();
+		bookOutInsertUserName.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bookOutInsertUserName.setEditable(false);
+		bookOutInsertUserName.setColumns(10);
+		bookOutInsertUserName.setBounds(109, 60, 85, 21);
+		bookOutInsert.add(bookOutInsertUserName);
+		
+		JLabel lblNewLabel_20_1_4 = new JLabel("사용자성명");
+		lblNewLabel_20_1_4.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_20_1_4.setBounds(35, 63, 67, 15);
+		bookOutInsert.add(lblNewLabel_20_1_4);
+		
+		JLabel lblNewLabel_20_1_1_1 = new JLabel("도서ID");
+		lblNewLabel_20_1_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_20_1_1_1.setBounds(35, 94, 67, 15);
+		bookOutInsert.add(lblNewLabel_20_1_1_1);
+		
+		JLabel lblNewLabel_20_1_2_1 = new JLabel("도서제목");
+		lblNewLabel_20_1_2_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_20_1_2_1.setBounds(35, 125, 67, 15);
+		bookOutInsert.add(lblNewLabel_20_1_2_1);
+		
+		JLabel lblNewLabel_20_1_3_1 = new JLabel("일자");
+		lblNewLabel_20_1_3_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_20_1_3_1.setBounds(35, 156, 67, 15);
+		bookOutInsert.add(lblNewLabel_20_1_3_1);
+		
+		bookOutInsertBookTitle = new JTextField();
+		bookOutInsertBookTitle.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bookOutInsertBookTitle.setEditable(false);
+		bookOutInsertBookTitle.setColumns(10);
+		bookOutInsertBookTitle.setBounds(109, 122, 233, 21);
+		bookOutInsert.add(bookOutInsertBookTitle);
+		
+		bookOutInsertBookID = new JTextField();
+		bookOutInsertBookID.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bookOutInsertBookID.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				String queryString = "	SELECT	BookTitle"
+									+ "	FROM 	BookInfo"
+									+ "	WHERE	BookID = ?";
+				
+				ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
+				dataPack.add(new DataPack(1, bookOutInsertBookID.getText()));
+				
+				Book book = new Book();
+				book.selectData(queryString, bookOutInsertBookTitle, dataPack);
+				Tool.setText(lblResultOutput, "처리 완료", 3);
+			}
+		});
+		bookOutInsertBookID.setColumns(10);
+		bookOutInsertBookID.setBounds(109, 91, 85, 21);
+		bookOutInsert.add(bookOutInsertBookID);
+		
+		JDateChooser bookOutInsertDate = new JDateChooser();
+		bookOutInsertDate.setBounds(109, 153, 97, 21);
+		bookOutInsertDate.setDateFormatString("yyyy-MM-dd");
+		bookOutInsert.add(bookOutInsertDate);
+		
+
+		JButton btnNewButton_7_4_1 = new JButton("반출등록");
+		btnNewButton_7_4_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		btnNewButton_7_4_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String queryString = "	INSERT INTO BookInOut"
+									+ "	("
+									+ "		UserID,"
+									+ "		UserName,"
+									+ " 	BookID,"
+									+ " 	BookTitle,"
+									+ " 	InOutType,"
+									+ " 	InOutDate"
+									+ " )"
+									+ " VALUES"
+									+ " ("
+									+ "		?,"
+									+ "		?,"
+									+ "		?,"
+									+ "		?,"
+									+ "		?,"
+									+ "		?"
+									+ " );";
+				
+				Date chooserDate = bookOutInsertDate.getDate();
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				String date = chooserDate == null ? "" : dateFormat.format(chooserDate);
+				
+				ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
+				dataPack.add(new DataPack(1, bookOutInsertUserID.getText()));
+				dataPack.add(new DataPack(2, bookOutInsertUserName.getText()));
+				dataPack.add(new DataPack(3, bookOutInsertBookID.getText()));
+				dataPack.add(new DataPack(4, bookOutInsertBookTitle.getText()));
+				dataPack.add(new DataPack(5, "O"));
+				dataPack.add(new DataPack(6, date));
+				
+				BookInOut bookInOut = new BookInOut();
+				
+				if (Tool.openAlert("처리하시겠습니까?") == 0) {
+					bookInOut.insertData(queryString, dataPack);
+					Tool.setText(lblResultOutput, "처리 완료", 3);
+				}
+			}
+		});
+		btnNewButton_7_4_1.setBounds(109, 180, 97, 23);
+		bookOutInsert.add(btnNewButton_7_4_1);
+		
+		
+		JPanel bookInInsert = new JPanel();
+		bookInInsert.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bookInInsert.setBounds(0, 0, 634, 335);
+		frame.getContentPane().add(bookInInsert);
+		bookInInsert.setLayout(null);
+		
+		bookInInsertUserID = new JTextField();
+		bookInInsertUserID.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bookInInsertUserID.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				String queryString = "	SELECT	UserName"
+									+ "	FROM 	UserInfo"
+									+ "	WHERE	UserID = ?";
+			
+				ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
+				dataPack.add(new DataPack(1, bookInInsertUserID.getText()));
+				
+				User user = new User();
+				user.selectData(queryString, bookInInsertUserName, dataPack);
+				Tool.setText(lblResultOutput, "처리 완료", 3);
+			}
+		});
+		bookInInsertUserID.setBounds(114, 25, 85, 21);
+		bookInInsert.add(bookInInsertUserID);
+		bookInInsertUserID.setColumns(10);
+		
+		bookInInsertUserName = new JTextField();
+		bookInInsertUserName.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bookInInsertUserName.setEditable(false);
+		bookInInsertUserName.setColumns(10);
+		bookInInsertUserName.setBounds(114, 56, 85, 21);
+		bookInInsert.add(bookInInsertUserName);
+		
+		bookInInsertBookID = new JTextField();
+		bookInInsertBookID.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bookInInsertBookID.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				String queryString = "	SELECT	BookTitle"
+									+ "	FROM 	BookInfo"
+									+ "	WHERE	BookID = ?";
+					
+				ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
+				dataPack.add(new DataPack(1, bookInInsertBookID.getText()));
+				
+				Book book = new Book();
+				book.selectData(queryString, bookInInsertBookTitle, dataPack);
+				Tool.setText(lblResultOutput, "처리 완료", 3);
+			}
+		});
+		
+		bookInInsertBookID.setColumns(10);
+		bookInInsertBookID.setBounds(114, 87, 85, 21);
+		bookInInsert.add(bookInInsertBookID);
+		
+		bookInInsertBookTitle = new JTextField();
+		bookInInsertBookTitle.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bookInInsertBookTitle.setEditable(false);
+		bookInInsertBookTitle.setColumns(10);
+		bookInInsertBookTitle.setBounds(114, 118, 233, 21);
+		bookInInsert.add(bookInInsertBookTitle);
+		
+		JLabel lblNewLabel_20 = new JLabel("사용자ID");
+		lblNewLabel_20.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_20.setBounds(40, 28, 67, 15);
+		bookInInsert.add(lblNewLabel_20);
+		
+		JLabel lblNewLabel_20_1 = new JLabel("사용자성명");
+		lblNewLabel_20_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_20_1.setBounds(40, 59, 67, 15);
+		bookInInsert.add(lblNewLabel_20_1);
+		
+		JLabel lblNewLabel_20_1_1 = new JLabel("도서ID");
+		lblNewLabel_20_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_20_1_1.setBounds(40, 90, 67, 15);
+		bookInInsert.add(lblNewLabel_20_1_1);
+		
+		JLabel lblNewLabel_20_1_2 = new JLabel("도서제목");
+		lblNewLabel_20_1_2.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_20_1_2.setBounds(40, 121, 67, 15);
+		bookInInsert.add(lblNewLabel_20_1_2);
+		
+		JLabel lblNewLabel_20_1_3 = new JLabel("일자");
+		lblNewLabel_20_1_3.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_20_1_3.setBounds(40, 152, 67, 15);
+		bookInInsert.add(lblNewLabel_20_1_3);
+		
+		JDateChooser bookInInsertDate = new JDateChooser();
+		bookInInsertDate.setBounds(114, 149, 97, 21);
+		bookInInsertDate.setDateFormatString("yyyy-MM-dd");
+		bookInInsert.add(bookInInsertDate);
+		
+		JPanel bookInOutSelect = new JPanel();
+		bookInOutSelect.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bookInOutSelect.setBounds(0, 0, 634, 335);
+		frame.getContentPane().add(bookInOutSelect);
+		bookInOutSelect.setLayout(null);
+		
+		JLabel lblNewLabel_14 = new JLabel("  [도서 대여 이력 조회]");
+		lblNewLabel_14.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_14.setBounds(0, 0, 634, 15);
+		bookInOutSelect.add(lblNewLabel_14);
+		
+		JDateChooser bookInOutSelectFr = new JDateChooser();
+		bookInOutSelectFr.setBounds(410, 25, 100, 21);
+		bookInOutSelectFr.setDateFormatString("yyyy-MM-dd");
+		bookInOutSelect.add(bookInOutSelectFr);
+		
+		JDateChooser bookInOutSelectTo = new JDateChooser();
+		bookInOutSelectTo.setBounds(522, 25, 100, 21);
+		bookInOutSelectTo.setDateFormatString("yyyy-MM-dd");
+		bookInOutSelect.add(bookInOutSelectTo);
+		
+		JButton btnNewButton_5_1 = new JButton("조회");
+		btnNewButton_5_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String queryString = "	SELECT	UserID,"
+									+ "			UserName,"
+									+ "			BookID,"
+									+ "			BookTitle,"
+									+ "			InOutType,"
+									+ "			InOutDate"
+									+ "	FROM 	BookInOut"
+									+ "	WHERE	UserName = CASE WHEN ? = '' THEN UserName ELSE ? END"
+									+ "			AND BookTitle LIKE ?"
+									+ "         AND InOutDate >= CASE WHEN ? = '' THEN InOutDate ELSE ? END"
+									+ "         AND InOutDate <= CASE WHEN ? = '' THEN InOutDate ELSE ? END";
+
+				ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
+				dataPack.add(new DataPack(1, bookInOutSelectName.getText()));
+				dataPack.add(new DataPack(2, bookInOutSelectName.getText()));
+				dataPack.add(new DataPack(3, "%" + bookInOutSelectTitle.getText() + "%"));
+				
+				Date chooserDateFr = bookInOutSelectFr.getDate();
+				Date chooserDateTo = bookInOutSelectTo.getDate();
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				String dateFr = chooserDateFr == null ? "" : dateFormat.format(chooserDateFr);
+				String dateTo = chooserDateTo == null ? "" : dateFormat.format(chooserDateTo);
+				dataPack.add(new DataPack(4, dateFr));
+				dataPack.add(new DataPack(5, dateFr));
+				dataPack.add(new DataPack(6, dateTo));
+				dataPack.add(new DataPack(7, dateTo));
+				User user = new User();
+				user.selectData(queryString, bookInOutTableModel, dataPack);
+				Tool.setText(lblResultOutput, "처리 완료", 3);
+			}
+		});
+		btnNewButton_5_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		btnNewButton_5_1.setBounds(10, 302, 97, 23);
+		bookInOutSelect.add(btnNewButton_5_1);
+		
+		JLabel lblNewLabel_19_1 = new JLabel("사용자성명");
+		lblNewLabel_19_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_19_1.setBounds(10, 25, 68, 15);
+		bookInOutSelect.add(lblNewLabel_19_1);
+		
+		bookInOutSelectName = new JTextField();
+		bookInOutSelectName.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bookInOutSelectName.setColumns(10);
+		bookInOutSelectName.setBounds(79, 25, 74, 21);
+		bookInOutSelect.add(bookInOutSelectName);
 		
 		JPanel bookInfoSelect = new JPanel();
 		bookInfoSelect.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
@@ -108,11 +423,11 @@ public class Viewer {
 		frame.getContentPane().add(bookInfoSelect);
 		bookInfoSelect.setLayout(null);
 		
-		JPanel bookInOutSelect = new JPanel();
-		bookInOutSelect.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bookInOutSelect.setBounds(0, 0, 634, 335);
-		frame.getContentPane().add(bookInOutSelect);
-		bookInOutSelect.setLayout(null);
+		JPanel userInfoSelect = new JPanel();
+		userInfoSelect.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		userInfoSelect.setBounds(0, 0, 634, 335);
+		frame.getContentPane().add(userInfoSelect);
+		userInfoSelect.setLayout(null);
 		
 		JPanel userInfoUpdate = new JPanel();
 		userInfoUpdate.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
@@ -126,155 +441,67 @@ public class Viewer {
 		frame.getContentPane().add(bookInfoUpdate);
 		bookInfoUpdate.setLayout(null);
 		
+		JPanel bookInfoDelete = new JPanel();
+		bookInfoDelete.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bookInfoDelete.setBounds(0, 0, 634, 335);
+		frame.getContentPane().add(bookInfoDelete);
+		bookInfoDelete.setLayout(null);
 		
+		JPanel userInfoDelete = new JPanel();
+		userInfoDelete.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		userInfoDelete.setBounds(0, 0, 634, 335);
+		frame.getContentPane().add(userInfoDelete);
+		userInfoDelete.setLayout(null);
 		
-		JLabel lblResultOutput = new JLabel("");
-		lblResultOutput.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblResultOutput.setBounds(0, 333, 634, 25);
-		frame.getContentPane().add(lblResultOutput);
+		JPanel bookInfoInsert = new JPanel();
+		bookInfoInsert.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bookInfoInsert.setBounds(0, 0, 634, 335);
+		frame.getContentPane().add(bookInfoInsert);
+		bookInfoInsert.setLayout(null);
 		
-		String[] userInfoTableColName = {"사용자ID","사용자성명","사용자전화번호"};
-		DefaultTableModel userInfoTableModel = new DefaultTableModel(userInfoTableColName, 0);
+		JPanel userInfoInsert = new JPanel();
+		userInfoInsert.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		userInfoInsert.setBounds(0, 0, 634, 335);
+		frame.getContentPane().add(userInfoInsert);
+		userInfoInsert.setLayout(null);
 		
-		String[] bookInfoTableColName = {"도서ID","도서제목","도서ISBN"};
-		DefaultTableModel bookInfoTableModel = new DefaultTableModel(bookInfoTableColName, 0);
-		
-		String[] bookInOutTableColName = {"사용자ID","사용자성명","도서ID","도서제목","상태","일자"};
-		DefaultTableModel bookInOutTableModel = new DefaultTableModel(bookInOutTableColName, 0);
-						
-		
-		
-		userInfoTable = new JTable(userInfoTableModel);
-		userInfoTable.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		userInfoTable.setBounds(10, 50, 410, 155);
-						
-		JLabel lblNewLabel_6 = new JLabel("  [사용자 정보 조회]");
-		lblNewLabel_6.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_6.setBounds(0, 0, 634, 15);
-		userInfoSelect.add(lblNewLabel_6);
-		
-		JScrollPane userInfoScrollPane = new JScrollPane(userInfoTable);
-		userInfoScrollPane.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		userInfoScrollPane.setBounds(10,50,612,242);
-		userInfoSelect.add(userInfoScrollPane);
-		
-		userInfoSelectID = new JTextField();
-		userInfoSelectID.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		userInfoSelectID.setBounds(62, 25, 116, 21);
-		userInfoSelect.add(userInfoSelectID);
-		userInfoSelectID.setColumns(10);
-		
-		JLabel lblNewLabel_15 = new JLabel("ID");
-		lblNewLabel_15.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_15.setBounds(10, 27, 57, 15);
-		userInfoSelect.add(lblNewLabel_15);
-		
-		JButton btnNewButton = new JButton("조회");
-		btnNewButton.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String queryString = "	SELECT	UserID,"
-									+ "			UserName,"
-									+ "			UserPhoneNum "
-									+ "	FROM 	UserInfo"
-									+ "	WHERE	UserID = CASE WHEN ? = '' THEN UserID ELSE ? END";
-			
-				ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
-				dataPack.add(new DataPack(1, userInfoSelectID.getText()));
-				dataPack.add(new DataPack(2, userInfoSelectID.getText()));
-				
-				User user = new User();
-				user.selectData(queryString, userInfoTableModel, dataPack);
-				Tool.setText(lblResultOutput, "처리 완료", 3);
-			}
-		});
-		btnNewButton.setBounds(10, 302, 97, 23);
-		userInfoSelect.add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("전체 조회");
-		btnNewButton_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String queryString = "	SELECT	UserID,"
-									+ "			UserName,"
-									+ "			UserPhoneNum "
-									+ "	FROM 	UserInfo";
-				
-				User user = new User();
-				user.selectData(queryString, userInfoTableModel);
-				Tool.setText(lblResultOutput, "처리 완료", 3);
-			}
-		});
-		btnNewButton_1.setBounds(124, 302, 97, 23);
-		userInfoSelect.add(btnNewButton_1);
-
-		
-		bookInfoTable = new JTable(bookInfoTableModel);
-		bookInfoTable.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bookInfoTable.setBounds(10, 50, 410, 155);
+		JPanel mainPanel = new JPanel();
+		mainPanel.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		mainPanel.setBounds(0, 0, 634, 335);
+		frame.getContentPane().add(mainPanel);
+		mainPanel.setLayout(null);
 		
 		JLabel lblNewLabel_11 = new JLabel("  [도서 정보 조회]");
 		lblNewLabel_11.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		lblNewLabel_11.setBounds(0, 0, 634, 15);
 		bookInfoSelect.add(lblNewLabel_11);
 		
-		JButton btnNewButton_5 = new JButton("조회");
-		btnNewButton_5.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		btnNewButton_5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String queryString = "	SELECT	BookID,"
-									+ "			BookTitle,"
-									+ "			BookISBN "
-									+ "	FROM 	BookInfo"
-									+ "	WHERE	BookID = ?";
-				ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
-				dataPack.add(new DataPack(1, bookInfoSelectID.getText()));
-				Book book = new Book();
-				book.selectData(queryString, bookInfoTableModel, dataPack);
-				Tool.setText(lblResultOutput, "처리 완료", 3);
-			}
-		});
-		btnNewButton_5.setBounds(10, 302, 97, 23);
-		bookInfoSelect.add(btnNewButton_5);
+		String[] userInfoTableColName = {"사용자ID","사용자성명","사용자전화번호"};
+		userInfoTableModel = new DefaultTableModel(userInfoTableColName, 0);
 		
-		JButton btnNewButton_6 = new JButton("전체 조회");
-		btnNewButton_6.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		btnNewButton_6.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String queryString = "	SELECT	BookID,"
-									+ "			BookTitle,"
-									+ "			BookISBN "
-									+ "	FROM 	BookInfo";
-				Book book = new Book();
-				book.selectData(queryString, bookInfoTableModel);
-				Tool.setText(lblResultOutput, "처리 완료", 3);
-			}
-		});
-		btnNewButton_6.setBounds(124, 302, 97, 23);
-		bookInfoSelect.add(btnNewButton_6);
+		userInfoTable = new JTable(userInfoTableModel);
+		userInfoTable.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		userInfoTable.setBounds(10, 50, 410, 155);
 		
-		bookInfoSelectID = new JTextField();
-		bookInfoSelectID.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bookInfoSelectID.setBounds(62, 25, 116, 21);
-		bookInfoSelect.add(bookInfoSelectID);
-		bookInfoSelectID.setColumns(10);
+		JScrollPane userInfoScrollPane = new JScrollPane(userInfoTable);
+		userInfoScrollPane.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		userInfoScrollPane.setBounds(10,50,612,242);
+		userInfoSelect.add(userInfoScrollPane);
 		
-		JLabel lblNewLabel_19 = new JLabel("ID");
-		lblNewLabel_19.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_19.setBounds(10, 27, 57, 15);
-		bookInfoSelect.add(lblNewLabel_19);
+		String[] bookInfoTableColName = {"도서ID","도서제목","도서ISBN"};
+		bookInfoTableModel = new DefaultTableModel(bookInfoTableColName, 0);
+		
+		bookInfoTable = new JTable(bookInfoTableModel);
+		bookInfoTable.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bookInfoTable.setBounds(10, 50, 410, 155);
 		
 		JScrollPane bookInfoScrollPane = new JScrollPane(bookInfoTable);
 		bookInfoScrollPane.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		bookInfoScrollPane.setBounds(10,50,612,242);
 		bookInfoSelect.add(bookInfoScrollPane);
-		
 
-		
-		JLabel lblNewLabel_14 = new JLabel("  [도서 대여 이력 조회]");
-		lblNewLabel_14.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_14.setBounds(0, 0, 634, 15);
-		bookInOutSelect.add(lblNewLabel_14);
+		String[] bookInOutTableColName = {"사용자ID","사용자성명","도서ID","도서제목","상태","일자"};
+		bookInOutTableModel = new DefaultTableModel(bookInOutTableColName, 0);
 		
 		bookInOutTable = new JTable(bookInOutTableModel);
 		bookInOutTable.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
@@ -285,61 +512,205 @@ public class Viewer {
 		bookInOutScrollPane.setBounds(10,50,612,242);
 		bookInOutSelect.add(bookInOutScrollPane);
 		
-		JButton btnNewButton_6_1 = new JButton("전체 조회");
-		btnNewButton_6_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String queryString = "	SELECT	UserID,"
-									+ "			UserName,"
-									+ "			BookID,"
-									+ "			BookTitle,"
-									+ "			InOutType,"
-									+ "			InOutDate"
-									+ "	FROM 	BookInOut";
-				User user = new User();
-				user.selectData(queryString, bookInOutTableModel);
-				Tool.setText(lblResultOutput, "처리 완료", 3);
-			}
-		});
-		btnNewButton_6_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		btnNewButton_6_1.setBounds(124, 302, 97, 23);
-		bookInOutSelect.add(btnNewButton_6_1);
+		JLabel lblNewLabel_21 = new JLabel("~");
+		lblNewLabel_21.setBounds(511, 25, 15, 17);
+		bookInOutSelect.add(lblNewLabel_21);
 		
-		JButton btnNewButton_5_1 = new JButton("조회");
-		btnNewButton_5_1.addActionListener(new ActionListener() {
+		bookInOutSelectTitle = new JTextField();
+		bookInOutSelectTitle.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bookInOutSelectTitle.setColumns(10);
+		bookInOutSelectTitle.setBounds(210, 25, 163, 21);
+		bookInOutSelect.add(bookInOutSelectTitle);
+		
+		JLabel lblNewLabel_19_1_1 = new JLabel("책제목");
+		lblNewLabel_19_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_19_1_1.setBounds(165, 25, 40, 15);
+		bookInOutSelect.add(lblNewLabel_19_1_1);
+		
+		JLabel lblNewLabel_19_1_1_1 = new JLabel("기간");
+		lblNewLabel_19_1_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_19_1_1_1.setBounds(380, 25, 33, 15);
+		bookInOutSelect.add(lblNewLabel_19_1_1_1);
+		
+		bookInfoSelectID = new JTextField();
+		bookInfoSelectID.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bookInfoSelectID.setBounds(41, 25, 45, 21);
+		bookInfoSelect.add(bookInfoSelectID);
+		bookInfoSelectID.setColumns(10);
+		
+		JLabel lblNewLabel_19 = new JLabel("ID");
+		lblNewLabel_19.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_19.setBounds(10, 25, 29, 15);
+		bookInfoSelect.add(lblNewLabel_19);
+		
+		JLabel lblNewLabel_19_2 = new JLabel("책 제목");
+		lblNewLabel_19_2.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_19_2.setBounds(98, 25, 69, 15);
+		bookInfoSelect.add(lblNewLabel_19_2);
+		
+		bookInfoSelectTitle = new JTextField();
+		bookInfoSelectTitle.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bookInfoSelectTitle.setColumns(10);
+		bookInfoSelectTitle.setBounds(168, 25, 97, 21);
+		bookInfoSelect.add(bookInfoSelectTitle);
+		
+		JLabel lblNewLabel_19_3 = new JLabel("ISBN");
+		lblNewLabel_19_3.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_19_3.setBounds(272, 25, 69, 15);
+		bookInfoSelect.add(lblNewLabel_19_3);
+		
+		bookInfoSelectISBN = new JTextField();
+		bookInfoSelectISBN.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bookInfoSelectISBN.setColumns(10);
+		bookInfoSelectISBN.setBounds(342, 25, 153, 21);
+		bookInfoSelect.add(bookInfoSelectISBN);
+		
+		JButton btnNewButton_5 = new JButton("조회");
+		btnNewButton_5.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String queryString = "	SELECT	UserID,"
-									+ "			UserName,"
-									+ "			BookID,"
+				String queryString = "	SELECT	BookID,"
 									+ "			BookTitle,"
-									+ "			InOutType,"
-									+ "			InOutDate"
-									+ "	FROM 	BookInOut"
-									+ "	WHERE	UserID = ?";
-
+									+ "			BookISBN "
+									+ "	FROM 	BookInfo"
+									+ "	WHERE	BookID = CASE WHEN ? = '' THEN BookID ELSE ? END"
+									+ " 		AND BookTitle LIKE ?"
+									+ " 		AND BookISBN LIKE ?";
 				ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
-				dataPack.add(new DataPack(1, bookInOutSelectID.getText()));
-				User user = new User();
-				user.selectData(queryString, bookInOutTableModel, dataPack);
+				dataPack.add(new DataPack(1, bookInfoSelectID.getText()));
+				dataPack.add(new DataPack(2, bookInfoSelectID.getText()));
+				dataPack.add(new DataPack(3, "%" + bookInfoSelectTitle.getText() + "%"));
+				dataPack.add(new DataPack(4, "%" + bookInfoSelectISBN.getText() + "%"));
+				Book book = new Book();
+				book.selectData(queryString, bookInfoTableModel, dataPack);
 				Tool.setText(lblResultOutput, "처리 완료", 3);
 			}
 		});
-		btnNewButton_5_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		btnNewButton_5_1.setBounds(10, 302, 97, 23);
-		bookInOutSelect.add(btnNewButton_5_1);
+		btnNewButton_5.setBounds(10, 302, 97, 23);
+		bookInfoSelect.add(btnNewButton_5);
 		
-		JLabel lblNewLabel_19_1 = new JLabel("사용자ID");
-		lblNewLabel_19_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_19_1.setBounds(10, 27, 57, 15);
-		bookInOutSelect.add(lblNewLabel_19_1);
 		
-		bookInOutSelectID = new JTextField();
-		bookInOutSelectID.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bookInOutSelectID.setColumns(10);
-		bookInOutSelectID.setBounds(62, 25, 116, 21);
-		bookInOutSelect.add(bookInOutSelectID);
+		JLabel lblNewLabel_13 = new JLabel("  [도서 반입 등록]");
+		lblNewLabel_13.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_13.setBounds(0, 0, 434, 15);
+		bookInInsert.add(lblNewLabel_13);
 		
+		JButton btnNewButton_7_4 = new JButton("반입등록");
+		btnNewButton_7_4.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		btnNewButton_7_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String queryString = "	INSERT INTO BookInOut"
+									+ "	("
+									+ "		UserID,"
+									+ "		UserName,"
+									+ " 	BookID,"
+									+ " 	BookTitle,"
+									+ " 	InOutType,"
+									+ " 	InOutDate"
+									+ " )"
+									+ " VALUES"
+									+ " ("
+									+ "		?,"
+									+ "		?,"
+									+ "		?,"
+									+ "		?,"
+									+ "		?,"
+									+ "		?"
+									+ " );";
+				
+				Date chooserDate = bookInInsertDate.getDate();
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				String date = chooserDate == null ? "" : dateFormat.format(chooserDate);
+				
+				ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
+				dataPack.add(new DataPack(1, bookInInsertUserID.getText()));
+				dataPack.add(new DataPack(2, bookInInsertUserName.getText()));
+				dataPack.add(new DataPack(3, bookInInsertBookID.getText()));
+				dataPack.add(new DataPack(4, bookInInsertBookTitle.getText()));
+				dataPack.add(new DataPack(5, "I"));
+				dataPack.add(new DataPack(6, date));
+				
+				BookInOut bookInOut = new BookInOut();
+				
+				if (Tool.openAlert("처리하시겠습니까?") == 0) {
+					bookInOut.insertData(queryString, dataPack);
+					Tool.setText(lblResultOutput, "처리 완료", 3);
+				}
+			}
+		});
+		btnNewButton_7_4.setBounds(114, 176, 97, 23);
+		bookInInsert.add(btnNewButton_7_4);
 
 		
+		lblResultOutput = new JLabel("");
+		lblResultOutput.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblResultOutput.setBounds(0, 333, 634, 25);
+		frame.getContentPane().add(lblResultOutput);
+						
+		JLabel lblNewLabel_6 = new JLabel("  [사용자 정보 조회]");
+		lblNewLabel_6.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_6.setBounds(0, 0, 634, 15);
+		userInfoSelect.add(lblNewLabel_6);
+		
+		userInfoSelectID = new JTextField();
+		userInfoSelectID.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		userInfoSelectID.setBounds(41, 25, 45, 21);
+		userInfoSelect.add(userInfoSelectID);
+		userInfoSelectID.setColumns(10);
+		
+		JLabel lblNewLabel_15 = new JLabel("ID");
+		lblNewLabel_15.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_15.setBounds(10, 25, 29, 15);
+		userInfoSelect.add(lblNewLabel_15);
+		
+		JButton btnNewButton = new JButton("조회");
+		btnNewButton.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String queryString = "	SELECT	UserID,"
+									+ "			UserName,"
+									+ "			UserPhoneNum "
+									+ "	FROM 	UserInfo"
+									+ "	WHERE	UserID = CASE WHEN ? = '' THEN UserID ELSE ? END"
+									+ " 		AND UserName LIKE ?"
+									+ " 		AND UserPhoneNum LIKE ?";
+				
+				ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
+				dataPack.add(new DataPack(1, userInfoSelectID.getText()));
+				dataPack.add(new DataPack(2, userInfoSelectID.getText()));
+				dataPack.add(new DataPack(3, "%" + userInfoSelectName.getText() + "%"));
+				dataPack.add(new DataPack(4, "%" + userInfoSelectPhoneNum.getText() + "%"));
+				
+				User user = new User();
+				user.selectData(queryString, userInfoTableModel, dataPack);
+				Tool.setText(lblResultOutput, "처리 완료", 3);
+			}
+		});
+		btnNewButton.setBounds(10, 302, 97, 23);
+		userInfoSelect.add(btnNewButton);
+		
+		JLabel lblNewLabel_15_1 = new JLabel("사용자 성명");
+		lblNewLabel_15_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_15_1.setBounds(98, 25, 69, 15);
+		userInfoSelect.add(lblNewLabel_15_1);
+		
+		userInfoSelectName = new JTextField();
+		userInfoSelectName.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		userInfoSelectName.setColumns(10);
+		userInfoSelectName.setBounds(168, 25, 97, 21);
+		userInfoSelect.add(userInfoSelectName);
+		
+		JLabel lblNewLabel_15_1_1 = new JLabel("전화번호");
+		lblNewLabel_15_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_15_1_1.setBounds(272, 25, 69, 15);
+		userInfoSelect.add(lblNewLabel_15_1_1);
+		
+		userInfoSelectPhoneNum = new JTextField();
+		userInfoSelectPhoneNum.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		userInfoSelectPhoneNum.setColumns(10);
+		userInfoSelectPhoneNum.setBounds(342, 25, 153, 21);
+		userInfoSelect.add(userInfoSelectPhoneNum);
+				
 		JLabel lblNewLabel_5 = new JLabel("  [사용자 정보 수정]");
 		lblNewLabel_5.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		lblNewLabel_5.setBounds(0, 0, 634, 15);
@@ -363,6 +734,7 @@ public class Viewer {
 				Tool.setText(lblResultOutput, "처리 완료", 3);
 			}
 		});
+		
 		userInfoUpdateUserID.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		userInfoUpdateUserID.setBounds(84, 40, 116, 21);
 		userInfoUpdate.add(userInfoUpdateUserID);
@@ -409,7 +781,7 @@ public class Viewer {
 				dataPack.add(new DataPack(2, userInfoUpdatePhoneNum.getText()));
 				dataPack.add(new DataPack(3, userInfoUpdateUserID.getText()));
 				
-				User user = new User();				
+				User user = new User();
 				
 				if (Tool.openAlert("처리하시겠습니까?") == 0) {
 					user.updateData(queryString, dataPack);
@@ -419,7 +791,6 @@ public class Viewer {
 		});
 		btnNewButton_4.setBounds(15, 149, 97, 23);
 		userInfoUpdate.add(btnNewButton_4);
-
 		
 		JLabel lblNewLabel_9 = new JLabel("  [도서 정보 수정]");
 		lblNewLabel_9.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
@@ -503,316 +874,6 @@ public class Viewer {
 		lblNewLabel_2_2_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		lblNewLabel_2_2_1.setBounds(24, 42, 57, 15);
 		bookInfoUpdate.add(lblNewLabel_2_2_1);
-		
-		JPanel bookOutInsert = new JPanel();
-		bookOutInsert.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bookOutInsert.setBounds(0, 0, 634, 335);
-		frame.getContentPane().add(bookOutInsert);
-		bookOutInsert.setLayout(null);
-		
-		JLabel lblNewLabel_12 = new JLabel("  [도서 반출 등록]");
-		lblNewLabel_12.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_12.setBounds(0, 0, 434, 15);
-		bookOutInsert.add(lblNewLabel_12);
-				
-		JLabel lblNewLabel_20_2 = new JLabel("사용자ID");
-		lblNewLabel_20_2.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_20_2.setBounds(35, 32, 67, 15);
-		bookOutInsert.add(lblNewLabel_20_2);
-		
-		bookOutInsertUserID = new JTextField();
-		bookOutInsertUserID.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bookOutInsertUserID.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				String queryString = "	SELECT	UserName"
-									+ "	FROM 	UserInfo"
-									+ "	WHERE	UserID = ?";
-		
-				ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
-				dataPack.add(new DataPack(1, bookOutInsertUserID.getText()));
-				
-				User user = new User();
-				user.selectData(queryString, bookOutInsertUserName, dataPack);
-				Tool.setText(lblResultOutput, "처리 완료", 3);
-			}
-		});
-		bookOutInsertUserID.setColumns(10);
-		bookOutInsertUserID.setBounds(109, 29, 85, 21);
-		bookOutInsert.add(bookOutInsertUserID);
-		
-		bookOutInsertUserName = new JTextField();
-		bookOutInsertUserName.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bookOutInsertUserName.setEditable(false);
-		bookOutInsertUserName.setColumns(10);
-		bookOutInsertUserName.setBounds(109, 60, 85, 21);
-		bookOutInsert.add(bookOutInsertUserName);
-		
-		JLabel lblNewLabel_20_1_4 = new JLabel("사용자성명");
-		lblNewLabel_20_1_4.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_20_1_4.setBounds(35, 63, 67, 15);
-		bookOutInsert.add(lblNewLabel_20_1_4);
-		
-		JLabel lblNewLabel_20_1_1_1 = new JLabel("도서ID");
-		lblNewLabel_20_1_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_20_1_1_1.setBounds(35, 94, 67, 15);
-		bookOutInsert.add(lblNewLabel_20_1_1_1);
-		
-		JLabel lblNewLabel_20_1_2_1 = new JLabel("도서제목");
-		lblNewLabel_20_1_2_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_20_1_2_1.setBounds(35, 125, 67, 15);
-		bookOutInsert.add(lblNewLabel_20_1_2_1);
-		
-		JLabel lblNewLabel_20_1_3_1 = new JLabel("일자");
-		lblNewLabel_20_1_3_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_20_1_3_1.setBounds(35, 156, 67, 15);
-		bookOutInsert.add(lblNewLabel_20_1_3_1);
-		
-		bookOutInsertDate = new JTextField();
-		bookOutInsertDate.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bookOutInsertDate.setColumns(10);
-		bookOutInsertDate.setBounds(109, 153, 85, 21);
-		bookOutInsert.add(bookOutInsertDate);
-		
-		JButton btnNewButton_7_4_1 = new JButton("반출등록");
-		btnNewButton_7_4_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		btnNewButton_7_4_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String queryString = "	INSERT INTO BookInOut"
-									+ "	("
-									+ "		UserID,"
-									+ "		UserName,"
-									+ " 	BookID,"
-									+ " 	BookTitle,"
-									+ " 	InOutType,"
-									+ " 	InOutDate"
-									+ " )"
-									+ " VALUES"
-									+ " ("
-									+ "		?,"
-									+ "		?,"
-									+ "		?,"
-									+ "		?,"
-									+ "		?,"
-									+ "		?"
-									+ " );";
-						
-				ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
-				dataPack.add(new DataPack(1, bookOutInsertUserID.getText()));
-				dataPack.add(new DataPack(2, bookOutInsertUserName.getText()));
-				dataPack.add(new DataPack(3, bookOutInsertBookID.getText()));
-				dataPack.add(new DataPack(4, bookOutInsertBookTitle.getText()));
-				dataPack.add(new DataPack(5, "O"));
-				dataPack.add(new DataPack(6, bookOutInsertDate.getText()));
-				
-				BookInOut bookInOut = new BookInOut();
-				
-				if (Tool.openAlert("처리하시겠습니까?") == 0) {
-					bookInOut.insertData(queryString, dataPack);
-					Tool.setText(lblResultOutput, "처리 완료", 3);
-				}
-			}
-		});
-		btnNewButton_7_4_1.setBounds(109, 180, 97, 23);
-		bookOutInsert.add(btnNewButton_7_4_1);
-		
-		bookOutInsertBookTitle = new JTextField();
-		bookOutInsertBookTitle.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bookOutInsertBookTitle.setEditable(false);
-		bookOutInsertBookTitle.setColumns(10);
-		bookOutInsertBookTitle.setBounds(109, 122, 233, 21);
-		bookOutInsert.add(bookOutInsertBookTitle);
-		
-		bookOutInsertBookID = new JTextField();
-		bookOutInsertBookID.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bookOutInsertBookID.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				String queryString = "	SELECT	BookTitle"
-									+ "	FROM 	BookInfo"
-									+ "	WHERE	BookID = ?";
-				
-				ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
-				dataPack.add(new DataPack(1, bookOutInsertBookID.getText()));
-				
-				Book book = new Book();
-				book.selectData(queryString, bookOutInsertBookTitle, dataPack);
-				Tool.setText(lblResultOutput, "처리 완료", 3);
-			}
-		});
-		bookOutInsertBookID.setColumns(10);
-		bookOutInsertBookID.setBounds(109, 91, 85, 21);
-		bookOutInsert.add(bookOutInsertBookID);
-		
-		JPanel bookInInsert = new JPanel();
-		bookInInsert.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bookInInsert.setBounds(0, 0, 634, 335);
-		frame.getContentPane().add(bookInInsert);
-		bookInInsert.setLayout(null);
-		
-		JPanel bookInfoDelete = new JPanel();
-		bookInfoDelete.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bookInfoDelete.setBounds(0, 0, 634, 335);
-		frame.getContentPane().add(bookInfoDelete);
-		bookInfoDelete.setLayout(null);
-		
-		JPanel userInfoDelete = new JPanel();
-		userInfoDelete.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		userInfoDelete.setBounds(0, 0, 634, 335);
-		frame.getContentPane().add(userInfoDelete);
-		userInfoDelete.setLayout(null);
-		
-		JPanel bookInfoInsert = new JPanel();
-		bookInfoInsert.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bookInfoInsert.setBounds(0, 0, 634, 335);
-		frame.getContentPane().add(bookInfoInsert);
-		bookInfoInsert.setLayout(null);
-		
-		JPanel userInfoInsert = new JPanel();
-		userInfoInsert.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		userInfoInsert.setBounds(0, 0, 634, 335);
-		frame.getContentPane().add(userInfoInsert);
-		userInfoInsert.setLayout(null);
-		
-		JPanel mainPanel = new JPanel();
-		mainPanel.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		mainPanel.setBounds(0, 0, 634, 335);
-		frame.getContentPane().add(mainPanel);
-		mainPanel.setLayout(null);
-		
-		JLabel lblNewLabel_13 = new JLabel("  [도서 반입 등록]");
-		lblNewLabel_13.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_13.setBounds(0, 0, 434, 15);
-		bookInInsert.add(lblNewLabel_13);
-		
-		JButton btnNewButton_7_4 = new JButton("반입등록");
-		btnNewButton_7_4.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		btnNewButton_7_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String queryString = "	INSERT INTO BookInOut"
-									+ "	("
-									+ "		UserID,"
-									+ "		UserName,"
-									+ " 	BookID,"
-									+ " 	BookTitle,"
-									+ " 	InOutType,"
-									+ " 	InOutDate"
-									+ " )"
-									+ " VALUES"
-									+ " ("
-									+ "		?,"
-									+ "		?,"
-									+ "		?,"
-									+ "		?,"
-									+ "		?,"
-									+ "		?"
-									+ " );";
-				
-				ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
-				dataPack.add(new DataPack(1, bookInInsertUserID.getText()));
-				dataPack.add(new DataPack(2, bookInInsertUserName.getText()));
-				dataPack.add(new DataPack(3, bookInInsertBookID.getText()));
-				dataPack.add(new DataPack(4, bookInInsertBookTitle.getText()));
-				dataPack.add(new DataPack(5, "I"));
-				dataPack.add(new DataPack(6, bookInInsertDate.getText()));
-				
-				BookInOut bookInOut = new BookInOut();
-				
-				if (Tool.openAlert("처리하시겠습니까?") == 0) {
-					bookInOut.insertData(queryString, dataPack);
-					Tool.setText(lblResultOutput, "처리 완료", 3);
-				}
-			}
-		});
-		btnNewButton_7_4.setBounds(114, 176, 97, 23);
-		bookInInsert.add(btnNewButton_7_4);
-		
-		bookInInsertUserID = new JTextField();
-		bookInInsertUserID.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bookInInsertUserID.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				String queryString = "	SELECT	UserName"
-									+ "	FROM 	UserInfo"
-									+ "	WHERE	UserID = ?";
-			
-				ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
-				dataPack.add(new DataPack(1, bookInInsertUserID.getText()));
-				
-				User user = new User();
-				user.selectData(queryString, bookInInsertUserName, dataPack);
-				Tool.setText(lblResultOutput, "처리 완료", 3);
-			}
-		});
-		bookInInsertUserID.setBounds(114, 25, 85, 21);
-		bookInInsert.add(bookInInsertUserID);
-		bookInInsertUserID.setColumns(10);
-		
-		bookInInsertUserName = new JTextField();
-		bookInInsertUserName.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bookInInsertUserName.setEditable(false);
-		bookInInsertUserName.setColumns(10);
-		bookInInsertUserName.setBounds(114, 56, 85, 21);
-		bookInInsert.add(bookInInsertUserName);
-		
-		bookInInsertBookID = new JTextField();
-		bookInInsertBookID.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bookInInsertBookID.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				String queryString = "	SELECT	BookTitle"
-									+ "	FROM 	BookInfo"
-									+ "	WHERE	BookID = ?";
-					
-				ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
-				dataPack.add(new DataPack(1, bookInInsertBookID.getText()));
-				
-				Book book = new Book();
-				book.selectData(queryString, bookInInsertBookTitle, dataPack);
-				Tool.setText(lblResultOutput, "처리 완료", 3);
-			}
-		});
-		bookInInsertBookID.setColumns(10);
-		bookInInsertBookID.setBounds(114, 87, 85, 21);
-		bookInInsert.add(bookInInsertBookID);
-		
-		bookInInsertBookTitle = new JTextField();
-		bookInInsertBookTitle.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bookInInsertBookTitle.setEditable(false);
-		bookInInsertBookTitle.setColumns(10);
-		bookInInsertBookTitle.setBounds(114, 118, 233, 21);
-		bookInInsert.add(bookInInsertBookTitle);
-		
-		bookInInsertDate = new JTextField();
-		bookInInsertDate.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bookInInsertDate.setColumns(10);
-		bookInInsertDate.setBounds(114, 149, 85, 21);
-		bookInInsert.add(bookInInsertDate);
-		
-		JLabel lblNewLabel_20 = new JLabel("사용자ID");
-		lblNewLabel_20.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_20.setBounds(40, 28, 67, 15);
-		bookInInsert.add(lblNewLabel_20);
-		
-		JLabel lblNewLabel_20_1 = new JLabel("사용자성명");
-		lblNewLabel_20_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_20_1.setBounds(40, 59, 67, 15);
-		bookInInsert.add(lblNewLabel_20_1);
-		
-		JLabel lblNewLabel_20_1_1 = new JLabel("도서ID");
-		lblNewLabel_20_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_20_1_1.setBounds(40, 90, 67, 15);
-		bookInInsert.add(lblNewLabel_20_1_1);
-		
-		JLabel lblNewLabel_20_1_2 = new JLabel("도서제목");
-		lblNewLabel_20_1_2.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_20_1_2.setBounds(40, 121, 67, 15);
-		bookInInsert.add(lblNewLabel_20_1_2);
-		
-		JLabel lblNewLabel_20_1_3 = new JLabel("일자");
-		lblNewLabel_20_1_3.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_20_1_3.setBounds(40, 152, 67, 15);
-		bookInInsert.add(lblNewLabel_20_1_3);
 				
 		JLabel lblNewLabel_10 = new JLabel("  [도서 정보 삭제]");
 		lblNewLabel_10.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
@@ -842,7 +903,7 @@ public class Viewer {
 					Tool.setText(lblResultOutput, "처리 완료", 3);
 				}
 			}
-		});
+		});		
 		btnNewButton_3_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		btnNewButton_3_1.setBounds(20, 57, 97, 23);
 		bookInfoDelete.add(btnNewButton_3_1);

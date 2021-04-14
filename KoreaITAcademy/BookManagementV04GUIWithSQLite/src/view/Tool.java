@@ -10,12 +10,8 @@ import javax.swing.UIManager;
 public class Tool {
 	
 	public static int count;
-	
+
 	public static void setText(JLabel resultLabel, String resultText, int keepSeconds) {
-		execTimer(resultLabel, resultText, keepSeconds);
-	}
-	
-	public static void execTimer(JLabel resultLabel, String resultText, int keepSeconds) {
 		count = 0;
 		
 		Timer timer = new Timer();
