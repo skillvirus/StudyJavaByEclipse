@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -10,8 +11,14 @@ import javax.swing.UIManager;
 public class Tool {
 	
 	public static int count;
+	
+	public static enum messageType {
+		SUCCESS,
+		WARNING,
+		ERROR
+	}
 
-	public static void setText(JLabel resultLabel, String resultText, int keepSeconds) {
+	public static void setText(JLabel resultLabel, String resultText, int keepSeconds, messageType type) {
 		count = 0;
 		
 		Timer timer = new Timer();
@@ -21,11 +28,24 @@ public class Tool {
 			public void run() {
 				if (count < 1) {
 					resultLabel.setText("  " + resultText);
+					
+					if (type == messageType.SUCCESS) {
+						resultLabel.setBackground(new Color(144, 180, 213)); //Ice Blue
+					}
+					else if (type == messageType.WARNING) {
+						resultLabel.setBackground(new Color(254,240,158)); //Light Yellow
+					}
+					else if (type == messageType.WARNING) {
+						resultLabel.setBackground(new Color(203,0,0)); //Red
+					}
+					resultLabel.setOpaque(true);
+					
 					count++;
 				} 
 				else {
 					timer.cancel();
 					resultLabel.setText("");
+					resultLabel.setOpaque(false);
 				}	
 			}
 		};

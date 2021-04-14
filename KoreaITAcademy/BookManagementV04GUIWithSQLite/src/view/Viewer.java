@@ -138,7 +138,7 @@ public class Viewer {
 				
 				User user = new User();
 				user.selectData(queryString, bookOutInsertUserName, dataPack);
-				Tool.setText(lblResultOutput, "처리 완료", 3);
+				Tool.setText(lblResultOutput, "처리 완료", 3, Tool.messageType.SUCCESS);
 			}
 		});
 		
@@ -194,7 +194,7 @@ public class Viewer {
 				
 				Book book = new Book();
 				book.selectData(queryString, bookOutInsertBookTitle, dataPack);
-				Tool.setText(lblResultOutput, "처리 완료", 3);
+				Tool.setText(lblResultOutput, "처리 완료", 3, Tool.messageType.SUCCESS);
 			}
 		});
 		bookOutInsertBookID.setColumns(10);
@@ -246,7 +246,7 @@ public class Viewer {
 				
 				if (Tool.openAlert("처리하시겠습니까?") == 0) {
 					bookInOut.insertData(queryString, dataPack);
-					Tool.setText(lblResultOutput, "처리 완료", 3);
+					Tool.setText(lblResultOutput, "처리 완료", 3, Tool.messageType.SUCCESS);
 				}
 			}
 		});
@@ -274,7 +274,7 @@ public class Viewer {
 				
 				User user = new User();
 				user.selectData(queryString, bookInInsertUserName, dataPack);
-				Tool.setText(lblResultOutput, "처리 완료", 3);
+				Tool.setText(lblResultOutput, "처리 완료", 3, Tool.messageType.SUCCESS);
 			}
 		});
 		bookInInsertUserID.setBounds(114, 25, 85, 21);
@@ -302,7 +302,7 @@ public class Viewer {
 				
 				Book book = new Book();
 				book.selectData(queryString, bookInInsertBookTitle, dataPack);
-				Tool.setText(lblResultOutput, "처리 완료", 3);
+				Tool.setText(lblResultOutput, "처리 완료", 3, Tool.messageType.SUCCESS);
 			}
 		});
 		
@@ -399,7 +399,7 @@ public class Viewer {
 				dataPack.add(new DataPack(7, dateTo));
 				User user = new User();
 				user.selectData(queryString, bookInOutTableModel, dataPack);
-				Tool.setText(lblResultOutput, "처리 완료", 3);
+				Tool.setText(lblResultOutput, "처리 완료", 3, Tool.messageType.SUCCESS);
 			}
 		});
 		btnNewButton_5_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
@@ -583,7 +583,7 @@ public class Viewer {
 				dataPack.add(new DataPack(4, "%" + bookInfoSelectISBN.getText() + "%"));
 				Book book = new Book();
 				book.selectData(queryString, bookInfoTableModel, dataPack);
-				Tool.setText(lblResultOutput, "처리 완료", 3);
+				Tool.setText(lblResultOutput, "처리 완료", 3, Tool.messageType.SUCCESS);
 			}
 		});
 		btnNewButton_5.setBounds(10, 302, 97, 23);
@@ -634,7 +634,7 @@ public class Viewer {
 				
 				if (Tool.openAlert("처리하시겠습니까?") == 0) {
 					bookInOut.insertData(queryString, dataPack);
-					Tool.setText(lblResultOutput, "처리 완료", 3);
+					Tool.setText(lblResultOutput, "처리 완료", 3, Tool.messageType.SUCCESS);
 				}
 			}
 		});
@@ -683,7 +683,7 @@ public class Viewer {
 				
 				User user = new User();
 				user.selectData(queryString, userInfoTableModel, dataPack);
-				Tool.setText(lblResultOutput, "처리 완료", 3);
+				Tool.setText(lblResultOutput, "처리 완료", 3, Tool.messageType.SUCCESS);
 			}
 		});
 		btnNewButton.setBounds(10, 302, 97, 23);
@@ -731,7 +731,7 @@ public class Viewer {
 				User user = new User();
 				user.selectData(queryString, userInfoUpdateUserName, dataPack, 1);
 				user.selectData(queryString, userInfoUpdatePhoneNum, dataPack, 2);
-				Tool.setText(lblResultOutput, "처리 완료", 3);
+				Tool.setText(lblResultOutput, "처리 완료", 3, Tool.messageType.SUCCESS);
 			}
 		});
 		
@@ -785,7 +785,7 @@ public class Viewer {
 				
 				if (Tool.openAlert("처리하시겠습니까?") == 0) {
 					user.updateData(queryString, dataPack);
-					Tool.setText(lblResultOutput, "처리 완료", 3);
+					Tool.setText(lblResultOutput, "처리 완료", 3, Tool.messageType.SUCCESS);
 				}
 			}
 		});
@@ -812,7 +812,7 @@ public class Viewer {
 				User user = new User();
 				user.selectData(queryString, bookInfoUpdateBookTitle, dataPack, 1);
 				user.selectData(queryString, bookInfoUpdateBookISBN, dataPack, 2);
-				Tool.setText(lblResultOutput, "처리 완료", 3);
+				Tool.setText(lblResultOutput, "처리 완료", 3, Tool.messageType.SUCCESS);
 			}
 		});
 		bookInfoUpdateBookID.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
@@ -849,7 +849,7 @@ public class Viewer {
 				
 				if (Tool.openAlert("처리하시겠습니까?") == 0) {
 					book.updateData(queryString, dataPack);
-					Tool.setText(lblResultOutput, "처리 완료", 3);
+					Tool.setText(lblResultOutput, "처리 완료", 3, Tool.messageType.SUCCESS);
 				}
 			}
 		});
@@ -900,7 +900,7 @@ public class Viewer {
 				
 				if (Tool.openAlert("처리하시겠습니까?") == 0) {
 					book.deleteData(queryString, dataPack);
-					Tool.setText(lblResultOutput, "처리 완료", 3);
+					Tool.setText(lblResultOutput, "처리 완료", 3, Tool.messageType.SUCCESS);
 				}
 			}
 		});		
@@ -946,7 +946,7 @@ public class Viewer {
 				
 				if (Tool.openAlert("처리하시겠습니까?") == 0) {
 					user.deleteData(queryString, dataPack);
-					Tool.setText(lblResultOutput, "처리 완료", 3);
+					Tool.setText(lblResultOutput, "처리 완료", 3, Tool.messageType.SUCCESS);
 				}
 			}
 		});
@@ -1019,7 +1019,7 @@ public class Viewer {
 				
 				if (Tool.openAlert("처리하시겠습니까?") == 0) {
 					book.insertData(queryString, dataPack);
-					Tool.setText(lblResultOutput, "처리 완료", 3);
+					Tool.setText(lblResultOutput, "처리 완료", 3, Tool.messageType.SUCCESS);
 				}
 			}
 		});
@@ -1094,7 +1094,7 @@ public class Viewer {
 				
 				if (Tool.openAlert("처리하시겠습니까?") == 0) {
 					user.insertData(queryString, dataPack);
-					Tool.setText(lblResultOutput, "처리 완료", 3);
+					Tool.setText(lblResultOutput, "처리 완료", 3, Tool.messageType.SUCCESS);
 				}
 			}
 		});
