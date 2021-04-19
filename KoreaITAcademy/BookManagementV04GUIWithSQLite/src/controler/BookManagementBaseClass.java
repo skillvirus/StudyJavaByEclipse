@@ -24,7 +24,7 @@ public class BookManagementBaseClass {
 			System.out.println(ex.getMessage());
 		} finally {
 			if (databaseAccessHelper != null) {
-				databaseAccessHelper.Close();
+				databaseAccessHelper.close();
 			}
 		}
 	}
@@ -39,7 +39,7 @@ public class BookManagementBaseClass {
 			System.out.println(ex.getMessage());
 		} finally {
 			if (databaseAccessHelper != null) {
-				databaseAccessHelper.Close();
+				databaseAccessHelper.close();
 			}
 		}
 	}
@@ -54,7 +54,7 @@ public class BookManagementBaseClass {
 			System.out.println(ex.getMessage());
 		} finally {
 			if (databaseAccessHelper != null) {
-				databaseAccessHelper.Close();
+				databaseAccessHelper.close();
 			}
 		}
 	}
@@ -80,7 +80,7 @@ public class BookManagementBaseClass {
 			System.out.println(ex.getMessage());
 		} finally {
 			if (databaseAccessHelper != null) {
-				databaseAccessHelper.Close();
+				databaseAccessHelper.close();
 			}
 			if (resultSet != null) {
 				try {
@@ -113,7 +113,7 @@ public class BookManagementBaseClass {
 			System.out.println(ex.getMessage());
 		} finally {
 			if (databaseAccessHelper != null) {
-				databaseAccessHelper.Close();
+				databaseAccessHelper.close();
 			}
 			if (resultSet != null) {
 				try {
@@ -137,7 +137,7 @@ public class BookManagementBaseClass {
 			System.out.println(ex.getMessage());
 		} finally {
 			if (databaseAccessHelper != null) {
-				databaseAccessHelper.Close();
+				databaseAccessHelper.close();
 			}
 			if (resultSet != null) {
 				try {
@@ -161,7 +161,7 @@ public class BookManagementBaseClass {
 			System.out.println(ex.getMessage());
 		} finally {
 			if (databaseAccessHelper != null) {
-				databaseAccessHelper.Close();
+				databaseAccessHelper.close();
 			}
 			if (resultSet != null) {
 				try {

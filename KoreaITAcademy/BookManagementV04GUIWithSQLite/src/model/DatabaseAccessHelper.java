@@ -49,7 +49,7 @@ public class DatabaseAccessHelper {
 	/*
 	 * 데이터 베이스 연결 종료
 	 */
-	public void Close() {
+	public void close() {
 		if (connection != null) {
 			try {
 				connection.close();
