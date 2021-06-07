@@ -9,7 +9,7 @@
 
 ### JAVA 프로그래밍 공식 자료
 
-JAVA Base  : [링크](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html)   
-JAVA API   : [링크](https://docs.oracle.com/en/java/javase/16/docs/api/index.html)   
-JAVA Swing : [링크](https://docs.oracle.com/javase/tutorial/uiswing/components/toplevel.html)   
-
+JAVA API : [링크](https://docs.oracle.com/en/java/javase/16/docs/api/index.html)   
+JAVA Document(Home) : [링크](https://docs.oracle.com/javase/tutorial/index.html)   
+　-Basics : [링크](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html)   
+ 　-Swing : [링크](https://docs.oracle.com/javase/tutorial/uiswing/components/toplevel.html)   
