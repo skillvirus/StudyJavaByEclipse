@@ -10,11 +10,10 @@ public class ContinueTest {
             if (i % 2 == 0) {
                 continue;
             }
+            System.out.println(i);
             sum += i;
         }
 
-        System.out.println("sum = " + sum);
-		
+        System.out.println("sum = " + sum);		
 	}
-
 }

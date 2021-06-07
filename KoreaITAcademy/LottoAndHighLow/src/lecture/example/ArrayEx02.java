@@ -34,5 +34,4 @@ public class ArrayEx02 {
 			System.out.println();
 		}
 	}
-
 }

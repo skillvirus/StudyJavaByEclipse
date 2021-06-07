@@ -36,11 +36,6 @@ public class ArrayEx01 {
 		
 		for (int loopCount = 0; loopCount < score.length; loopCount++) {
 			System.out.println(score[loopCount]);
-		}
-			
-		
+		}			
 	}
-
-	
-	
 }
