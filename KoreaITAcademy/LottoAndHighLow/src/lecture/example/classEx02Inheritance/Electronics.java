@@ -1,4 +1,4 @@
-package lecture.example.classInheritance;
+package lecture.example.classEx02Inheritance;
 
 public class Electronics {
 	private String name;

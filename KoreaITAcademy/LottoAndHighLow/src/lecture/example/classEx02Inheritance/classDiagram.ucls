@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="lecture.example.classInheritance.Computer" project="LottoAndHighLow" 
-    file="/LottoAndHighLow/src/lecture/example/classInheritance/Computer.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="1" language="java" name="lecture.example.classEx02Inheritance.Computer" project="LottoAndHighLow" 
+    file="/LottoAndHighLow/src/lecture/example/classEx02Inheritance/Computer.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="96" width="170" x="59" y="376"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -10,8 +10,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="lecture.example.classInheritance.Electronics" project="LottoAndHighLow" 
-    file="/LottoAndHighLow/src/lecture/example/classInheritance/Electronics.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="lecture.example.classEx02Inheritance.Electronics" project="LottoAndHighLow" 
+    file="/LottoAndHighLow/src/lecture/example/classEx02Inheritance/Electronics.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="240" width="182" x="382" y="96"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -19,8 +20,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="lecture.example.classInheritance.Television" project="LottoAndHighLow" 
-    file="/LottoAndHighLow/src/lecture/example/classInheritance/Television.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="3" language="java" name="lecture.example.classEx02Inheritance.Television" project="LottoAndHighLow" 
+    file="/LottoAndHighLow/src/lecture/example/classEx02Inheritance/Television.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="96" width="176" x="269" y="376"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -28,8 +30,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="lecture.example.classInheritance.MainClass" project="LottoAndHighLow" 
-    file="/LottoAndHighLow/src/lecture/example/classInheritance/MainClass.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="4" language="java" name="lecture.example.classEx02Inheritance.MainClass" project="LottoAndHighLow" 
+    file="/LottoAndHighLow/src/lecture/example/classEx02Inheritance/MainClass.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="96" width="170" x="116" y="96"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -37,8 +39,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="lecture.example.classInheritance.Refrigerator" project="LottoAndHighLow" 
-    file="/LottoAndHighLow/src/lecture/example/classInheritance/Refrigerator.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="lecture.example.classEx02Inheritance.Refrigerator" project="LottoAndHighLow" 
+    file="/LottoAndHighLow/src/lecture/example/classEx02Inheritance/Refrigerator.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="96" width="188" x="485" y="376"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -46,8 +49,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="lecture.example.classInheritance.AISpeaker" project="LottoAndHighLow" 
-    file="/LottoAndHighLow/src/lecture/example/classInheritance/AISpeaker.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="6" language="java" name="lecture.example.classEx02Inheritance.AISpeaker" project="LottoAndHighLow" 
+    file="/LottoAndHighLow/src/lecture/example/classEx02Inheritance/AISpeaker.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="114" width="170" x="713" y="376"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -56,19 +59,19 @@
     </display>  
   </class>  
   <generalization id="7">    
-    <end type="SOURCE" refId="3"/>    
+    <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="2"/>  
   </generalization>  
   <generalization id="8">    
-    <end type="SOURCE" refId="6"/>    
+    <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="2"/>  
   </generalization>  
   <generalization id="9">    
-    <end type="SOURCE" refId="1"/>    
+    <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="2"/>  
   </generalization>  
   <generalization id="10">    
-    <end type="SOURCE" refId="5"/>    
+    <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="2"/>  
   </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
