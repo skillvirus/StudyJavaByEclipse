@@ -5,7 +5,6 @@ public class Electronics {
 	private String location;
 	
 	public Electronics() {
-		
 	}
 	
 	public Electronics(String name, String location) {

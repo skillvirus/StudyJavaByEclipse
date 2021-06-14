@@ -4,6 +4,9 @@ public class MainClass {
 
 	public static void main(String[] args) {
 		
+		Electronics com = new Computer("컴퓨터", "안방"); //상속시킨 클래스로 객체 생성
+		System.out.println(com.getLocation());
+		
 		Computer computer1 = new Computer("가족공용컴퓨터", "거실"); //매개변수가 있는 생성자 이용
 		computer1.turnOn();
 		computer1.turnOff();
@@ -21,8 +24,8 @@ public class MainClass {
 		television1.turnOff();
 		System.out.println(television1.getName() + "는 " + television1.getLocation() + "에 있습니다.");
 		
-		AISpeaker genie = new AISpeaker();
-		genie.turnOn("지니");
+		AISpeaker genie = new AISpeaker("지니", "거실");
+		genie.turnOn();
 		AISpeaker.reply(); //객체를 생성하지 않고 reply메소드 호출
 	}
 }
