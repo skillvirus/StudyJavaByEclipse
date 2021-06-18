@@ -1,14 +1,13 @@
-package lecture.example.classInheritance;
+package lecture.example.classEx02Inheritance;
 
-public class Refrigerator {
+public class Electronics {
 	private String name;
 	private String location;
 	
-	public Refrigerator() {
-		
+	public Electronics() {
 	}
 	
-	public Refrigerator(String name, String location) {
+	public Electronics(String name, String location) {
 		this.name = name;
 		this.location = location;
 	}
@@ -20,7 +19,7 @@ public class Refrigerator {
 	public void turnOff() {
 		System.out.println(name + " 전원 OFF");
 	}
-	
+
 	public String getName() {
 		return name;
 	}
