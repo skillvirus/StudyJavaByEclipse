@@ -47,7 +47,7 @@ public class MainClass {
 				int inputIndex = scn.nextInt();
 				phoneBook[inputIndex] = new PhoneBook();
 				
-				System.out.print("이름 : " + phoneBook[inputIndex].getName());
+				System.out.print("이름 : ");
 				phoneBook[inputIndex].setName(scn.next());
 				System.out.print("폰 번호 : ");
 				phoneBook[inputIndex].setPhoneNum(scn.next());
