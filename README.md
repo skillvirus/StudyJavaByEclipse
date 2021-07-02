@@ -4,11 +4,15 @@
 
 ### JAVA 프로그래밍 실습 예제
 
-강의용 PPT 1주차 : [링크](https://1drv.ms/p/s!AvogHfPRl8xvh_pJZwQkzsGfxFD4lA?e=pPvg2v)   
-강의용 PPT 2주차 : [링크](https://1drv.ms/p/s!AvogHfPRl8xviJQFh-sS6miVL2iyOg?e=liaypf)   
-강의용 PPT 3주차 : [링크](https://1drv.ms/p/s!AvogHfPRl8xviJRLqYKBauc-EQoWlw?e=qtOa6u)   
-강의용 PPT 4주차 : [링크](https://1drv.ms/p/s!AvogHfPRl8xviI1hDJNDfZPLgbJtlA?e=9srF6h)   
+강의용 PPT 1-1주차 : [링크](https://1drv.ms/p/s!AvogHfPRl8xvh_pJZwQkzsGfxFD4lA?e=pPvg2v)   
+강의용 PPT 1-2주차 : [링크](https://1drv.ms/p/s!AvogHfPRl8xviJQFh-sS6miVL2iyOg?e=liaypf)   
+강의용 PPT 1-3주차 : [링크](https://1drv.ms/p/s!AvogHfPRl8xviJRLqYKBauc-EQoWlw?e=qtOa6u)   
+강의용 PPT 1-4주차 : [링크](https://1drv.ms/p/s!AvogHfPRl8xviI1hDJNDfZPLgbJtlA?e=9srF6h)   
 
+강의용 PPT 2-1주차 : [링크](https://1drv.ms/p/s!AvogHfPRl8xviJ1qN2xkfABd4Sg53Q?e=XfmFWW)   
+강의용 PPT 2-2주차 : [링크](https://1drv.ms/p/s!AvogHfPRl8xviJ1sl-yjBdQ8lQ9uOw?e=7nLYo7)   
+강의용 PPT 2-3주차 : [링크]()   
+강의용 PPT 2-4주차 : [링크]()   
 ### JAVA 프로그래밍 공식 자료
 
 JAVA API : [링크](https://docs.oracle.com/en/java/javase/16/docs/api/index.html)   
