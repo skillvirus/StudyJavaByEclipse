@@ -22,7 +22,7 @@ JAVA Document(Home) : [링크](https://docs.oracle.com/javase/tutorial/index.htm
 
 ### Database 참조   
 
-Database란? : 위키백과(https://ko.wikipedia.org/wiki/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4)
+Database란? : [위키백과](https://ko.wikipedia.org/wiki/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4)   
 Database Vendor 순위 : [링크](https://db-engines.com/en/ranking)
 
 SQLite 공식 사이트 : [링크](https://sqlite.org/uri.html)   
