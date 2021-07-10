@@ -12,7 +12,7 @@
 강의용 PPT 2-1주차 : [링크](https://1drv.ms/p/s!AvogHfPRl8xviJ1qN2xkfABd4Sg53Q?e=XfmFWW)   
 강의용 PPT 2-2주차 : [링크](https://1drv.ms/p/s!AvogHfPRl8xviJ1sl-yjBdQ8lQ9uOw?e=7nLYo7)   
 강의용 PPT 2-3주차 : [링크](https://1drv.ms/p/s!AvogHfPRl8xviJ1uz983jWNYeUrOag?e=MrsbuF)   
-강의용 PPT 2-4주차 : [링크]()   
+강의용 PPT 2-4주차 : [링크](https://1drv.ms/p/s!AvogHfPRl8xviJ1vWCuMW5iSr08IZw?e=b7nTcO)   
 ### JAVA 프로그래밍 공식 자료
 
 JAVA API : [링크](https://docs.oracle.com/en/java/javase/16/docs/api/index.html)   
