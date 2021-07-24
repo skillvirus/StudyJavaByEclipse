@@ -1,27 +1,14 @@
 package lecture.example;
 
 public class RepetitionWhile {
-
 	public static void main(String[] args) {
+		int i = 1, sum = 0;
 		
-		int loopCount1 = 0;
-		int loopCount2 = 0;
-		int loopCount3 = 0;
-		
-		while (loopCount1 < 5) {
-			loopCount3 = loopCount1;
-			while (loopCount3 < 5 - 1) {
-				System.out.print(" ");
-				loopCount3++;
-			}
-			
-			while (loopCount2 < loopCount1 * 2 + 1) {
-				System.out.print("*");
-				loopCount2++;
-			}
-			System.out.println();
-			loopCount2 = 0;
-			loopCount1++;
+		while (i <= 100) {
+			sum += i;
+			i++;
 		}
+		
+		System.out.println("1 부터 100까지의 합 : " + sum);
 	}
 }

@@ -1,4 +1,4 @@
-package lecture.example.classEx;
+package lecture.example.classEx01;
 
 public class AddClass {
 
