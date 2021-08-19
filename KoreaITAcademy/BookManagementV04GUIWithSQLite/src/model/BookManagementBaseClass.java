@@ -1,4 +1,4 @@
-package controler;
+package model;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -9,8 +9,8 @@ import java.util.Vector;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import model.DataPack;
-import model.DatabaseAccessHelper;
+import controller.DataPack;
+import controller.DatabaseAccessHelper;
 
 public class BookManagementBaseClass {
 

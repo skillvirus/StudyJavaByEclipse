@@ -21,8 +21,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
-import model.DataPack;
-import model.DatabaseAccessHelper;
+import controller.DataPack;
+import controller.DatabaseAccessHelper;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
