@@ -1,8 +1,10 @@
-package model;
+package controller;
 
 import java.util.ArrayList;
 
-import controler.*;
+import model.Book;
+import model.BookInOut;
+import model.UserGeneral;
 
 public class DataHelper {
 

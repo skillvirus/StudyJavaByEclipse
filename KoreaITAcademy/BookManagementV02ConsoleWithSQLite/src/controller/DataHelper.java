@@ -1,11 +1,11 @@
-package model;
+package controller;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import controler.Book;
-import controler.BookInOut;
-import controler.UserGeneral;
+import model.Book;
+import model.BookInOut;
+import model.UserGeneral;
 
 public class DataHelper {
 
@@ -197,7 +197,7 @@ public class DataHelper {
 			queryString = "	SELECT	UserID,"
 						+ "			UserName,"
 						+ "			BookID,"
-						+ "			BookTitle,"
+						+ "			BookTtile,"
 						+ "			InOutType,"
 						+ "			InOutDate"
 						+ "	FROM 	BookInOut"

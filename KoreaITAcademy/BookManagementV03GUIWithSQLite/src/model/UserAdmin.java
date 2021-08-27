@@ -1,6 +1,6 @@
-package controler;
+package model;
 
-import model.*;
+import controller.DataHelper;
 
 public class UserAdmin {
 

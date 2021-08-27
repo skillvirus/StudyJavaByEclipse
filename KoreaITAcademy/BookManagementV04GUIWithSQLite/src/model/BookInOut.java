@@ -1,4 +1,4 @@
-package controler;
+package model;
 
 
 public class BookInOut extends BookManagementBaseClass {

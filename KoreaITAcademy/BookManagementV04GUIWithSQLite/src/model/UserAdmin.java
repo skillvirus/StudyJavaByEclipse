@@ -1,4 +1,4 @@
-package controler;
+package model;
 
 public class UserAdmin {
 
