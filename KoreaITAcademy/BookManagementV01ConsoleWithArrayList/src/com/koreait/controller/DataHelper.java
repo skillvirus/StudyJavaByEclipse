@@ -1,10 +1,10 @@
-package controller;
+package com.koreait.controller;
 
 import java.util.ArrayList;
 
-import model.Book;
-import model.BookInOut;
-import model.UserGeneral;
+import com.koreait.model.Book;
+import com.koreait.model.BookInOut;
+import com.koreait.model.UserGeneral;
 
 public class DataHelper {
 

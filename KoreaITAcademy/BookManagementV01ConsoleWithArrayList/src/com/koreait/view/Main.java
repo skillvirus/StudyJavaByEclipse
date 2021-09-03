@@ -1,4 +1,4 @@
-package view;
+package com.koreait.view;
 
 public class Main {
 

@@ -1,12 +1,11 @@
 {
 	"folders": {},
 	"connections": {
-		"sqlite_jdbc-178cd84c08b-5b7eabd146e4d2c8": {
+		"sqlite_jdbc-17b96640508-59ae95a60fe9bcb3": {
 			"provider": "generic",
 			"driver": "sqlite_jdbc",
 			"name": "BookManagement.db",
 			"save-password": true,
-			"show-system-objects": true,
 			"read-only": false,
 			"configuration": {
 				"database": "C:\\Users\\MainUser\\UserDevelopProjects\\StudyJavaByEclipse\\KoreaITAcademy\\BookManagementV04GUIWithSQLite\\Resources\\Database\\BookManagement.db",
@@ -24,7 +23,8 @@
 			"description": "Regular development database",
 			"auto-commit": true,
 			"confirm-execute": false,
-			"confirm-data-change": false
+			"confirm-data-change": false,
+			"auto-close-transactions": false
 		}
 	}
 }

@@ -1,6 +1,6 @@
-package model;
+package com.koreait.model;
 
-import controller.DataHelper;
+import com.koreait.controller.DataHelper;
 
 public class UserAdmin {
 

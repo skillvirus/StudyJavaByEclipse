@@ -1,9 +1,9 @@
-package view;
+package com.koreait.view;
 import java.util.Scanner;
 
-import model.Book;
-import model.BookInOut;
-import model.UserGeneral;
+import com.koreait.model.Book;
+import com.koreait.model.BookInOut;
+import com.koreait.model.UserGeneral;
 
 public class Viewer {
 
