@@ -9,8 +9,8 @@ public class MyPetSwitch {
 		
 		System.out.println("=====마이펫=====");
 		System.out.println("1. 밥주기");
-		System.out.println("2. 밥주기");
-		System.out.println("3. 밥주기");
+		System.out.println("2. 씻기기");
+		System.out.println("3. 재우기");
 		System.out.print("무엇을 할 것인지 입력하세요 : ");
 		
 		input = scn.nextInt();
