@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 import com.koreait.model.Book;
 import com.koreait.model.BookInOut;
-import com.koreait.model.UserGeneral;
+import com.koreait.model.User;
 
 public class DataHelper {
 
 	private static ArrayList<Book> bookList = new ArrayList<Book>();
-	private static ArrayList<UserGeneral> userList = new ArrayList<UserGeneral>();
+	private static ArrayList<User> userList = new ArrayList<User>();
 	private static ArrayList<BookInOut> bookInOutList = new ArrayList<BookInOut>();
 
 	public DataHelper() {
@@ -19,7 +19,7 @@ public class DataHelper {
 		bookList.add(book);
 	}
 	
-	public void insertData(UserGeneral user) {
+	public void insertData(User user) {
 		userList.add(user);
 	}
 
@@ -42,7 +42,7 @@ public class DataHelper {
 		}
 	}
 	
-	public void selectData(UserGeneral user) {
+	public void selectData(User user) {
 		System.out.println();
 		for (int loopCount = 0; loopCount < userList.size(); loopCount++) {
 			if (user.getUserID().equals(userList.get(loopCount).getUserID()))
@@ -88,7 +88,7 @@ public class DataHelper {
 		}
 	}
 	
-	public void selectAllData(UserGeneral user) {
+	public void selectAllData(User user) {
 		System.out.println();
 		for (int loopCount = 0; loopCount < userList.size(); loopCount++) {
 			System.out.print(userList.get(loopCount).getUserID());
@@ -127,7 +127,7 @@ public class DataHelper {
 		}
 	}
 	
-	public void deleteData(UserGeneral user) {
+	public void deleteData(User user) {
 		for (int loopCount = 0; loopCount < userList.size(); loopCount++) {
 			if (user.getUserID().equals(userList.get(loopCount).getUserID()))
 			{
@@ -146,7 +146,7 @@ public class DataHelper {
 		}
 	}
 	
-	public void updateData(UserGeneral user, UserGeneral updatedUser) {
+	public void updateData(User user, User updatedUser) {
 		for (int loopCount = 0; loopCount < userList.size(); loopCount++) {
 			if (user.getUserID().equals(userList.get(loopCount).getUserID()))
 			{

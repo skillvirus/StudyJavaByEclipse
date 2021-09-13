@@ -2,7 +2,7 @@ package com.koreait.model;
 
 import com.koreait.controller.DataHelper;
 
-public class UserGeneral {
+public class User {
 	
 	private String userID; //사용자 ID
 	private String userName; //사용자 성명
@@ -34,23 +34,23 @@ public class UserGeneral {
 	
 	DataHelper dataHelper = new DataHelper();
 	
-	public void insertUserInfo(UserGeneral user) {
+	public void insertUserInfo(User user) {
 		dataHelper.insertData(user);
 	}
 	
-	public void selectUserInfo(UserGeneral user) {
+	public void selectUserInfo(User user) {
 		dataHelper.selectData(user);
 	}
 	
-	public void selectUserAllInfo(UserGeneral user) {
+	public void selectUserAllInfo(User user) {
 		dataHelper.selectAllData(user);
 	}
 	
-	public void deleteUserInfo(UserGeneral user) {
+	public void deleteUserInfo(User user) {
 		dataHelper.deleteData(user);
 	}
 	
-	public void updateUserInfo(UserGeneral user, UserGeneral updatedUser) {
+	public void updateUserInfo(User user, User updatedUser) {
 		dataHelper.updateData(user, updatedUser);
 	}
 }

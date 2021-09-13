@@ -47,7 +47,6 @@ public class Book {
 		this.bookTitle = bookTitle;
 	}
 
-
 	/*
 	 * Get bookISBN
 	 */

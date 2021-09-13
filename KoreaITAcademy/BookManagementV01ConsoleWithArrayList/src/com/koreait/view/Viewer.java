@@ -3,17 +3,23 @@ import java.util.Scanner;
 
 import com.koreait.model.Book;
 import com.koreait.model.BookInOut;
-import com.koreait.model.UserGeneral;
+import com.koreait.model.User;
 
 public class Viewer {
 
 	private Scanner inputSC = new Scanner(System.in);
 	private int inputNum;
 	
+	/*
+	 * 메뉴시작(외부 클래스 노출)
+	 */
 	public void start() {
 		this.showMain();
 	}
 	
+	/*
+	 * 메인메뉴
+	 */
 	private void showMain() {
 		System.out.println();
 		System.out.println("=========도서대여 관리 프로그램=========");
@@ -137,19 +143,18 @@ public class Viewer {
 	 * 사용자 정보 등록 
 	 */
 	private void showUserInfoInsert() {
-		UserGeneral userGeneral = new UserGeneral();
+		User user = new User();
 		
 		System.out.println();
 		System.out.println("==========사용자 정보 등록==========");
 		System.out.print("사용자 아이디를 입력하세요 : ");
-		userGeneral.setUserID(inputSC.next());
+		user.setUserID(inputSC.next());
 		System.out.print("사용자 이름을 입력하세요 : ");
-		userGeneral.setUserName(inputSC.next());
+		user.setUserName(inputSC.next());
 		System.out.print("사용자 전화번호를 입력하세요 : ");
-		userGeneral.setUserPhoneNum(inputSC.next());
+		user.setUserPhoneNum(inputSC.next());
 		
-		//정보확인 후 맞다고 선택하면 등록 아니면 재등록 기능 필요
-		userGeneral.insertUserInfo(userGeneral);
+		user.insertUserInfo(user);
 		
 		System.out.println();
 		System.out.println("사용자 정보가 등록되었습니다.");
@@ -160,14 +165,14 @@ public class Viewer {
 	 * 사용자 정보 삭제
 	 */
 	private void showUserInfoDelete() {
-		UserGeneral userGeneral = new UserGeneral();
+		User user = new User();
 		
 		System.out.println();
 		System.out.println("==========사용자 정보 삭제==========");
 		System.out.print("사용자 아이디를 입력하세요 : ");
-		userGeneral.setUserID(inputSC.next());
+		user.setUserID(inputSC.next());
 		
-		userGeneral.deleteUserInfo(userGeneral);
+		user.deleteUserInfo(user);
 
 		System.out.println();
 		System.out.println("사용자 정보가 삭제되었습니다.");
@@ -178,19 +183,19 @@ public class Viewer {
 	 * 사용자 정보 수정
 	 */
 	private void showUserInfoUpdate() {
-		UserGeneral userGeneral = new UserGeneral();
-		UserGeneral updatedUser = new UserGeneral();
+		User user = new User();
+		User updatedUser = new User();
 		
 		System.out.println();
 		System.out.println("==========사용자 정보 수정==========");
 		System.out.print("사용자 아이디를 입력하세요 : ");
-		userGeneral.setUserID(inputSC.next());
+		user.setUserID(inputSC.next());
 		System.out.print("사용자 이름을 입력하세요 : ");
 		updatedUser.setUserName(inputSC.next());
 		System.out.print("사용자 전화번호를 입력하세요 : ");
 		updatedUser.setUserPhoneNum(inputSC.next());
 		
-		userGeneral.updateUserInfo(userGeneral, updatedUser);
+		user.updateUserInfo(user, updatedUser);
 		
 		System.out.println();
 		System.out.println("사용자가 정보가 수정되었습니다.");
@@ -201,7 +206,7 @@ public class Viewer {
 	 * 사용자 정보 조회 
 	 */
 	private void showUserInfoSelect() {
-		UserGeneral userGeneral = new UserGeneral();
+		User user = new User();
 		
 		System.out.println();
 		System.out.println("==========사용자 정보 조회==========");
@@ -210,10 +215,10 @@ public class Viewer {
 		String inputUserID = inputSC.next();
 		
 		if (inputUserID.equals("A")) {
-			userGeneral.selectUserAllInfo(userGeneral);
+			user.selectUserAllInfo(user);
 		} else {
-			userGeneral.setUserID(inputUserID);
-			userGeneral.selectUserInfo(userGeneral);
+			user.setUserID(inputUserID);
+			user.selectUserInfo(user);
 		}
 		
 		System.out.println();
@@ -314,13 +319,13 @@ public class Viewer {
 	
 	//Level2-3 Menu(도서 대여 관리) Start
 	/*
-	 * 도서 반출 등록
+	 * 도서 대출 등록
 	 */
 	private void showInOutInfoOutgoing() {
 		BookInOut bookInOut = new BookInOut();
 		
 		System.out.println();
-		System.out.println("==========도서 반출 등록==========");
+		System.out.println("==========도서 대출 등록==========");
 		System.out.print("사용자 아이디를 입력하세요 : ");
 		bookInOut.setUserID(inputSC.next());
 		System.out.print("사용자 이름을 입력하세요 : ");
@@ -333,22 +338,21 @@ public class Viewer {
 		bookInOut.setInOutDate(inputSC.next());
 		bookInOut.setInOutType("O");
 		
-		//정보확인 후 맞다고 선택하면 등록 아니면 재등록 기능 필요
 		bookInOut.incomingInOutInfo(bookInOut);
 		
 		System.out.println();
-		System.out.println("도서 반출 정보가 등록되었습니다.");
+		System.out.println("도서 대출 정보가 등록되었습니다.");
 		this.showCommonInfo("inOut"); //처리 후 메뉴 호출
 	}
 	
 	/*
-	 * 도서 반입 등록
+	 * 도서 반납 등록
 	 */
 	private void showInOutInfoIncoming() {
 		BookInOut bookInOut = new BookInOut();
 		
 		System.out.println();
-		System.out.println("==========도서 반입 등록==========");
+		System.out.println("==========도서 반납 등록==========");
 		System.out.print("사용자 아이디를 입력하세요 : ");
 		bookInOut.setUserID(inputSC.next());
 		System.out.print("사용자 이름을 입력하세요 : ");
@@ -361,7 +365,6 @@ public class Viewer {
 		bookInOut.setInOutDate(inputSC.next());
 		bookInOut.setInOutType("I");
 		
-		//정보확인 후 맞다고 선택하면 등록 아니면 재등록 기능 필요
 		bookInOut.incomingInOutInfo(bookInOut);
 		
 		System.out.println();
@@ -395,6 +398,9 @@ public class Viewer {
 	}
 	//Level2-3 Menu(도서 대여 관리) End
 	
+	/*
+	 * 공통메뉴
+	 */
 	private void showCommonInfo(String preShowType) {
 		System.out.println();
 		System.out.println("========================================");
@@ -421,6 +427,9 @@ public class Viewer {
 		}
 	}
 	
+	/*
+	 * 프로그램 종료
+	 */
 	private void end() {
 		System.out.println();
 		System.out.println("프로그램을 종료합니다.");
