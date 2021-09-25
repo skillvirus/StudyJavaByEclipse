@@ -4,6 +4,7 @@ import java.util.Scanner;
 import com.koreait.model.Book;
 import com.koreait.model.BookInOut;
 import com.koreait.model.User;
+import com.koreait.view.Tool.menuType;
 
 public class Viewer {
 
@@ -40,7 +41,11 @@ public class Viewer {
 			this.showBookInOutManagement();
 		} else if (inputNum == 0) {
 			this.end();
-		}		
+		} else {
+			System.out.println();
+			System.out.println("메뉴번호를 확인하세요.");
+			showMain();
+		}
 	}
 	
 	//Level1 Menu(도서대여점 관리 프로그램) Start
@@ -73,6 +78,10 @@ public class Viewer {
 			this.showMain();
 		} else if (inputNum == 0) { //프로그램 종료
 			this.end();
+		} else {
+			System.out.println();
+			System.out.println("메뉴번호를 확인하세요.");
+			showUserInfoManagement();
 		}
 	}
 	
@@ -105,6 +114,10 @@ public class Viewer {
 			this.showMain();
 		} else if (inputNum == 0) {
 			this.end();
+		} else {
+			System.out.println();
+			System.out.println("메뉴번호를 확인하세요.");
+			showBookInfoManagement();
 		}
 	}
 	
@@ -134,6 +147,10 @@ public class Viewer {
 			this.showMain();
 		} else if (inputNum == 0) {
 			this.end();
+		} else {
+			System.out.println();
+			System.out.println("메뉴번호를 확인하세요.");
+			showBookInOutManagement();
 		}
 	}
 	//Level1 Menu(도서대여점 관리 프로그램) End
@@ -158,7 +175,8 @@ public class Viewer {
 		
 		System.out.println();
 		System.out.println("사용자 정보가 등록되었습니다.");
-		this.showCommonInfo("user"); //처리 후 메뉴 호출
+		//this.showCommonInfo("user"); //처리 후 메뉴 호출
+		this.showCommonInfo(menuType.USER); //처리 후 메뉴 호출
 	}
 	
 	/*
@@ -176,7 +194,8 @@ public class Viewer {
 
 		System.out.println();
 		System.out.println("사용자 정보가 삭제되었습니다.");
-		this.showCommonInfo("user"); //처리 후 메뉴 호출
+		//this.showCommonInfo("user"); //처리 후 메뉴 호출
+		this.showCommonInfo(menuType.USER); //처리 후 메뉴 호출
 	}
 	
 	/*
@@ -199,7 +218,8 @@ public class Viewer {
 		
 		System.out.println();
 		System.out.println("사용자가 정보가 수정되었습니다.");
-		this.showCommonInfo("user"); //처리 후 메뉴 호출
+		//this.showCommonInfo("user"); //처리 후 메뉴 호출
+		this.showCommonInfo(menuType.USER); //처리 후 메뉴 호출
 	}
 	
 	/*
@@ -223,7 +243,8 @@ public class Viewer {
 		
 		System.out.println();
 		System.out.println("사용자 정보를 조회했습니다.");
-		this.showCommonInfo("user");
+		//this.showCommonInfo("user");
+		this.showCommonInfo(menuType.USER); //처리 후 메뉴 호출
 	}
 	//Level2-1 Menu(사용자 정보 관리) End
 	
@@ -248,7 +269,8 @@ public class Viewer {
 		
 		System.out.println();
 		System.out.println("도서정보가 등록되었습니다.");
-		this.showCommonInfo("book"); //처리 후 메뉴 호출
+		//this.showCommonInfo("book"); //처리 후 메뉴 호출
+		this.showCommonInfo(menuType.BOOK); //처리 후 메뉴 호출
 	}
 	
 	/*
@@ -266,7 +288,8 @@ public class Viewer {
 
 		System.out.println();
 		System.out.println("도서 정보가 삭제되었습니다.");
-		this.showCommonInfo("book"); //처리 후 메뉴 호출
+		//this.showCommonInfo("book"); //처리 후 메뉴 호출
+		this.showCommonInfo(menuType.BOOK); //처리 후 메뉴 호출
 	}
 	
 	/*
@@ -289,7 +312,8 @@ public class Viewer {
 		
 		System.out.println();
 		System.out.println("도서 정보가 수정되었습니다.");
-		this.showCommonInfo("book"); //처리 후 메뉴 호출
+		//this.showCommonInfo("book"); //처리 후 메뉴 호출
+		this.showCommonInfo(menuType.BOOK); //처리 후 메뉴 호출
 	}
 	
 	/*
@@ -313,7 +337,8 @@ public class Viewer {
 		
 		System.out.println();
 		System.out.println("도서정보를 조회했습니다.");
-		this.showCommonInfo("book");
+		//this.showCommonInfo("book");
+		this.showCommonInfo(menuType.BOOK); //처리 후 메뉴 호출
 	}
 	//Level2-2 Menu(도서 정보 관리) End
 	
@@ -342,7 +367,8 @@ public class Viewer {
 		
 		System.out.println();
 		System.out.println("도서 대출 정보가 등록되었습니다.");
-		this.showCommonInfo("inOut"); //처리 후 메뉴 호출
+		//this.showCommonInfo("inOut"); //처리 후 메뉴 호출
+		this.showCommonInfo(menuType.INOUT); //처리 후 메뉴 호출
 	}
 	
 	/*
@@ -369,7 +395,8 @@ public class Viewer {
 		
 		System.out.println();
 		System.out.println("도서 반입 정보가 등록되었습니다.");
-		this.showCommonInfo("inOut"); //처리 후 메뉴 호출
+		//this.showCommonInfo("inOut"); //처리 후 메뉴 호출
+		this.showCommonInfo(menuType.INOUT); //처리 후 메뉴 호출
 	}
 	
 	/*
@@ -393,8 +420,8 @@ public class Viewer {
 		
 		System.out.println();
 		System.out.println("도서 대여 이력을 조회했습니다.");
-
-		this.showCommonInfo("inOut"); //처리 후 메뉴 호출
+		//this.showCommonInfo("inOut"); //처리 후 메뉴 호출
+		this.showCommonInfo(menuType.INOUT); //처리 후 메뉴 호출
 	}
 	//Level2-3 Menu(도서 대여 관리) End
 	
@@ -424,6 +451,43 @@ public class Viewer {
 			}
 		} else if (inputNum == 0) {
 			this.end();
+		} else {
+			System.out.println();
+			System.out.println("메뉴번호를 확인하세요.");
+			showCommonInfo(preShowType);
+		}
+	}
+	
+	/*
+	 * 공통메뉴
+	 */
+	private void showCommonInfo(menuType preShowType) {
+		System.out.println();
+		System.out.println("========================================");
+		System.out.println("[8] 최초화면");
+		System.out.println("[9] 이전화면");
+		System.out.println("[0] 프로그램 종료");
+		System.out.println("========================================");
+		System.out.print("실행할 메뉴의 번호를 입력하세요 : ");
+		
+		inputNum = inputSC.nextInt();
+		
+		if (inputNum == 8) {
+			this.showMain();
+		} else if (inputNum == 9) {
+			if (preShowType == menuType.USER) {
+				this.showUserInfoManagement();
+			} else if (preShowType == menuType.BOOK) {
+				this.showBookInfoManagement();
+			} else if (preShowType == menuType.INOUT) {
+				this.showBookInOutManagement();
+			}
+		} else if (inputNum == 0) {
+			this.end();
+		} else {
+			System.out.println();
+			System.out.println("메뉴번호를 확인하세요.");
+			showCommonInfo(preShowType);
 		}
 	}
 	
