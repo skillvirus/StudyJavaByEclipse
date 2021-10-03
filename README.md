@@ -11,7 +11,7 @@ JDK & Eclipse 설치 : [링크](https://1drv.ms/p/s!AvogHfPRl8xviKBTbz2nllhB_mAQ
 수업용 PPT JAVA1-3주차 : [링크](https://1drv.ms/p/s!AvogHfPRl8xviJRLqYKBauc-EQoWlw?e=qtOa6u)   
 수업용 PPT JAVA1-4주차 : [링크](https://1drv.ms/p/s!AvogHfPRl8xviI1hDJNDfZPLgbJtlA?e=9srF6h)   
 
-수업용 PPT JAVA2-1주차 : [링크](https://1drv.ms/p/s!AvogHfPRl8xviJ1qN2xkfABd4Sg53Q?e=XfmFWW)   
+수업용 PPT JAVA2-1주차 : [링크](https://1drv.ms/p/s!AvogHfPRl8xviJ1q2GWfu4Y2aBHZHw?e=w3L53c)   
 수업용 PPT JAVA2-2주차 : [링크](https://1drv.ms/p/s!AvogHfPRl8xviJ1sl-yjBdQ8lQ9uOw?e=7nLYo7)   
 수업용 PPT JAVA2-3주차 : [링크](https://1drv.ms/p/s!AvogHfPRl8xviJ1uz983jWNYeUrOag?e=MrsbuF)   
 수업용 PPT JAVA2-4주차 : [링크](https://1drv.ms/p/s!AvogHfPRl8xviJ1vWCuMW5iSr08IZw?e=b7nTcO)   
