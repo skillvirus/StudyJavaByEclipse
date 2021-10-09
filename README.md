@@ -30,5 +30,5 @@ Database Vendor 순위 : [링크](https://db-engines.com/en/ranking)
 SQLite 공식 사이트 : [링크](https://sqlite.org/uri.html)   
 SQLite JDBC github : [링크](https://github.com/xerial/sqlite-jdbc/releases)   
 SQLite WikiDocs : [링크](https://wikidocs.net/book/1530)   
-
-
+   
+SQL 연습용 사이트 : [링크](https://www.w3schools.com/sql/trysql.asp?filename=trysql_select_all)
