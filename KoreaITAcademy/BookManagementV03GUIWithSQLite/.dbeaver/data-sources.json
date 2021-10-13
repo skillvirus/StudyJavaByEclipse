@@ -1,16 +1,15 @@
 {
 	"folders": {},
 	"connections": {
-		"sqlite_jdbc-177d2c1592c-5762bba5961d7e6": {
-			"provider": "generic",
+		"sqlite_jdbc-17c78858463-6b0b54600a52b859": {
+			"provider": "sqlite",
 			"driver": "sqlite_jdbc",
-			"name": "sqlite-jdbc-3.32.3.2.jar",
+			"name": "BookManagement.db",
 			"save-password": true,
-			"show-system-objects": true,
 			"read-only": false,
 			"configuration": {
-				"database": "C:\\Users\\MainUser\\UserDevelopProjects\\StudyJavaByEclipse\\KoreaITAcademy\\BookManagementV02\\Resources\\JDBCConnector\\sqlite-jdbc-3.32.3.2.jar",
-				"url": "jdbc:sqlite:C:\\Users\\MainUser\\UserDevelopProjects\\StudyJavaByEclipse\\KoreaITAcademy\\BookManagementV02\\Resources\\JDBCConnector\\sqlite-jdbc-3.32.3.2.jar",
+				"database": "C:\\Users\\MainUser\\UserDevelopProjects\\StudyJavaByEclipse\\KoreaITAcademy\\BookManagementV05GUIWithSQLite\\Resources\\Database\\BookManagement.db",
+				"url": "jdbc:sqlite:C:\\Users\\MainUser\\UserDevelopProjects\\StudyJavaByEclipse\\KoreaITAcademy\\BookManagementV05GUIWithSQLite\\Resources\\Database\\BookManagement.db",
 				"type": "dev",
 				"auth-model": "native",
 				"handlers": {}
@@ -24,7 +23,8 @@
 			"description": "Regular development database",
 			"auto-commit": true,
 			"confirm-execute": false,
-			"confirm-data-change": false
+			"confirm-data-change": false,
+			"auto-close-transactions": false
 		}
 	}
 }
