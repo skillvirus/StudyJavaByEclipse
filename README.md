@@ -15,6 +15,8 @@ JDK & Eclipse 설치 : [링크](https://1drv.ms/p/s!AvogHfPRl8xviKBTbz2nllhB_mAQ
 수업용 PPT JAVA2-2주차 : [링크](https://1drv.ms/p/s!AvogHfPRl8xviJ1sl-yjBdQ8lQ9uOw?e=7nLYo7)   
 수업용 PPT JAVA2-3주차 : [링크](https://1drv.ms/p/s!AvogHfPRl8xviJ1uz983jWNYeUrOag?e=MrsbuF)   
 수업용 PPT JAVA2-4주차 : [링크](https://1drv.ms/p/s!AvogHfPRl8xviJ1vWCuMW5iSr08IZw?e=b7nTcO)   
+
+도서대여관리 프로그램(GUI) 개발 문서 : [링크](https://1drv.ms/x/s!AvogHfPRl8xviKFXgb-2L7ZPW8FC7g?e=tIB3v1)   
 ### JAVA 프로그래밍 공식 자료
 
 JAVA API : [링크](https://docs.oracle.com/en/java/javase/16/docs/api/index.html)   
