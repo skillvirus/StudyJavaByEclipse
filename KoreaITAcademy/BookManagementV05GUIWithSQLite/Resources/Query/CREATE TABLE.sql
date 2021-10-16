@@ -1,7 +1,7 @@
 --사용자 정보
 CREATE TABLE UserInfo
 (
-	UserID		 INTEGER,
+	UserID		 TEXT,
 	UserName 	 TEXT,
 	UserPhoneNum TEXT
 )
@@ -9,7 +9,7 @@ CREATE TABLE UserInfo
 --도서 정보
 CREATE TABLE BookInfo
 (
-	BookID		INTEGER,
+	BookID		TEXT,
 	BookTitle	TEXT,
 	BookISBN	TEXT
 )
@@ -17,10 +17,10 @@ CREATE TABLE BookInfo
 --도서 대여 이력 정보
 CREATE TABLE BookRentalHistoryInfo
 (
-	UserID		INTEGER,
+	UserID		TEXT,
 	UserName	TEXT,
-	BookID		INTEGER,
-	BookName	TEXT,
+	BookID		TEXT,
+	BookTitle	TEXT,
 	RentalReturnType TEXT,
 	RentalReturnDate TEXT
 )
