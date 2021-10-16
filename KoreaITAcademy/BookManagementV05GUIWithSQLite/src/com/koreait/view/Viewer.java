@@ -88,7 +88,15 @@ public class Viewer {
 	private DefaultTableModel tblUserInfoTableModel;
 	private JButton btnUserInfoSelect;
 	private JTextField txfUserInfoSelectID;
-	
+	private JTextField txfUserInfoSelectName;
+	private JTextField txfUserInfoSelectPhoneNum;
+	private JTextField txfUserInfoUpdateID;
+	private JTextField txfUserInfoUpdateName;
+	private JTextField txfUserInfoUpdatePhoneNum;
+	private JLabel lblUserInfoUpdateID;
+	private JLabel lblUserInfoUpdatePhoneNum;
+	private JLabel lblUserInfoUpdateName;
+	private JButton btnUserInfoUpdate;
 	
 	/**
 	 * Launch the application.
@@ -121,6 +129,7 @@ public class Viewer {
 
 		frmMain.setTitle("도서 대여 관리");
 		frmMain.setBounds(100, 100, 650, 420);
+		frmMain.setLocationRelativeTo(null); //화면 중앙에서 열림
 		frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmMain.getContentPane().setLayout(null);
 		frmMain.addWindowListener(new WindowAdapter() {
@@ -130,76 +139,80 @@ public class Viewer {
 			}
 		});
 		
-		pnlUserInfoSelect = new JPanel();
-		pnlUserInfoSelect.setBounds(0, 21, 634, 335);
-		frmMain.getContentPane().add(pnlUserInfoSelect);
-		pnlUserInfoSelect.setLayout(null);
+		pnlUserInfoUpdate = new JPanel();
+		pnlUserInfoUpdate.setBounds(0, 21, 634, 335);
+		frmMain.getContentPane().add(pnlUserInfoUpdate);
+		pnlUserInfoUpdate.setLayout(null);
 		
-		lblUserInfoSelectPnlTitle = new JLabel("[사용자 정보 조회]");
-		lblUserInfoSelectPnlTitle.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblUserInfoSelectPnlTitle.setBounds(5, 5, 200, 15);
-		pnlUserInfoSelect.add(lblUserInfoSelectPnlTitle);
+		lblUserInfoUpdatePnlTitle = new JLabel("[사용자 정보 수정]");
+		lblUserInfoUpdatePnlTitle.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblUserInfoUpdatePnlTitle.setBounds(5, 5, 200, 15);
+		pnlUserInfoUpdate.add(lblUserInfoUpdatePnlTitle);
 		
-		String[] tblUserInfoColName = {"사용자ID", "사용자성명", "사용자전화번호"};
-		tblUserInfoTableModel = new DefaultTableModel(tblUserInfoColName, 0);
+		lblUserInfoUpdateID = new JLabel("ID");
+		lblUserInfoUpdateID.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblUserInfoUpdateID.setBounds(10, 54, 57, 15);
+		pnlUserInfoUpdate.add(lblUserInfoUpdateID);
 		
-		tblUserInfo = new JTable(tblUserInfoTableModel);
-		tblUserInfo.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		tblUserInfo.setBounds(10, 50, 410, 155);
+		txfUserInfoUpdateID = new JTextField();
+		txfUserInfoUpdateID.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		txfUserInfoUpdateID.setColumns(10);
+		txfUserInfoUpdateID.setBounds(81, 51, 116, 21);
+		pnlUserInfoUpdate.add(txfUserInfoUpdateID);
 		
-		scrpUserInfo = new JScrollPane(tblUserInfo);
-		scrpUserInfo.setBounds(10, 50, 612, 242);
-		pnlUserInfoSelect.add(scrpUserInfo);
+		txfUserInfoUpdateName = new JTextField();
+		txfUserInfoUpdateName.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		txfUserInfoUpdateName.setColumns(10);
+		txfUserInfoUpdateName.setBounds(81, 79, 116, 21);
+		pnlUserInfoUpdate.add(txfUserInfoUpdateName);
 		
-		btnUserInfoSelect = new JButton("조회");
-		btnUserInfoSelect.addActionListener(new ActionListener() {
+		txfUserInfoUpdatePhoneNum = new JTextField();
+		txfUserInfoUpdatePhoneNum.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		txfUserInfoUpdatePhoneNum.setColumns(10);
+		txfUserInfoUpdatePhoneNum.setBounds(81, 107, 116, 21);
+		pnlUserInfoUpdate.add(txfUserInfoUpdatePhoneNum);
+		
+		lblUserInfoUpdatePhoneNum = new JLabel("전화번호");
+		lblUserInfoUpdatePhoneNum.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblUserInfoUpdatePhoneNum.setBounds(10, 110, 57, 15);
+		pnlUserInfoUpdate.add(lblUserInfoUpdatePhoneNum);
+		
+		lblUserInfoUpdateName = new JLabel("이름");
+		lblUserInfoUpdateName.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblUserInfoUpdateName.setBounds(10, 82, 57, 15);
+		pnlUserInfoUpdate.add(lblUserInfoUpdateName);
+		
+		btnUserInfoUpdate = new JButton("수정");
+		btnUserInfoUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UserInfo userInfo = new UserInfo(); //Model 영역 객체 선언
-				Manager manager = new Manager(); //Controller 영역 객체 선언
-				ResultSet resultSet = null;
+				UserInfo userInfo = new UserInfo(); //정보를 담아놓을 객체(Model 영역)
+				Manager manager = new Manager(); //정보를 직접 처리(등록,수정,삭제, 조회)할 객체(Controller 영역)
+				boolean result = false;
 				
-				userInfo.setUserID(txfUserInfoSelectID.getText());
-				resultSet = manager.selectUserInfo(userInfo);
-				
-				tblUserInfoTableModel.setNumRows(0);
 				try {
-					while(resultSet.next() ) {
-						tblUserInfoTableModel.addRow(new Object[]{
-													resultSet.getString("UserID"), 
-													resultSet.getString("UserName"),
-													resultSet.getString("UserPhoneNum")
-												 });
-					}
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				} finally {
-					if (resultSet != null) {
-						try {
-							resultSet.close();
-						} catch (SQLException e1) {
-							e1.printStackTrace();
+					userInfo.setUserID(txfUserInfoUpdateID.getText());
+					userInfo.setUserName(txfUserInfoUpdateName.getText());
+					userInfo.setUserPhoneNum(txfUserInfoUpdatePhoneNum.getText());
+					
+					if (Tools.openAlert("수정하시겠습니까?") == 0) {
+						result = manager.updateUserInfo(userInfo);
+						
+						if (result == true) {
+							Tools.setText(lblResultInfo, "수정 완료", 3, Tools.messageType.SUCCESS);
+						} else {
+							Tools.setText(lblResultInfo, "오류 발생", 3, Tools.messageType.ERROR);
 						}
 					}
+				} catch(Exception ex) {
+					Tools.setText(lblResultInfo, ex.getMessage(), 3, Tools.messageType.ERROR);
+				} finally {
+					manager.closeDataBaseConnection();
 				}
-				
-				manager.closeDataBaseConnection();
-				manager.closeResultSet();
 			}
 		});
-		btnUserInfoSelect.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		btnUserInfoSelect.setBounds(10, 302, 97, 23);
-		pnlUserInfoSelect.add(btnUserInfoSelect);
-		
-		JLabel lblUserInfoSelectID = new JLabel("ID");
-		lblUserInfoSelectID.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblUserInfoSelectID.setBounds(10, 30, 57, 15);
-		pnlUserInfoSelect.add(lblUserInfoSelectID);
-		
-		txfUserInfoSelectID = new JTextField();
-		txfUserInfoSelectID.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		txfUserInfoSelectID.setBounds(80, 27, 97, 21);
-		pnlUserInfoSelect.add(txfUserInfoSelectID);
-		txfUserInfoSelectID.setColumns(10);
+		btnUserInfoUpdate.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		btnUserInfoUpdate.setBounds(10, 302, 97, 23);
+		pnlUserInfoUpdate.add(btnUserInfoUpdate);
 		
 		pnlUserInfoInsert = new JPanel();
 		pnlUserInfoInsert.setBounds(0, 21, 634, 335);
@@ -328,26 +341,135 @@ public class Viewer {
 //				//2단계 : DAO 객체를 사용(MVC 미사용)_E
 				
 				//3단계 : MVC 패턴 사용_S
-				UserInfo userInfo = new UserInfo(); //Model 영역 객체 선언
-				Manager manager = new Manager(); //Controller 영역 객체 선언
+				UserInfo userInfo = new UserInfo(); //정보를 담아놓을 객체(Model 영역)
+				Manager manager = new Manager(); //정보를 직접 처리(등록,수정,삭제, 조회)할 객체(Controller 영역)
+				boolean result = false;;
 				
-				userInfo.setUserID(txfUserInfoInsertID.getText());
-				userInfo.setUserName(txfUserInfoInsertName.getText());
-				userInfo.setUserPhoneNum(txfUserInfoInsertPhoneNum.getText());
-				boolean result = manager.inserUserInfo(userInfo);
-				manager.closeDataBaseConnection();
-				//3단계 : MVC 패턴 사용_E
-				
-				if (result == true) {
-					lblResultInfo.setText("등록되었습니다.");	
-				} else {
-					lblResultInfo.setText("오류가 발생하였습니다.");
+				try {
+					userInfo.setUserID(txfUserInfoInsertID.getText());
+					userInfo.setUserName(txfUserInfoInsertName.getText());
+					userInfo.setUserPhoneNum(txfUserInfoInsertPhoneNum.getText());
+					
+					result = manager.inserUserInfo(userInfo);
+					
+					if (result == true) {
+						Tools.setText(lblResultInfo, "등록 완료", 3, Tools.messageType.SUCCESS);
+					} else {
+						Tools.setText(lblResultInfo, "오류 발생", 3, Tools.messageType.ERROR);
+					}
+				} catch(Exception ex) {
+					Tools.setText(lblResultInfo, ex.getMessage(), 3, Tools.messageType.ERROR);
+				} finally {
+					manager.closeDataBaseConnection();
 				}
+				//3단계 : MVC 패턴 사용_E
 			}
 		});
 		btnUserInfoInsert.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		btnUserInfoInsert.setBounds(10, 302, 97, 23);
 		pnlUserInfoInsert.add(btnUserInfoInsert);
+		
+		pnlUserInfoSelect = new JPanel();
+		pnlUserInfoSelect.setBounds(0, 21, 634, 335);
+		frmMain.getContentPane().add(pnlUserInfoSelect);
+		pnlUserInfoSelect.setLayout(null);
+		
+		lblUserInfoSelectPnlTitle = new JLabel("[사용자 정보 조회]");
+		lblUserInfoSelectPnlTitle.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblUserInfoSelectPnlTitle.setBounds(5, 5, 200, 15);
+		pnlUserInfoSelect.add(lblUserInfoSelectPnlTitle);
+		
+		String[] tblUserInfoColName = {"사용자ID", "사용자성명", "사용자전화번호"};
+		tblUserInfoTableModel = new DefaultTableModel(tblUserInfoColName, 0);
+		
+		tblUserInfo = new JTable(tblUserInfoTableModel);
+		tblUserInfo.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		tblUserInfo.setBounds(10, 50, 410, 155);
+		
+		scrpUserInfo = new JScrollPane(tblUserInfo);
+		scrpUserInfo.setBounds(10, 50, 612, 242);
+		pnlUserInfoSelect.add(scrpUserInfo);
+		
+		btnUserInfoSelect = new JButton("조회");
+		btnUserInfoSelect.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserInfo userInfo = new UserInfo(); //정보를 담아놓을 객체(Model 영역)
+				Manager manager = new Manager(); //정보를 직접 처리(등록,수정,삭제, 조회)할 객체(Controller 영역)
+				ResultSet resultSet = null;
+				
+				try
+				{
+					userInfo.setUserID(txfUserInfoSelectID.getText());
+					userInfo.setUserName(txfUserInfoSelectName.getText());
+					userInfo.setUserPhoneNum(txfUserInfoSelectPhoneNum.getText());
+					resultSet = manager.selectUserInfo(userInfo);
+					
+					tblUserInfoTableModel.setNumRows(0);
+					try {
+						while(resultSet.next() ) {
+							tblUserInfoTableModel.addRow(new Object[]{
+														resultSet.getString("UserID"), 
+														resultSet.getString("UserName"),
+														resultSet.getString("UserPhoneNum")
+													 });
+						}
+						
+						Tools.setText(lblResultInfo, "조회 완료", 3, Tools.messageType.SUCCESS);
+					} catch (SQLException e1) {
+						Tools.setText(lblResultInfo, e1.getMessage(), 3, Tools.messageType.ERROR);
+					} finally {
+						if (resultSet != null) {
+							try {
+								resultSet.close();
+							} catch (SQLException e1) {
+								Tools.setText(lblResultInfo, e1.getMessage(), 3, Tools.messageType.ERROR);
+							}
+						}
+					}
+				} catch (Exception ex) {
+					Tools.setText(lblResultInfo, ex.getMessage(), 3, Tools.messageType.ERROR);
+				} finally {
+					manager.closeDataBaseConnection();
+					manager.closeResultSet();
+				}
+			}
+		});
+		btnUserInfoSelect.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		btnUserInfoSelect.setBounds(10, 302, 97, 23);
+		pnlUserInfoSelect.add(btnUserInfoSelect);
+		
+		JLabel lblUserInfoSelectID = new JLabel("ID");
+		lblUserInfoSelectID.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblUserInfoSelectID.setBounds(10, 30, 57, 15);
+		pnlUserInfoSelect.add(lblUserInfoSelectID);
+		
+		txfUserInfoSelectID = new JTextField();
+		txfUserInfoSelectID.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		txfUserInfoSelectID.setBounds(80, 27, 97, 21);
+		pnlUserInfoSelect.add(txfUserInfoSelectID);
+		txfUserInfoSelectID.setColumns(10);
+		
+		txfUserInfoSelectName = new JTextField();
+		txfUserInfoSelectName.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		txfUserInfoSelectName.setColumns(10);
+		txfUserInfoSelectName.setBounds(256, 27, 97, 21);
+		pnlUserInfoSelect.add(txfUserInfoSelectName);
+		
+		JLabel lblUserInfoSelectName = new JLabel("이름");
+		lblUserInfoSelectName.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblUserInfoSelectName.setBounds(186, 30, 57, 15);
+		pnlUserInfoSelect.add(lblUserInfoSelectName);
+		
+		txfUserInfoSelectPhoneNum = new JTextField();
+		txfUserInfoSelectPhoneNum.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		txfUserInfoSelectPhoneNum.setColumns(10);
+		txfUserInfoSelectPhoneNum.setBounds(435, 27, 187, 21);
+		pnlUserInfoSelect.add(txfUserInfoSelectPhoneNum);
+		
+		JLabel lblUserInfoSelectPhoneNum = new JLabel("전화번호");
+		lblUserInfoSelectPhoneNum.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblUserInfoSelectPhoneNum.setBounds(365, 30, 57, 15);
+		pnlUserInfoSelect.add(lblUserInfoSelectPhoneNum);
 						
 		pnlUserInfoDelete = new JPanel();
 		pnlUserInfoDelete.setBounds(0, 21, 634, 335);
@@ -426,19 +548,28 @@ public class Viewer {
 				//2단계 : DAO 객체를 사용(MVC 미사용)_E
 				
 				//3단계 : MVC 패턴 사용_S
-				UserInfo userInfo = new UserInfo(); //Model 영역 객체 선언
-				Manager manager = new Manager(); //Controller 영역 객체 선언
+				UserInfo userInfo = new UserInfo(); //정보를 담아놓을 객체(Model 영역)
+				Manager manager = new Manager(); //정보를 직접 처리(등록,수정,삭제, 조회)할 객체(Controller 영역)
+				boolean result = false;
 				
-				userInfo.setUserID(txfUserInfoDeleteID.getText());
-				boolean result = manager.deleteUserInfo(userInfo);
-				manager.closeDataBaseConnection();
-				//3단계 : MVC 패턴 사용_E
-				
-				if (result == true) {
-					lblResultInfo.setText("삭제되었습니다.");	
-				} else {
-					lblResultInfo.setText("오류가 발생하였습니다.");
+				try {
+					userInfo.setUserID(txfUserInfoDeleteID.getText());
+					
+					if (Tools.openAlert("삭제하시겠습니까?") == 0) {
+						result = manager.deleteUserInfo(userInfo);
+						
+						if (result == true) {
+							Tools.setText(lblResultInfo, "삭제 완료", 3, Tools.messageType.SUCCESS);
+						} else {
+							Tools.setText(lblResultInfo, "오류 발생", 3, Tools.messageType.ERROR);
+						}
+					}
+				} catch(Exception ex) {
+					Tools.setText(lblResultInfo, ex.getMessage(), 3, Tools.messageType.ERROR);
+				} finally {
+					manager.closeDataBaseConnection();	
 				}
+				//3단계 : MVC 패턴 사용_E
 			}
 		});
 		btnUserInfoDelete.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
@@ -603,16 +734,6 @@ public class Viewer {
 		lblResultInfo.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		lblResultInfo.setBounds(0, 358, 634, 23);
 		frmMain.getContentPane().add(lblResultInfo);
-		
-		pnlUserInfoUpdate = new JPanel();
-		pnlUserInfoUpdate.setBounds(0, 21, 634, 335);
-		frmMain.getContentPane().add(pnlUserInfoUpdate);
-		pnlUserInfoUpdate.setLayout(null);
-		
-		lblUserInfoUpdatePnlTitle = new JLabel("[사용자 정보 수정]");
-		lblUserInfoUpdatePnlTitle.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblUserInfoUpdatePnlTitle.setBounds(5, 5, 200, 15);
-		pnlUserInfoUpdate.add(lblUserInfoUpdatePnlTitle);
 		
 		pnlBookInfoInsert = new JPanel();
 		pnlBookInfoInsert.setBounds(0, 21, 634, 335);

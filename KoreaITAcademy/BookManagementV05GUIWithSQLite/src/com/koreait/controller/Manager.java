@@ -40,7 +40,7 @@ public class Manager {
 						+ "		?"
 						+ " );";
 			
-			ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
+			dataPack = new ArrayList<DataPack>();
 			dataPack.add(new DataPack(1, userInfo.getUserID()));
 			dataPack.add(new DataPack(2, userInfo.getUserName()));
 			dataPack.add(new DataPack(3, userInfo.getUserPhoneNum()));
@@ -63,9 +63,8 @@ public class Manager {
 		
 		try {
 			queryString = "	DELETE"
-						+ "	FROM UserInfo"
-						+ "	WHERE UserID = ?";
-			
+						+ "	FROM 	UserInfo"
+						+ "	WHERE 	UserID = ?";
 			
 			dataPack.add(new DataPack(1, userInfo.getUserID()));
 			
@@ -82,8 +81,25 @@ public class Manager {
 	/*
 	 * 사용자 정보 수정
 	 */
-	public boolean updateUserInfo(UserInfo usrInfo) {
+	public boolean updateUserInfo(UserInfo userInfo) {
 		boolean returnValue = false;
+		
+		try {
+			queryString = "	UPDATE 	UserInfo"
+						+ "	SET 	UserName = ?,"
+					    + "         UserPhoneNum = ?"
+						+ "	WHERE	UserID = ?";
+			
+			dataPack.add(new DataPack(1, userInfo.getUserName()));
+			dataPack.add(new DataPack(2, userInfo.getUserPhoneNum()));
+			dataPack.add(new DataPack(3, userInfo.getUserID()));
+			
+			databaseAccessHelper.executeUpdate(queryString, dataPack);
+			
+			returnValue = true;
+		} catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
 		
 		return returnValue;
 	}
@@ -97,12 +113,17 @@ public class Manager {
 						+ "			UserName,"
 						+ "			UserPhoneNum "
 						+ "	FROM 	UserInfo"
-						+ "	WHERE	UserID = ?";
+						+ "	WHERE	UserID = CASE WHEN ? = '' THEN UserID ELSE ? END"
+						+ "         AND UserName LIKE ?"
+						+ "         AND UserPhoneNum LIKE ?";
 		
-			ArrayList<DataPack> dataPack = new ArrayList<DataPack>();
+			dataPack = new ArrayList<DataPack>();
 			dataPack.add(new DataPack(1, userInfo.getUserID()));
-			resultSet = databaseAccessHelper.executeQuery(queryString, dataPack);
+			dataPack.add(new DataPack(2, userInfo.getUserID()));
+			dataPack.add(new DataPack(3, "%" + userInfo.getUserName() + "%"));
+			dataPack.add(new DataPack(4, "%" + userInfo.getUserPhoneNum() + "%"));
 			
+			resultSet = databaseAccessHelper.executeQuery(queryString, dataPack);	
 		} catch(Exception ex) {
 			System.out.println(ex.getMessage());
 		}
