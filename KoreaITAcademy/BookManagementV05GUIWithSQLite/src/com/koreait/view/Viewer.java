@@ -97,6 +97,9 @@ public class Viewer {
 	private JLabel lblUserInfoUpdatePhoneNum;
 	private JLabel lblUserInfoUpdateName;
 	private JButton btnUserInfoUpdate;
+	private JLabel lblUserInfoSelectID;
+	private JLabel lblUserInfoSelectName;
+	private JLabel lblUserInfoSelectPhoneNum;
 	
 	/**
 	 * Launch the application.
@@ -438,7 +441,7 @@ public class Viewer {
 		btnUserInfoSelect.setBounds(10, 302, 97, 23);
 		pnlUserInfoSelect.add(btnUserInfoSelect);
 		
-		JLabel lblUserInfoSelectID = new JLabel("ID");
+		lblUserInfoSelectID = new JLabel("ID");
 		lblUserInfoSelectID.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		lblUserInfoSelectID.setBounds(10, 30, 57, 15);
 		pnlUserInfoSelect.add(lblUserInfoSelectID);
@@ -455,7 +458,7 @@ public class Viewer {
 		txfUserInfoSelectName.setBounds(256, 27, 97, 21);
 		pnlUserInfoSelect.add(txfUserInfoSelectName);
 		
-		JLabel lblUserInfoSelectName = new JLabel("이름");
+		lblUserInfoSelectName = new JLabel("이름");
 		lblUserInfoSelectName.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		lblUserInfoSelectName.setBounds(186, 30, 57, 15);
 		pnlUserInfoSelect.add(lblUserInfoSelectName);
@@ -466,7 +469,7 @@ public class Viewer {
 		txfUserInfoSelectPhoneNum.setBounds(435, 27, 187, 21);
 		pnlUserInfoSelect.add(txfUserInfoSelectPhoneNum);
 		
-		JLabel lblUserInfoSelectPhoneNum = new JLabel("전화번호");
+		lblUserInfoSelectPhoneNum = new JLabel("전화번호");
 		lblUserInfoSelectPhoneNum.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		lblUserInfoSelectPhoneNum.setBounds(365, 30, 57, 15);
 		pnlUserInfoSelect.add(lblUserInfoSelectPhoneNum);
