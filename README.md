@@ -2,7 +2,7 @@
 
 ![GitHub Repo stars](https://img.shields.io/github/stars/skillvirus/StudyJavaByEclipse?style=flat-square) ![GitHub forks](https://img.shields.io/github/forks/skillvirus/StudyJavaByEclipse?color=orange&style=flat-square)
 
-### JAVA 프로그래밍 수업용 PPT
+### JAVA 프로그래밍 수업용 자료
 
 JDK & Eclipse 설치 : [링크](https://1drv.ms/p/s!AvogHfPRl8xviKBTbz2nllhB_mAQow?e=sg70Fh)   
 
