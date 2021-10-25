@@ -23,7 +23,7 @@ public class Manager {
 	/*
 	 * 사용자 정보 등록
 	 */
-	public boolean inserUserInfo(UserInfo userInfo) {
+	public boolean insertUserInfo(UserInfo userInfo) {
 		boolean returnValue = false;
 		
 		try {

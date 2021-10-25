@@ -353,7 +353,7 @@ public class Viewer {
 					userInfo.setUserName(txfUserInfoInsertName.getText());
 					userInfo.setUserPhoneNum(txfUserInfoInsertPhoneNum.getText());
 					
-					result = manager.inserUserInfo(userInfo);
+					result = manager.insertUserInfo(userInfo);
 					
 					if (result == true) {
 						Tools.setText(lblResultInfo, "등록 완료", 3, Tools.messageType.SUCCESS);
